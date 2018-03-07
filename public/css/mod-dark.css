@@ -1,0 +1,95 @@
+body {
+    background: #363d44;
+    color: #eee;
+}
+
+a {
+    color: #15cffd;
+}
+
+a:hover {
+    color: #18c5f0;
+}
+
+/*** Style Modifiers ***/
+
+.bg {
+    background: #0d1015;
+}
+
+.bg.list-group-item {
+    border: 1px solid #363d44;
+}
+
+.bg.list-group-item:hover {
+    background: #363d44;
+}
+
+.tabs a {
+    color: #eee;
+}
+
+.tabs a:hover {
+    background: #363d44;
+}
+
+.bg-main {
+    background: #181b20;
+}
+
+.bg-main-grad {
+    background: #181b20;
+    background: -moz-linear-gradient(180deg, #1c2027 -30%,#0d1015 80%);
+    background: -webkit-linear-gradient(180deg, #1c2027 -30%,#0d1015 80%);
+    background: linear-gradient(180deg, #181b20 -30%,#0d1015 80%);
+}
+
+.bg-mid {
+    background: #aaa;
+}
+
+.bg-second {
+    background: #363d44;
+}
+
+.bg-second-grad {
+    background: #112741;
+    background: -moz-linear-gradient(-45deg, #112741 60%, #00728e 100%);
+    background: -webkit-linear-gradient(-45deg, #112741 60%,#00728e 100%);
+    background: linear-gradient(135deg, #112741 60%,#00728e 100%);
+    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#112741', endColorstr='#008e7b',GradientType=1);
+}
+
+.bg-add {
+    background: rgba(0, 0, 0, 0.25)
+}
+
+.bg-remove {
+    background: rgba(255, 255, 255, 0.15)
+}
+
+.border-main {
+    border-color: #363d44;
+}
+
+.table > thead > tr.border-main > th {
+    border-bottom: 2px solid #0d1015;  
+}
+
+.table > tbody > tr.border-main > td {
+    border-top: 2px solid #0d1015;
+}
+
+.text-light {
+    color: #f7f7f7;
+}
+
+.text-shadow-glow::placeholder {
+    text-shadow: transparent 0 0 0px;
+    color: #9bc;
+}
+
+.text-shadow-glow {
+    color: #def;
+    text-shadow: #def 0 0 1px;
+}

@@ -1,0 +1,104 @@
+body {
+    background: #eee;
+    color: #344;
+}
+
+a {
+    color: #0091b6;
+}
+
+a:hover {
+    color: #00728e;
+}
+
+/*** Style Modifiers ***/
+
+.bg {
+    background: #fff;
+}
+
+.bg.list-group-item {
+    border: 1px solid #ddd;
+}
+
+.bg.list-group-item:hover {
+    background: #f3f3f3;
+}
+
+.tabs a {
+    color: #555;
+}
+
+.tabs a:hover {
+    background: #ddd;
+}
+
+.bg-main {
+    background: #f3f3f3;
+}
+
+.bg-main-grad {
+    background: #f3f3f3;
+    background: -moz-linear-gradient(180deg, #ddd -30%,#fff 60%);
+    background: -webkit-linear-gradient(180deg, #ddd -30%,#fff 60%);
+    background: linear-gradient(180deg, #ddd -30%,#fff 60%);
+}
+
+.bg-mid {
+    background: #404040;
+}
+
+.bg-second {
+    background: #555;
+}
+
+.bg-second-grad {
+    background: #112741;
+    background: -moz-linear-gradient(-45deg, #112741 60%, #00728e 100%);
+    background: -webkit-linear-gradient(-45deg, #112741 60%,#00728e 100%);
+    background: linear-gradient(135deg, #112741 60%,#00728e 100%);
+    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#112741', endColorstr='#008e7b',GradientType=1);
+}
+
+.bg-add {
+    background: rgba(255, 255, 255, 0.15)
+}
+
+.bg-remove {
+    background: rgba(0, 0, 0, 0.25)
+}
+
+.border-main {
+    border-color: #ddd;
+}
+
+.tabs.border-main {
+    border-bottom: 1px solid #ddd;
+}
+
+.table > thead > tr.border-main > th {
+    border-bottom: 2px solid #fff;  
+}
+
+.table > tbody > tr.border-main > td {
+    background: #f3f3f3;
+    border-top: 2px solid #fff;
+}
+
+.text-second {
+    color: #888;
+}
+
+.text-light {
+    color: #fff;
+}
+
+.text-shadow-glow::placeholder {
+    text-shadow: transparent 0 0 0px;
+    color: #9bc;
+}
+
+.text-shadow-glow {
+    color: #def;
+    text-shadow: #def 0 0 1px;
+}
