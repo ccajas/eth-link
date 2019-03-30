@@ -38,22 +38,22 @@
 
 /** Loading spinner **/
 
-.loader {
-    -webkit-animation: changewidth 15s linear infinite;
-            animation: changewidth 15s linear infinite;
+#main-loader {
+    /*-webkit-animation: changewidth 15s linear infinite;
+            animation: changewidth 15s linear infinite;*/
     float: right;
-    margin-top: 22px;
+    margin-top: 0px;
     font-size: 0.3em;
-    height: 3px;
+    height: 5px;
     width: 100px;
 }
   
 @-webkit-keyframes changewidth {
-    from { width: 50%; }
+    from { width: 100%; }
     to { width: 1px; }
 }
   
 @keyframes changewidth {
-    from { width: 50%; }
+    from { width: 100%; }
     to { width: 1px; }
 }

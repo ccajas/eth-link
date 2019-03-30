@@ -39,9 +39,9 @@ a:hover {
 
 .bg-main-grad {
     background: #f3f3f3;
-    background: -moz-linear-gradient(180deg, #ddd -30%,#fff 60%);
-    background: -webkit-linear-gradient(180deg, #ddd -30%,#fff 60%);
-    background: linear-gradient(180deg, #ddd -30%,#fff 60%);
+    background: -moz-linear-gradient(180deg, #00728e -30%,#fff 60%);
+    background: -webkit-linear-gradient(180deg, #00728e -30%,#fff 60%);
+    background: linear-gradient(180deg, #00728e -30%,#fff 60%);
 }
 
 .bg-mid {
@@ -50,6 +50,10 @@ a:hover {
 
 .bg-second {
     background: #555;
+}
+
+.bg-bright {
+    background: #00728e;
 }
 
 .bg-second-grad {
