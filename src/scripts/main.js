@@ -65,8 +65,7 @@ export default {
         },
         reloadTable: function() 
         {
-            console.log('main view mounted');
-            const refreshTime = 15000;
+            //console.log('main view mounted');
             const maxEntries = 15;
 
             // List latest blocks
@@ -108,12 +107,32 @@ export default {
                 }
 
             }.bind(this));
-
-            setTimeout(this.reloadTable, refreshTime);
         }
     },
     mounted: function() {
         
         this.reloadTable();
+        
+        const refreshTime = 15000;
+        let start = Date.now();
+        let self = this;
+
+        // Check for updates
+        function step()
+        {
+            let elapsed = Date.now() - start;
+            let percent = 100 - (elapsed/refreshTime * 100);
+            let loaderEl = document.getElementById('main-loader');
+            loaderEl.style.width = percent +'%';
+
+            if (elapsed > refreshTime)
+            {
+                start = Date.now();
+                self.reloadTable();
+            }
+            window.requestAnimationFrame(step);
+        }
+
+        window.requestAnimationFrame(step);
     }
 }
