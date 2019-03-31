@@ -1,9 +1,9 @@
 
 <template>
     <nav class="navbar navbar-default bg-second-grad shadow-normal">
-        <div class="row container-fluid bg-add">
-            <div class="text-light">
-                <div class="col-sm-2">
+        <div class="container text-light">
+            <div class="row bg-add">
+                <div class="col-sm-3">
                     <vlink v-cloak class="navbar-brand" href="/">
                         <i class="glyphicon glyphicon-random text-light"></i>
                         &nbsp;<span class="text-light"> {{ apptitle }} </span></vlink>
