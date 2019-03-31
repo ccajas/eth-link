@@ -1,22 +1,26 @@
 
 <template>
-    <tr class="fade-in">
-        <td><vlink :href="blockID">{{ block.id }}</vlink> &nbsp;</td>
-        <td><vlink :href="blockTxs">{{ block.txLength }}</vlink> &nbsp;</td>
-        <td>{{ block.miner }}</td>
-        <td>{{ block.size }} &nbsp;</td>
-        <td>{{ block.gasUsed }}</td>
-        <td>{{ block.time }} &nbsp;</td>
-    </tr>
+    <div>
+        <div v-html="identicon" class="row col-sm-1 identicon pull-left"></div>
+        <div class="col-sm-11">
+            <p><blockLink :block="block.id">{{ block.id }}</blockLink></p>
+            <span class="text-second pull-right">{{ block.time }}</span>
+            {{ block.txLength }} transactions... {{ block.gasUsed }}
+            <span class="text-second pull-right">Mined by 
+                <addrLink :addr="block.miner">{{ block.miner }}</addrLink></span>
+        </div>
+    </div>
 </template>
 
 <script>
 
-import vlink from "./vLink.vue";
+import addrLink  from "./vAddrLink.vue";
+import blockLink from "./vBlockLink.vue";
 
 export default {
     components: {
-        vlink
+        addrLink,
+        blockLink,
     },
     props: {
         block: {
@@ -30,6 +34,9 @@ export default {
         },
         blockTxs () {
             return '/block-txs/'+ this.block.id;
+        },
+        identicon: function() {
+            return jdenticon.toSvg(this.block.miner, 44, 0);
         }
     }
 }

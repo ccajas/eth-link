@@ -1,9 +1,10 @@
 
 import app       from '../views/theApp.vue';
 import navbar    from '../views/theNavbar.vue';
-import txInfo    from '../views/components/vTxInfo.vue';
 
 import mainView  from '../views/theMainPage.vue';
+import blockInfo from '../views/components/vBlockInfo.vue';
+import txInfo    from '../views/components/vTxInfo.vue';
 
 import routes       from '../routes/index.js';
 import { eventBus } from '../routes/eventbus.js';
@@ -14,6 +15,7 @@ export default {
         app,
         navbar,
         mainView,
+        blockInfo,
         txInfo
     },
     data: function() {

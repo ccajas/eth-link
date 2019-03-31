@@ -1,6 +1,6 @@
 
 <template>
-    <vlink :href="blockValue">{{ block }}</vlink>
+    <vlink :href="blockValue"><b>{{ block }}</b></vlink>
 </template>
 
 <script>
