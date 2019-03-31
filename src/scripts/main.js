@@ -20,15 +20,19 @@ export default {
             blockList: [],
             blocksFound: [],
             txList: [],
+            blockTime: '',
+            difficulty: '',
+            hashRate: '',
+
             view: '',
             itemNumber: '',
+            nf: '',
             last: 0
         }
     },
     watch: {
         view: function (val, oldVal) {
             console.log('updated again');
-            //this.reloadTable();
         }
     },
     methods: {
@@ -41,6 +45,8 @@ export default {
                 id: b.number,
                 hash: b.hash,
                 size: b.size,
+                diff: b.difficulty,
+                timestamp: b.timestamp,
                 txLength: b.transactions.length,
                 miner: b.miner,
                 gasUsed: b.gasUsed,
@@ -83,8 +89,14 @@ export default {
                         promises.push(this.$web3.eth.getBlock(n - i).then(this.processBlock));
                     }
                     
-                    Promise.all(promises).then(() => {
+                    // Order blocks and get current network stats
+                    Promise.all(promises).then(() => 
+                    {
                         this.blockList.sort((a, b) => b.id - a.id);
+                        this.blockTime = (this.blockList[0].timestamp - this.blockList[this.blockList.length - 1].timestamp) / maxEntries;
+                        this.difficulty = this.blockList[0].diff;
+                        this.hashRate = this.difficulty / this.blockTime;
+
                         console.log('blocks sorted');
                         this.last = n;
                         promises.length = this.blocksFound.length = 0;
@@ -101,7 +113,6 @@ export default {
 
                     Promise.all(promises).then(() => { 
                         this.txList.sort((a, b) => b.id - a.id);
-                        console.log('transactions sorted');
                         promises.length = 0;
                     });
                 }
@@ -112,8 +123,9 @@ export default {
     mounted: function() {
         
         this.reloadTable();
+        this.nf = new Intl.NumberFormat();
         
-        const refreshTime = 15000;
+        const refreshTime = 20000;
         let start = Date.now();
         let self = this;
 
