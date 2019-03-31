@@ -8,7 +8,7 @@ html {
 }
 
 body {
-    font-family: "Cousine", Helvetica, Arial, sans-serif;
+    font-family: "Segoe UI", Helvetica, Arial, sans-serif; /*"Cousine"*/
     font-size: 12px;
     height: 100%;
 }
@@ -19,7 +19,7 @@ table {
 }
 
 h1, h2, h3 {
-    font-family: "Open Sans", Helvetica, Arial, sans-serif;
+    font-family: "Segoe UI", "Open Sans", Helvetica, Arial, sans-serif;
     font-weight: bold;
 }
 
@@ -80,6 +80,10 @@ code {
     overflow-y: scroll;
 }
 
+.identicon svg {
+    border-radius: 50%;
+}
+
 #main-container {
     padding: 0px;
     padding-top: 48px;
@@ -101,6 +105,11 @@ code {
     width: 100%;
     min-height: 48px;
     font-family: "Open Sans", Helvetica, Arial, sans-serif;
+}
+@media (min-width: 768px) {
+    .navbar >.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
+        margin-left: 0px;
+    }
 }
 
 .navbar-brand {
