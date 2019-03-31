@@ -18,11 +18,12 @@ a:hover {
 }
 
 .bg.list-group-item {
-    border: 1px solid #ddd;
+    margin: 0px;
+    border-bottom: 1px solid #e7e7e7;
 }
 
 .bg.list-group-item:hover {
-    background: #f3f3f3;
+    background: #f7f7f7;
 }
 
 .tabs a {
