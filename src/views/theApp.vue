@@ -2,7 +2,7 @@
 <template>
     <div class="bg-main">
         <navbar :apptitle = "apptitle" :conn = "connected"></navbar>
-        <div id="main-container" class="container-fluid bg">
+        <div id="main-container">
             <mainView  v-if = "view === 'Main'"></mainView>
             <blockInfo v-if = "view === 'Block'"></blockInfo>
             <txInfo    v-if = "view === 'Transaction'"></txInfo>
@@ -12,4 +12,4 @@
     </div>      
 </template>
 
-<script src="../scripts/app.js"/>
+<script type="text/javascript" src="../scripts/app.js"/>

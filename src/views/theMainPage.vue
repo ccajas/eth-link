@@ -1,106 +1,44 @@
 
 <template>
-    <div class="row">
-        <div class="col-sm-2">
-            <br/>
+    <section class="container">
+        <div class="col-sm-3">
+            <h3>Latest Blocks</h3>
             -&#164;- work in progress -&#164;-
         </div>
-        <div class="row col-sm-10">
+        <div class="row col-sm-9">
             <div class="row tabs border-main">
-                <div class="border-main row col-sm-6">
-                    <ul class="bg-main tabs">
-                        <li class="pull-left">
-                            <vlink v-bind:href="'test'"><i class="glyphicon glyphicon-book" style="font-size: 0.7em"></i>
-                            Latest Blocks</vlink>
-                        </li>
-                        <li class="pull-left">
-                            <vlink v-bind:href="'test'"><i class="glyphicon glyphicon-briefcase" style="font-size: 0.7em"></i>
-                            Test</vlink>
-                        </li>
-                        <li class="pull-left">
-                            <vlink v-bind:href="'test'"><i class="glyphicon glyphicon-book" style="font-size: 0.7em"></i>
-                            Extra Tab</vlink>
-                        </li>
-                    </ul>
-                </div>
-                <div class="border-main row col-sm-6">
-                    <ul class="bg-main tabs">
-                        <li class="pull-left">
-                            <vlink v-bind:href="'test'"><i class="glyphicon glyphicon-briefcase" style="font-size: 0.7em"></i>
-                            Test</vlink>
-                        </li>
-                        <li class="pull-left">
-                            <vlink v-bind:href="'test'"><i class="glyphicon glyphicon-book" style="font-size: 0.7em"></i>
-                            Extra Tab</vlink>
-                        </li>
-                    </ul>
-                </div>
-                <div class="row col-sm-12 tabs">
                     <div id="main-loader" class="bg-bright"></div>
-                </div>
             </div>
-            <div class="row">
-                <div class="row col-sm-6 y-overflow-panel">
-                    <ul>
-                        <li class="bg list-group-item"
-                            v-for = "block in blockList" 
-                            :key = "block.id">
-                            <blockLink :block="block.id">{{ block.id }}</blockLink>
-                                <span class="text-second pull-right">{{ block.time }}</span>
-                                {{ block.txLength }} transactions
-                                <span class="text-second pull-right">Mined by 
-                                    <addrLink :addr="block.miner">{{ block.miner }}</addrLink></span>
-                            
-                        </li>
-                    </ul>
-                </div>
-                <div class="row col-sm-6 y-overflow-panel">
-                    <table class="table table-dark">
-                        <thead>
-                            <tr class="border-main">
-                                <th style="width: 12%">Hash</th>
-                                <th style="width: 24%">From</th>
-                                <th style="width: 24%">To</th>
-                                <th style="width: 12%">Value</th>
-                                <th style="width: 12%">Gas Used</th>
-                                <th class="border-mid">Gas Price</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <txInfo
-                                v-for = "tx in txList" 
-                                :key = "tx.hash" 
-                                :tx = "tx">
-                            </txInfo>
-                        </tbody>
-                    </table>
-                </div>
+            <div class="row col-sm-8">
+                <ul>
+                    <li class="bg list-group-item" v-for = "block in blockList" :key = "block.id">
+                        <blockInfo :block="block"></blockInfo>                
+                    </li>
+                </ul>
+            </div>
+            <div class="col-sm-4">
+                <table class="table table-dark">
+                    <thead>
+                        <tr class="border-main">
+                            <th style="width: 12%">Hash</th>
+                            <th style="width: 24%">From</th>
+                            <th style="width: 24%">To</th>
+                            <th style="width: 12%">Value</th>
+                            <th style="width: 12%">Gas Used</th>
+                            <th class="border-mid">Gas Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <txInfo
+                            v-for = "tx in txList" 
+                            :key = "tx.hash" 
+                            :tx = "tx">
+                        </txInfo>
+                    </tbody>
+                </table>
             </div>
         </div>
-        <!--<div class="col-sm-6 y-overflow-panel">
-            <h3><i class="glyphicon glyphicon-briefcase" style="font-size: 0.7em"></i>
-                &nbsp;Latest Transactions</h3>
-            <table class="table table-dark">
-                <thead>
-                    <tr class="border-main">
-                        <th style="width: 12%">Hash</th>
-                        <th style="width: 24%">From</th>
-                        <th style="width: 24%">To</th>
-                        <th style="width: 12%">Value</th>
-                        <th style="width: 12%">Gas Used</th>
-                        <th class="border-mid">Gas Price</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <txInfo
-                        v-for = "tx in txList" 
-                        :key = "tx.hash" 
-                        :tx = "tx">
-                    </txInfo>
-                </tbody>
-            </table>
-        </div>-->
-    </div>
+    </section>
 </template>
 
 <script src="../scripts/main.js"/>
