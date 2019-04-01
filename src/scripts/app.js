@@ -1,10 +1,7 @@
 
-import app       from '../views/theApp.vue';
-import navbar    from '../views/theNavbar.vue';
-
-import mainView  from '../views/theMainPage.vue';
-import blockInfo from '../views/components/vBlockInfo.vue';
-import txInfo    from '../views/components/vTxInfo.vue';
+import app          from '../views/theApp.vue';
+import navbar       from '../views/theNavbar.vue';
+import blocks       from '../views/theMainPage.vue';
 
 import routes       from '../routes/index.js';
 import { eventBus } from '../routes/eventbus.js';
@@ -14,25 +11,23 @@ export default {
     components: {
         app,
         navbar,
-        mainView,
-        blockInfo,
-        txInfo
+        blocks
     },
     data: function() {
         return {
             apptitle: 'Eth-Link Explorer',
             connected: false,
             currentRoute: window.location.pathname,
-            view: 'Main',
-            detail: ''
+            title: '',
+            itemID: ''
         }
     },  
     watch: {
         currentRoute: function (val, oldVal) {
 
             let path = this.currentRoute.split('/');
-            this.view = routes['/'+ path[1]] || 'notfound';
-            this.detail = path[2] || '';
+            this.title = routes['/'+ path[1]] || 'notfound';
+            this.itemID = path[2] || '';
 
             console.log('loading view: '+ this.view.tableinfo + ' | '+ this.view.rowinfo);
         }
@@ -51,8 +46,8 @@ export default {
 
         // Set route
         let path = this.currentRoute.split('/');
-        this.view = routes['/'+ path[1]] || 'notfound';
-        this.detail = path[2] || '';
+        this.title = routes['/'+ path[1]] || 'notfound';
+        this.itemID = path[2] || '';
     },
     mounted: function() {
 
@@ -62,6 +57,12 @@ export default {
             this.connected = this.$web3.currentProvider.connected;
 
         }.bind(this));
+    },
+    computed: {
+        currentListComponent: function () {
+            let path = this.currentRoute.split('/');
+            return path[1] || 'blocks';
+        },
     },
     methods: {
         updateRoute()
