@@ -1,7 +1,7 @@
 
 import app          from '../views/theApp.vue';
 import navbar       from '../views/theNavbar.vue';
-import blocks       from '../views/theMainPage.vue';
+import blocks       from '../views/theBlockList.vue';
 
 import routes       from '../routes/index.js';
 import { eventBus } from '../routes/eventbus.js';

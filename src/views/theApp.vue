@@ -5,8 +5,10 @@
         <div id="main-container">
             <section class="container">
                 <div class="col-sm-3">
-                    <h3>{{ title }} {{ itemID }}</h3>
-                    -&#164;- work in progress -&#164;-
+                    <div class="fixed-panel">
+                        <h3>{{ title }} {{ itemID }}</h3>
+                        -&#164;- work in progress -&#164;-
+                    </div>
                 </div>
                 <div class="row col-sm-9">
                     <div class="row tabs border-main">

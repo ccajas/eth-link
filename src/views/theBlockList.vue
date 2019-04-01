@@ -14,4 +14,4 @@
     </ul>
 </template>
 
-<script src="../scripts/main.js"/>
+<script src="../scripts/blockList.js"/>

@@ -1,7 +1,4 @@
 
-import vlink from     '../views/components/vLink.vue';
-import blockInfo from '../views/components/vBlockInfo.vue';
-import txInfo from    '../views/components/vTxInfo.vue';
 import addrLink from  '../views/components/vAddrLink.vue';
 import blockLink from '../views/components/vBlockLink.vue';
 
@@ -9,9 +6,6 @@ import blockLink from '../views/components/vBlockLink.vue';
 
 export default {
     components: {
-        blockInfo,
-        txInfo,
-        vlink,
         addrLink,
         blockLink
     },
@@ -19,13 +13,11 @@ export default {
         return {
             blockList: [],
             blocksFound: [],
-            txList: [],
             blockTime: '',
             difficulty: '',
             hashRate: '',
             view: '',
             itemNumber: '',
-            nf: '',
             current: 0,
             next: 0
         }
@@ -55,7 +47,7 @@ export default {
 
             this.blocksFound.push(b.number);
         },
-        processTx: function(tx)
+        /*processTx: function(tx)
         {        
             if (tx === null)
                 return;
@@ -63,7 +55,7 @@ export default {
             tx.value = this.$web3.utils.fromWei(tx.value);
             tx.gasPrice = this.$web3.utils.fromWei(tx.gasPrice, 'Gwei');
             this.txList.push(tx);
-        },
+        },*/
         convertTimestamp: function (timestamp) 
         {
             let date = new Date(timestamp * 1000);      
@@ -139,11 +131,10 @@ export default {
     created: function()
     {
         this.maxEntries = 15;
+        this.nf = new Intl.NumberFormat();
     },
     mounted: function() 
     {    
-        this.nf = new Intl.NumberFormat();
-
         // List next blocks
         this.$web3.eth.getBlockNumber().then(function(n) 
         {
