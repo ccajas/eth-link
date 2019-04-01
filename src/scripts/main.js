@@ -108,52 +108,6 @@ export default {
             })
             .catch(() => { console.log('failed!') });
         },
-        reloadTable: function() 
-        {
-            const maxEntries = 15;
-
-            // List latest blocks
-   
-            this.$web3.eth.getBlockNumber().then(function(n) 
-            {
-                let promises = [];
-                console.log('getBlockNumber: '+ n)
-
-                if (this.last < n)
-                {
-                    this.blockList.length = this.txList.length = 0;
-
-                    for (var i = 0; i < maxEntries; i++) {
-                        promises.push(this.$web3.eth.getBlock(n - i).then(this.processBlock));
-                    }
-                    
-                    // Order blocks and get current network stats
-                    Promise.all(promises).then(() => 
-                    {
-                        this.blockList.sort((a, b) => b.id - a.id);
-                        this.blockTime = (this.blockList[0].timestamp - this.blockList[this.blockList.length - 1].timestamp) / maxEntries;
-                        this.difficulty = this.blockList[0].diff;
-                        this.hashRate = this.difficulty / this.blockTime;
-
-                        console.log('blocks sorted');
-                        this.last = n;
-                        promises.length = this.blocksFound.length = 0;
-                    });
-
-                    // List latest transactions
-                    
-                    for (var i = 0; i < maxEntries; i++) {
-                        promises.push(this.$web3.eth.getTransactionFromBlock(n, i).then(this.processTx));
-                    }
-
-                    Promise.all(promises).then(() => { 
-                        this.txList.sort((a, b) => b.id - a.id);
-                        promises.length = 0;
-                    });
-                }
-
-            }.bind(this));
-        },
         checkUpdates: function()
         {
             const refreshTime = 20000;
@@ -171,12 +125,15 @@ export default {
                 if (elapsed > refreshTime)
                 {
                     start = Date.now();
-                    self.reloadTable();
+                    //self.reloadTable();
                 }
                 window.requestAnimationFrame(step);
             }.bind(this);
     
             //window.requestAnimationFrame(step);
+        },
+        identicon: function(block) {
+            return jdenticon.toSvg(block.miner, 44, 0);
         }
     },
     created: function()
