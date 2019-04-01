@@ -10,7 +10,7 @@
                 </div>
 
                 <!-- Search box -->
-                <div class="col-sm-3 form-group inner-addon right-addon bg-remove">
+                <div class="col-sm-4 form-group inner-addon right-addon bg-remove">
                     <form @submit.prevent="sendRequest" name="ethRequest">
                         <i class="glyphicon glyphicon-search"></i>
                         <input type="text" class="form-control text-shadow-glow" v-model="ethRequest" id="master-input" name="master-input"
