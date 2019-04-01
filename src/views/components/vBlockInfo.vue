@@ -1,6 +1,6 @@
 
 <template>
-    <div>
+    <li class="bg list-group-item">
         <div v-html="identicon" class="row col-sm-1 identicon pull-left"></div>
         <div class="col-sm-11">
             <p><blockLink :block="block.id">{{ block.id }}</blockLink></p>
@@ -9,7 +9,7 @@
             <span class="text-second pull-right">Mined by 
                 <addrLink :addr="block.miner">{{ block.miner }}</addrLink></span>
         </div>
-    </div>
+    </li>
 </template>
 
 <script>
