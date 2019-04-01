@@ -23,7 +23,6 @@ export default {
             blockTime: '',
             difficulty: '',
             hashRate: '',
-
             view: '',
             itemNumber: '',
             nf: '',
@@ -69,9 +68,20 @@ export default {
             let date = new Date(timestamp * 1000);      
             return date.toLocaleDateString() +' '+ date.toLocaleTimeString();
         },
+        scroll: function()
+        {
+            let el = document.getElementById('main-container');
+            window.onscroll = () => {
+                let bottom = el.scrollHeight - window.scrollY < window.innerHeight + 1;
+                if (bottom)
+                {
+                    console.info('hit bottom');
+                    this.reloadTable();
+                }
+            }
+        },
         reloadTable: function() 
         {
-            //console.log('main view mounted');
             const maxEntries = 15;
 
             // List latest blocks
@@ -123,6 +133,7 @@ export default {
     mounted: function() {
         
         this.reloadTable();
+        this.scroll();
         this.nf = new Intl.NumberFormat();
         
         const refreshTime = 20000;
@@ -130,7 +141,7 @@ export default {
         let self = this;
 
         // Check for updates
-        function step()
+        let step = function()
         {
             let elapsed = Date.now() - start;
             let percent = 100 - (elapsed/refreshTime * 100);
@@ -143,8 +154,8 @@ export default {
                 self.reloadTable();
             }
             window.requestAnimationFrame(step);
-        }
+        }.bind(this);
 
-        window.requestAnimationFrame(step);
+        //window.requestAnimationFrame(step);
     }
 }
