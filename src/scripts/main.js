@@ -26,7 +26,8 @@ export default {
             view: '',
             itemNumber: '',
             nf: '',
-            last: 0
+            current: 0,
+            next: 0
         }
     },
     watch: {
@@ -75,10 +76,37 @@ export default {
                 let bottom = el.scrollHeight - window.scrollY < window.innerHeight + 1;
                 if (bottom)
                 {
-                    console.info('hit bottom');
-                    this.reloadTable();
+                    console.log('getBlockNumber: '+ this.next +' '+ this.current);
+                    this.loadBlockList(this.next, this.maxEntries);
                 }
             }
+        },
+        loadBlockList: function(n, maxEntries)
+        {
+            if (this.current == this.next)
+                return;
+
+            this.current = this.next;
+            let promises = [];
+            console.log('loading...');
+
+            for (var i = 0; i < maxEntries; i++) {
+                promises.push(this.$web3.eth.getBlock(n - i).then(this.processBlock));
+            }
+
+            // Order blocks and get current network stats
+            Promise.all(promises).then(() => 
+            {
+                this.blockList.sort((a, b) => b.id - a.id);
+                this.blockTime = (this.blockList[0].timestamp - this.blockList[this.blockList.length - 1].timestamp) / maxEntries;
+                this.difficulty = this.blockList[0].diff;
+                this.hashRate = this.difficulty / this.blockTime;
+
+                console.log('blocks sorted');
+                this.next = this.current - maxEntries;
+                promises.length = this.blocksFound.length = 0;
+            })
+            .catch(() => { console.log('failed!') });
         },
         reloadTable: function() 
         {
@@ -113,9 +141,6 @@ export default {
                     });
 
                     // List latest transactions
-
-                    //const maxTxs = (b.transactions.length < maxEntries) ? 
-                    //    b.transactions.length : maxEntries; 
                     
                     for (var i = 0; i < maxEntries; i++) {
                         promises.push(this.$web3.eth.getTransactionFromBlock(n, i).then(this.processTx));
@@ -128,34 +153,47 @@ export default {
                 }
 
             }.bind(this));
+        },
+        checkUpdates: function()
+        {
+            const refreshTime = 20000;
+            let start = Date.now();
+            let self = this;
+    
+            // Check for updates
+            let step = function()
+            {
+                let elapsed = Date.now() - start;
+                let percent = 100 - (elapsed/refreshTime * 100);
+                let loaderEl = document.getElementById('main-loader');
+                loaderEl.style.width = percent +'%';
+    
+                if (elapsed > refreshTime)
+                {
+                    start = Date.now();
+                    self.reloadTable();
+                }
+                window.requestAnimationFrame(step);
+            }.bind(this);
+    
+            //window.requestAnimationFrame(step);
         }
     },
-    mounted: function() {
-        
-        this.reloadTable();
-        this.scroll();
+    created: function()
+    {
+        this.maxEntries = 15;
+    },
+    mounted: function() 
+    {    
         this.nf = new Intl.NumberFormat();
-        
-        const refreshTime = 20000;
-        let start = Date.now();
-        let self = this;
 
-        // Check for updates
-        let step = function()
+        // List next blocks
+        this.$web3.eth.getBlockNumber().then(function(n) 
         {
-            let elapsed = Date.now() - start;
-            let percent = 100 - (elapsed/refreshTime * 100);
-            let loaderEl = document.getElementById('main-loader');
-            loaderEl.style.width = percent +'%';
+            this.next = n;
+            this.loadBlockList(n, this.maxEntries);
+        }.bind(this));
 
-            if (elapsed > refreshTime)
-            {
-                start = Date.now();
-                self.reloadTable();
-            }
-            window.requestAnimationFrame(step);
-        }.bind(this);
-
-        //window.requestAnimationFrame(step);
+        this.scroll();
     }
 }
