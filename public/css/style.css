@@ -154,6 +154,11 @@ ul .list-group-item {
     border-radius: 0px;
 }
 
+ul .bg.list-group-item:hover {
+    transform: scale(1.1);
+    z-index: 20;
+}
+
 ul .list-group-item:first-child {
     margin-top: 4px;
 }
