@@ -1,6 +1,6 @@
 
 const routes = {
-    '/'         : 'Latest Blocks', 
+    '/'         : 'Blocks', 
     '/block'    : 'Block',
     '/tx'       : 'Transaction',
     '/addr'     : 'Address',       

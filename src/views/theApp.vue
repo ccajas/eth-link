@@ -7,6 +7,8 @@
                 <div class="col-sm-3">
                     <div class="fixed-panel">
                         <h3>{{ title }} {{ itemID }}</h3>
+                        <networkInfo></networkInfo>
+                        <br/>
                         -&#164;- work in progress -&#164;-
                     </div>
                 </div>

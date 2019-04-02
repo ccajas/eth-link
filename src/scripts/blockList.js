@@ -12,12 +12,6 @@ export default {
     data() {
         return {
             blockList: [],
-            blocksFound: [],
-            blockTime: '',
-            difficulty: '',
-            hashRate: '',
-            view: '',
-            itemNumber: '',
             current: 0,
             next: 0
         }
@@ -44,8 +38,6 @@ export default {
                 gasUsed: b.gasUsed,
                 time: this.convertTimestamp(b.timestamp)
             });
-
-            this.blocksFound.push(b.number);
         },
         /*processTx: function(tx)
         {        
@@ -90,13 +82,9 @@ export default {
             Promise.all(promises).then(() => 
             {
                 this.blockList.sort((a, b) => b.id - a.id);
-                this.blockTime = (this.blockList[0].timestamp - this.blockList[this.blockList.length - 1].timestamp) / maxEntries;
-                this.difficulty = this.blockList[0].diff;
-                this.hashRate = this.difficulty / this.blockTime;
-
                 console.log('blocks sorted');
                 this.next = this.current - maxEntries;
-                promises.length = this.blocksFound.length = 0;
+                promises.length = 0;
             })
             .catch(() => { console.log('failed!') });
         },

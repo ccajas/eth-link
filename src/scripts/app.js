@@ -2,6 +2,7 @@
 import app          from '../views/theApp.vue';
 import navbar       from '../views/theNavbar.vue';
 import blocks       from '../views/theBlockList.vue';
+import networkInfo  from '../views/components/vNetworkInfo.vue';
 
 import routes       from '../routes/index.js';
 import { eventBus } from '../routes/eventbus.js';
@@ -11,7 +12,8 @@ export default {
     components: {
         app,
         navbar,
-        blocks
+        blocks,
+        networkInfo,
     },
     data: function() {
         return {
