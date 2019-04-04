@@ -21,7 +21,7 @@
                             <component v-bind:is="currentListComponent"></component>
                         </section>
                     </div>
-                    <div id="compare-detail"class="col-sm-4">
+                    <div id="compare-detail" class="col-sm-4">
                         <table class="table table-dark">
                             <thead>
                                 <tr class="border-main">

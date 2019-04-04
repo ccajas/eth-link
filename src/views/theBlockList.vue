@@ -4,10 +4,10 @@
         <li class="bg list-group-item" v-for = "block in blockList" :key = "block.id">
             <!-- <div v-html="identicon(block)" class="row col-sm-1 identicon pull-left"></div> -->
             <div class="row col-sm-2">
-                <blockLink :block="block.id">{{ block.id }}</blockLink>
+                <blockLink :block="block.id"></blockLink>
             </div>
             <div class="row col-sm-3">
-                <span class="text-second">{{ block.time }}</span>
+                <timeInfo :time="block.time"></timeInfo>
             </div>
             <div class="row col-sm-1">
                 {{ block.txLength }} 

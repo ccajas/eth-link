@@ -1,13 +1,15 @@
 
 import addrLink from  '../views/components/vAddrLink.vue';
 import blockLink from '../views/components/vBlockLink.vue';
+import timeInfo from  '../views/components/vTimeInfo.vue';
 
 // Table info component for block and tx data
 
 export default {
     components: {
         addrLink,
-        blockLink
+        blockLink,
+        timeInfo
     },
     data() {
         return {
