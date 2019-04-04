@@ -16,25 +16,12 @@
                     <div class="row tabs border-main">
                         <div id="main-loader" class="bg-bright"></div>
                     </div>
-                    <div class="row col-sm-8">
-                        <section>
-                            <component v-bind:is="currentListComponent"></component>
-                        </section>
-                    </div>
-                    <div id="compare-detail" class="col-sm-4">
-                        <table class="table table-dark">
-                            <thead>
-                                <tr class="border-main">
-                                    <th style="width: 12%">Hash</th>
-                                    <th style="width: 24%">From</th>
-                                    <th style="width: 24%">To</th>
-                                    <th style="width: 12%">Value</th>
-                                    <th style="width: 12%">Gas Used</th>
-                                    <th class="border-mid">Gas Price</th>
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
+                    <section class="row col-sm-8">
+                        <component v-bind:is="currentListComponent" :itemID="itemID"></component>
+                    </section>
+                    <section id="compare-detail" class="col-sm-4">
+
+                    </section>
                 </div>
             </section>
         </div>
