@@ -1,8 +1,8 @@
 body {
-    background: #f3f7fa;
-    background: -moz-radial-gradient(farthest-corner at 40px 40px,, #f3f7fa 52%, #caced1 100%); /* FF3.6-15 */
-    background: -webkit-radial-gradient(farthest-corner at 40px 40px,, #f3f7fa 52%,#caced1 100%); /* Chrome10-25,Safari5.1-6 */
-    background: radial-gradient(farthest-corner at 40px 40px, #f3f7fa 52%,#caced1 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    background: #ebf0f3;
+    background: -moz-radial-gradient(farthest-corner at 40px 40px, #ebf0f3 52%, #caced1 100%); /* FF3.6-15 */
+    background: -webkit-radial-gradient(farthest-corner at 40px 40px, #e6eff5 52%,#caced1 100%); /* Chrome10-25,Safari5.1-6 */
+    background: radial-gradient(farthest-corner at 40px 40px, #ebf0f3 52%,#caced1 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     background-attachment: fixed;
     color: #223336;
 }
@@ -30,6 +30,14 @@ ul .list-group-item {
 
 ul .list-group-item:hover {
     border: 1px solid #d9dde3;
+}
+
+ul a .list-group-item {
+    color: #223336;
+}
+
+ul a:hover .bg {
+    background: #f6f9fb;
 }
 
 .tabs a {

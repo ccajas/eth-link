@@ -160,6 +160,8 @@ ul .list-group-item {
     overflow: hidden;
     text-overflow: ellipsis;
     border: 1px solid;
+    transition: transform 0.25s;
+    -webkit-transition: transform 0.25s;
 }
 
 ul .list-group-item:first-child {
@@ -183,7 +185,7 @@ ul .list-group-item p.pull-right {
 }
 
 ul .list-group-item .glyphicon {
-    font-size: 1.1em;
+    font-size: 0.9em;
 }
 
 ul.tabs {
@@ -294,5 +296,5 @@ footer {
 }
 
 .shadow-normal {
-    box-shadow: 0px 0px 3px #000;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.55);
 }
