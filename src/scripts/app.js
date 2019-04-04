@@ -17,7 +17,7 @@ export default {
     },
     data: function() {
         return {
-            apptitle: 'Eth-Link Explorer',
+            apptitle: 'Eth-Link',
             connected: false,
             currentRoute: window.location.pathname,
             title: '',
