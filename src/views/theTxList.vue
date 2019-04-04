@@ -3,13 +3,8 @@
     <div>
         <ul>
             <li class="bg list-group-item" v-for = "tx in txList" :key = "tx.id">
-                <div class="row col-sm-6">
-                    <div class="row col-sm-10">
-                        {{ tx.transactionIndex }}
-                    </div>
-                    <div class="row col-sm-2">
-                        {{ tx.transactionIndex }}
-                    </div>
+                <div class="row col-sm-1">
+                    {{ tx.transactionIndex }}
                 </div>
                 <div class="row col-sm-3">
                     <div class="row col-sm-3">
@@ -25,6 +20,14 @@
                     </div>
                     <div class="row col-sm-9">
                         <addrLink :addr="tx.to"></addrLink>
+                    </div>
+                </div>
+                <div class="row col-sm-5">
+                    <div class="row col-sm-6">
+                        {{ nf.format(tx.value) }} ETH
+                    </div>
+                    <div class="row col-sm-6 text-second">
+                        {{ parseFloat(tx.gasFee.toFixed(8)) }} ETH
                     </div>
                 </div>
             </li>              
