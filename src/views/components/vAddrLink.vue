@@ -1,8 +1,10 @@
 
 <template>
     <div>
-        <vlink v-bind:href="addrValue">{{ addr }}</vlink>
-        <div :style="addrColored"></div>
+    <span class="text-second pull-right">
+        {{ prefix }}<vlink v-bind:href="addrValue">{{ addr }}</vlink>
+    </span><br/>
+    <div :style="addrColored"></div>
     </div>
 </template>
 
@@ -18,6 +20,10 @@ export default {
         addr: {
             type: String,
             required: true 
+        },
+        prefix: {
+            type: String,
+            required: false
         }
     },
     computed: {
@@ -26,7 +32,7 @@ export default {
         },
         addrColored () {
             let str = '';
-            str += 'width: 520px; height: 4px; background: linear-gradient(90deg, #fff,';
+            str += 'margin-top: 3px; width: 460px; height: 4px; background: linear-gradient(90deg, #fff,';
             for (let i = 2; i <= 40; i += 4)
             {
                 str += '#'+ this.addr.substring(i, i + 2) + this.addr.substring(i + 2, i + 4) +'77, ';
