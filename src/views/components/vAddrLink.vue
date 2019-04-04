@@ -1,6 +1,6 @@
 
 <template>
-    <span class="text-second">
+    <span>
         {{ prefix }}<vlink v-bind:href="addrValue">{{ addrTrunc }}</vlink>
     </span>
 </template>

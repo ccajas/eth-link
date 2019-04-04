@@ -1,5 +1,9 @@
 body {
     background: #f3f7fa;
+    background: -moz-radial-gradient(farthest-corner at 40px 40px,, #f3f7fa 52%, #caced1 100%); /* FF3.6-15 */
+    background: -webkit-radial-gradient(farthest-corner at 40px 40px,, #f3f7fa 52%,#caced1 100%); /* Chrome10-25,Safari5.1-6 */
+    background: radial-gradient(farthest-corner at 40px 40px, #f3f7fa 52%,#caced1 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    background-attachment: fixed;
     color: #223336;
 }
 
@@ -19,7 +23,8 @@ a:hover {
 
 ul .list-group-item {
     margin: 0px;
-    border: 1px solid #dde3e7;
+    /*border: 1px solid #9fa6aa;*/
+    border: 1px solid rgba(148, 157, 162, 30%);
     border-top: 1px solid transparent;
 }
 
@@ -88,7 +93,7 @@ ul .list-group-item:hover {
 }
 
 .text-second {
-    color: #888;
+    color: #667088;
 }
 
 .text-light {

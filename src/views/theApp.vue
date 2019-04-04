@@ -6,7 +6,7 @@
             <section class="container">
                 <div class="col-sm-2">
                     <div class="fixed-panel">
-                        <h3>{{ title }} {{ itemID }}</h3>
+                        <h3 class="text-second">{{ title }} {{ itemID }}</h3>
                         <networkInfo></networkInfo>
                         <br/>
                         -&#164;- work in progress -&#164;-

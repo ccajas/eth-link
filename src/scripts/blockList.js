@@ -114,8 +114,8 @@ export default {
     
             //window.requestAnimationFrame(step);
         },
-        identicon: function(block) {
-            return jdenticon.toSvg(block.miner, 44, 0);
+        identicon: function(block, dimension) {
+            return jdenticon.toSvg(block.miner, dimension, 0);
         }
     },
     created: function()

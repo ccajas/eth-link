@@ -88,6 +88,11 @@ code {
     position: fixed;
 }
 
+.identicon {
+    padding-right: 10px;
+    height: 20px;
+}
+
 .identicon svg {
     border-radius: 50%;
 }
@@ -149,14 +154,19 @@ ul {
 }
 
 ul .list-group-item {
-    font-size: 1.15em;
+    font-size: 1.1em;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     border: 1px solid;
 }
 
-ul .bg.list-group-item:hover {
+ul .list-group-item:first-child {
+    border-radius: 0px;
+    border-top: 0px;
+}
+
+ul .list-group-item:hover {
     transform: scale(1.1);
     z-index: 20;
 }
