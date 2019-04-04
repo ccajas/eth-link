@@ -2,12 +2,21 @@
 <template>
     <ul>
         <li class="bg list-group-item" v-for = "block in blockList" :key = "block.id">
-            <div v-html="identicon(block)" class="row col-sm-1 identicon pull-left"></div>
-            <div class="col-sm-11">
-                <p><blockLink :block="block.id">{{ block.id }}</blockLink></p>
-                <span class="text-second pull-right">{{ block.time }}</span>
-                {{ block.txLength }} transactions... {{ block.gasUsed }}
-                    <addrLink :addr="block.miner" :prefix="'Mined by '">{{ block.miner }}</addrLink>
+            <!-- <div v-html="identicon(block)" class="row col-sm-1 identicon pull-left"></div> -->
+            <div class="row col-sm-2">
+                <blockLink :block="block.id">{{ block.id }}</blockLink>
+            </div>
+            <div class="row col-sm-3">
+                <span class="text-second">{{ block.time }}</span>
+            </div>
+            <div class="row col-sm-1">
+                {{ block.txLength }} 
+            </div>
+            <div class="row col-sm-2">
+                {{ block.gasUsed }}
+            </div>
+            <div class="row col-sm 2">
+                <addrLink :addr="block.miner"></addrLink>
             </div>
         </li>              
     </ul>

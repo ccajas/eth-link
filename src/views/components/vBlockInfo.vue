@@ -7,7 +7,7 @@
             <span class="text-second pull-right">{{ block.time }}</span>
             {{ block.txLength }} transactions... {{ block.gasUsed }}
             <span class="text-second pull-right">Mined by 
-                <addrLink :addr="block.miner">{{ block.miner }}</addrLink></span>
+                <addrLink :addr="block.miner"></addrLink></span>
         </div>
     </li>
 </template>
