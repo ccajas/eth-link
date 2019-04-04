@@ -2,13 +2,14 @@
 @import url('https://fonts.googleapis.com/css?family=Exo+2:400,600|Saira+Semi+Condensed:400,600');*/
 @import url('https://fonts.googleapis.com/css?family=Cousine:400,400i,700');
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
+@import url('https://fonts.googleapis.com/css?family=Barlow:400,700');
 
 html {
     height: 100%;
 }
 
 body {
-    font-family: "Open Sans", Helvetica, Arial, sans-serif; /*"Cousine"*/
+    font-family: "Barlow", Helvetica, Arial, sans-serif; /*"Cousine"*/
     font-size: 13px;
     height: 100%;
 }
@@ -19,7 +20,7 @@ table {
 }
 
 h1, h2, h3 {
-    font-family: "Open Sans", Helvetica, Arial, sans-serif;
+    font-family: "Barlow", Helvetica, Arial, sans-serif;
     font-weight: bold;
 }
 
@@ -117,7 +118,7 @@ code {
     position: fixed;
     width: 100%;
     min-height: 48px;
-    font-family: "Open Sans", Helvetica, Arial, sans-serif;
+    font-family: "Barlow", Helvetica, Arial, sans-serif;
 }
 @media (min-width: 768px) {
     .navbar >.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
@@ -154,7 +155,7 @@ ul {
 }
 
 ul .list-group-item {
-    font-size: 1.1em;
+    font-size: 1.15em;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -181,8 +182,12 @@ ul .list-group-item p.pull-right {
     text-overflow: ellipsis;
 }
 
+ul .list-group-item .glyphicon {
+    font-size: 1.1em;
+}
+
 ul.tabs {
-    font-family: "Open Sans", Helvetica, Arial, sans-serif;
+    font-family: "Barlow", Helvetica, Arial, sans-serif;
     display: block;
     height: 48px;
 }
