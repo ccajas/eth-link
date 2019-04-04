@@ -14,6 +14,7 @@ export default {
     data() {
         return {
             blockList: [],
+            maxEntries: 25,
             current: 0,
             next: 0
         }
@@ -38,22 +39,9 @@ export default {
                 txLength: b.transactions.length,
                 miner: b.miner,
                 gasUsed: b.gasUsed,
+                extraData: this.hex2ascii(b.extraData),
                 time: this.convertTimestamp(b.timestamp)
             });
-        },
-        /*processTx: function(tx)
-        {        
-            if (tx === null)
-                return;
-                
-            tx.value = this.$web3.utils.fromWei(tx.value);
-            tx.gasPrice = this.$web3.utils.fromWei(tx.gasPrice, 'Gwei');
-            this.txList.push(tx);
-        },*/
-        convertTimestamp: function (timestamp) 
-        {
-            let date = new Date(timestamp * 1000);      
-            return date.toLocaleDateString() +' '+ date.toLocaleTimeString();
         },
         scroll: function()
         {
@@ -116,12 +104,19 @@ export default {
         },
         identicon: function(block, dimension) {
             return jdenticon.toSvg(block.miner, dimension, 0);
+        },
+        hex2ascii: function(hex) {
+            let str = '';
+            // skip first two characters
+            for (var i = 2; (i < hex.length && hex.substr(i, 2) !== '00'); i += 2)
+                str += String.fromCharCode(parseInt(hex.substr(i, 2), 16));
+            return str;
+        },
+        convertTimestamp: function (timestamp) 
+        {
+            let date = new Date(timestamp * 1000);      
+            return date.toLocaleDateString() +' '+ date.toLocaleTimeString();
         }
-    },
-    created: function()
-    {
-        this.maxEntries = 15;
-        this.nf = new Intl.NumberFormat();
     },
     mounted: function() 
     {    

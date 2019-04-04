@@ -21,8 +21,9 @@ export default {
         return {
             txList: [],
             txs: [],
-            maxEntries: 15,
+            maxEntries: 25,
             current: 0,
+            gasPrice: 0,
             next: 0
         }
     },
@@ -36,9 +37,18 @@ export default {
         {        
             if (tx === null)
                 return;
-                
-            //tx.value = this.$web3.utils.fromWei(tx.value);
-            tx.gasPrice = this.$web3.utils.fromWei(tx.gasPrice, 'Gwei');
+
+            tx.value = this.$web3.utils.fromWei(tx.value);
+            //tx.gasPrice = this.$web3.utils.fromWei(tx.gasPrice, 'Gwei');
+            tx.gasFee = this.$web3.utils.fromWei(tx.gasPrice) * tx.gas;
+
+            // instantiate by address
+            //console.log(this.myContract.balanceOf);
+            /*this.MyContract.balanceOf(tx.to, function(error, success)
+            {
+                if(error) console.log ("Something went wrong: " + error);
+                else console.log ("Balance: " + success.toString(10));
+            });*/
             this.txList.push(tx);
         },
         convertTimestamp: function (timestamp) 
@@ -89,6 +99,27 @@ export default {
     created: function()
     {
         this.nf = new Intl.NumberFormat();
+
+        // Minimalist ABI for smart contract
+        let minABI = [
+            // balanceOf
+            {
+              "constant":true,
+              "inputs":[{"name":"_owner","type":"address"}],
+              "name":"balanceOf",
+              "outputs":[{"name":"balance","type":"uint256"}],
+              "type":"function"
+            },
+            // decimals
+            {
+              "constant":true,
+              "inputs":[],
+              "name":"decimals",
+              "outputs":[{"name":"","type":"uint8"}],
+              "type":"function"
+            }
+        ];
+        this.myContract = this.$web3.eth.Contract(minABI);
     },
     mounted: function() 
     {    
@@ -98,7 +129,13 @@ export default {
             console.log(block);
             this.next = (block.transactions.length < this.maxEntries) ?
                 block.transactions.length : this.maxEntries;
-            this.loadTxList(block.transactions);
+
+            // Get gas price only once
+            this.$web3.eth.getGasPrice().then((gas) =>
+            {
+                this.gasPrice = gas;
+                this.loadTxList(block.transactions);
+            });
             this.txs = block.transactions;
 
         }.bind(this));
