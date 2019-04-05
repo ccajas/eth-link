@@ -16,9 +16,10 @@ export default {
         return {
             tempBlocks: [],
             blockList: [],
-            maxEntries: 25,
+            maxEntries: 10,
             current: 0,
-            next: 0
+            next: 0,
+            show: true
         }
     },
     watch: {
@@ -27,6 +28,14 @@ export default {
         }
     },
     methods: {
+        enter: function (el) {
+            let time = (el.dataset.index % this.maxEntries) * 0.25;
+            el.style['transition-delay'] = time +'s';
+        },
+        afterEnter: function (el) {
+            el.style['transition-delay'] = null;
+            el.style.transition = 'all 0.25s';
+        },
         processBlock: function(b)
         {
             if (b === null)
@@ -67,7 +76,7 @@ export default {
             this.tempBlocks = [];
             let promises = [];
 
-            console.log('loading...');
+            console.log('loading blocks...');
 
             for (var i = 0; i < maxEntries; i++) {
                 promises.push(this.$web3.eth.getBlock(n - i).then(this.processBlock));
@@ -77,9 +86,8 @@ export default {
             Promise.all(promises).then(() => 
             {
                 let blocks = this.tempBlocks.sort((a, b) => b.id - a.id);
-                blocks.forEach((el)=> el.sorted = true );
-                this.blockList = this.blockList.concat(blocks);
-                console.log(this.blockList);                
+                //blocks.forEach((el)=> el.sorted = true );
+                this.blockList = this.blockList.concat(blocks);               
 
                 this.next = this.current - maxEntries;
                 promises.length = 0;
@@ -137,6 +145,10 @@ export default {
             this.next = n;
             this.loadBlockList(n, this.maxEntries);
         }.bind(this));
+
+        this.$root.$on('eventing', data => {
+            console.log(data);
+        });
 
         this.scroll();
     }
