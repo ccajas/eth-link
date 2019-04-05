@@ -28,7 +28,6 @@
 			go (event) {
 				event.preventDefault();
 				window.history.pushState(null, '', this.href);
-				console.log('test '+ this.href);
 				eventBus.$emit('link-clicked', this.href);
 			}
 		}

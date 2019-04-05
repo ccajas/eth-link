@@ -6,21 +6,29 @@
                 <div class="row col-sm-1">
                     {{ tx.transactionIndex }}
                 </div>
-                <div class="row col-sm-3">
-                    <div class="row col-sm-3">
+                <div class="row col-sm-11">
+                    <div class="row col-sm-1">
                         <div v-html="identicon(tx.from, 20)" class="identicon pull-left"></div>
                     </div>
                     <div class="row col-sm-9">
                         <addrLink :addr="tx.from"></addrLink>
                     </div>
                 </div>
-                <div class="row col-sm-3">
-                    <div class="row col-sm-3">
+
+                <div class="row col-sm-1">
+                    &nbsp;
+                </div>
+                <div class="row col-sm-11">
+                    <div class="row col-sm-1">
                         <div v-html="identicon(tx.to, 20)" class="identicon pull-left"></div>
                     </div>
                     <div class="row col-sm-9">
                         <addrLink :addr="tx.to"></addrLink>
                     </div>
+                </div>
+
+                <div class="row col-sm-2">
+                    &nbsp;
                 </div>
                 <div class="row col-sm-5">
                     <div class="row col-sm-6">

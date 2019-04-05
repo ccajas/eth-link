@@ -1,18 +1,20 @@
 
 import addrLink from  '../views/components/vAddrLink.vue';
 import blockLink from '../views/components/vBlockLink.vue';
+import vlink from     '../views/components/vLink.vue';
 import timeInfo from  '../views/components/vTimeInfo.vue';
-
-// Table info component for block and tx data
+// Table info component for block data
 
 export default {
     components: {
         addrLink,
         blockLink,
+        vlink,
         timeInfo
     },
     data() {
         return {
+            tempBlocks: [],
             blockList: [],
             maxEntries: 25,
             current: 0,
@@ -30,7 +32,7 @@ export default {
             if (b === null)
                 return;
                 
-            this.blockList.push({
+            this.tempBlocks.push({
                 id: b.number,
                 hash: b.hash,
                 size: b.size,
@@ -40,7 +42,8 @@ export default {
                 miner: b.miner,
                 gasUsed: b.gasUsed,
                 extraData: this.hex2ascii(b.extraData),
-                time: this.convertTimestamp(b.timestamp)
+                time: this.convertTimestamp(b.timestamp),
+                sorted: false
             });
         },
         scroll: function()
@@ -61,7 +64,9 @@ export default {
                 return;
 
             this.current = this.next;
+            this.tempBlocks = [];
             let promises = [];
+
             console.log('loading...');
 
             for (var i = 0; i < maxEntries; i++) {
@@ -71,8 +76,11 @@ export default {
             // Order blocks and get current network stats
             Promise.all(promises).then(() => 
             {
-                this.blockList.sort((a, b) => b.id - a.id);
-                console.log('blocks sorted');
+                let blocks = this.tempBlocks.sort((a, b) => b.id - a.id);
+                blocks.forEach((el)=> el.sorted = true );
+                this.blockList = this.blockList.concat(blocks);
+                console.log(this.blockList);                
+
                 this.next = this.current - maxEntries;
                 promises.length = 0;
             })
@@ -116,6 +124,9 @@ export default {
         {
             let date = new Date(timestamp * 1000);      
             return date.toLocaleDateString() +' '+ date.toLocaleTimeString();
+        },
+        blockLink (id) {
+            return '/block/'+ id;
         }
     },
     mounted: function() 

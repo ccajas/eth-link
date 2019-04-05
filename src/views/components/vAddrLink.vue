@@ -1,7 +1,10 @@
 
 <template>
-    <span>
+    <span v-if="trunc">
         {{ prefix }}<vlink v-bind:href="addrValue">{{ addrTrunc }}</vlink>
+    </span>
+    <span v-else>
+        {{ prefix }}<vlink v-bind:href="addrValue">{{ addr }}</vlink>
     </span>
 </template>
 
@@ -20,6 +23,10 @@ export default {
         },
         prefix: {
             type: String,
+            required: false
+        },
+        trunc: {
+            type: Boolean,
             required: false
         }
     },
