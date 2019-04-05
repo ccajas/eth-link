@@ -3,9 +3,7 @@
     <div>
         <ul>
             <li class="bg list-group-item" v-for = "tx in txList" :key = "tx.id">
-                <div class="row col-sm-1">
-                    {{ tx.transactionIndex }}
-                </div>
+                <div class="row col-sm-1" v-text="tx.transactionIndex"></div>
                 <div class="row col-sm-11">
                     <div class="row col-sm-1">
                         <div v-html="identicon(tx.from, 20)" class="identicon pull-left"></div>

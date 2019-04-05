@@ -4,9 +4,9 @@
         <navbar :apptitle = "apptitle" :conn = "connected"></navbar>
         <div id="main-container">
             <section class="container">
-                <div class="col-sm-3">
-                    <div class="fixed-panel">
-                        <h2 class="text-second">{{ title }} {{ itemID }}</h2>
+                <div class="col-sm-3"  v-cloak>
+                    <div class="fixed-panel" v-cloak>
+                        <h1 class="text-second" v-text="title +' '+ itemID"></h1>
                         <networkInfo></networkInfo>
                         <br/>
                         -&#164;- work in progress -&#164;-
