@@ -3,6 +3,9 @@ import addrLink from  '../views/components/vAddrLink.vue';
 import blockLink from '../views/components/vBlockLink.vue';
 import vlink from     '../views/components/vLink.vue';
 import timeInfo from  '../views/components/vTimeInfo.vue';
+
+// Mixin
+import transition from '../mixins/transition.js';
 // Table info component for block data
 
 export default {
@@ -12,11 +15,12 @@ export default {
         vlink,
         timeInfo
     },
+    mixins: [transition],
     data() {
         return {
             tempBlocks: [],
             blockList: [],
-            maxEntries: 10,
+            maxEntries: 20,
             current: 0,
             next: 0,
             show: true
@@ -28,14 +32,6 @@ export default {
         }
     },
     methods: {
-        enter: function (el) {
-            let time = (el.dataset.index % this.maxEntries) * 0.25;
-            el.style['transition-delay'] = time +'s';
-        },
-        afterEnter: function (el) {
-            el.style['transition-delay'] = null;
-            el.style.transition = 'all 0.25s';
-        },
         processBlock: function(b)
         {
             if (b === null)
@@ -86,7 +82,6 @@ export default {
             Promise.all(promises).then(() => 
             {
                 let blocks = this.tempBlocks.sort((a, b) => b.id - a.id);
-                //blocks.forEach((el)=> el.sorted = true );
                 this.blockList = this.blockList.concat(blocks);               
 
                 this.next = this.current - maxEntries;

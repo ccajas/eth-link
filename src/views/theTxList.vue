@@ -1,8 +1,8 @@
 
 <template>
     <div>
-        <ul>
-            <li class="bg list-group-item" v-for = "tx in txList" :key = "tx.id">
+        <transition-group name="list-f" tag="ul" v-on:enter="enter" v-on:after-enter="afterEnter">
+            <li class="bg list-group-item" v-for="(tx, idx) in txList" :key="tx.transactionIndex +'_'" :data-index="idx">
                 <div class="row col-sm-1" v-text="tx.transactionIndex"></div>
                 <div class="row col-sm-11">
                     <div class="row col-sm-1">
@@ -37,7 +37,7 @@
                     </div>
                 </div>
             </li>              
-        </ul>
+        </transition-group>
     </div>
 </template>
 

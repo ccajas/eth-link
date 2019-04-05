@@ -4,7 +4,7 @@
         <navbar :apptitle="apptitle" :conn="connected" :containerClass="isResponsive ? fluid : nonFluid"></navbar>
         <div id="main-container">
             <section v-bind:class="isResponsive ? fluid : nonFluid">
-                <div class="col-sm-3" v-cloak>
+                <div class="col-sm-2" v-cloak>
                     <div class="fixed-panel" v-cloak>
                         <h1 class="text-second" v-text="title +' '+ itemID"></h1>
                         <networkInfo></networkInfo>

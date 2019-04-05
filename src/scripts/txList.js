@@ -3,6 +3,9 @@ import addrLink from  '../views/components/vAddrLink.vue';
 import blockLink from '../views/components/vBlockLink.vue';
 import timeInfo from  '../views/components/vTimeInfo.vue';
 
+// Mixin
+import transition from '../mixins/transition.js';
+
 // Table info component for block and tx data
 
 export default {
@@ -11,6 +14,7 @@ export default {
         blockLink,
         timeInfo
     },
+    mixins: [transition],
     props: {
         itemID: {
             type: String,
@@ -21,7 +25,7 @@ export default {
         return {
             txList: [],
             txs: [],
-            maxEntries: 25,
+            maxEntries: 20,
             current: 0,
             gasPrice: 0,
             next: 0
@@ -49,7 +53,7 @@ export default {
                 if(error) console.log ("Something went wrong: " + error);
                 else console.log ("Balance: " + success.toString(10));
             });*/
-            this.txList.push(tx);
+            this.tempTxs.push(tx);
         },
         convertTimestamp: function (timestamp) 
         {
@@ -73,6 +77,7 @@ export default {
             if (this.current == this.next)
                 return;
 
+            this.tempTxs = [];
             let promises = [];
 
             for (var i = this.current; i < this.next; i++) {
@@ -82,7 +87,9 @@ export default {
             // Move next marker after txs are loaded
             Promise.all(promises).then(() => 
             {
-                this.txList.sort((a, b) => a.transactionIndex - b.transactionIndex);
+                let allTxs = this.tempTxs.sort((a, b) => a.transactionIndex - b.transactionIndex);
+                this.txList = this.txList.concat(allTxs); 
+
                 this.current = this.next;
                 this.next += this.maxEntries;
                 if (this.next > txs.length)

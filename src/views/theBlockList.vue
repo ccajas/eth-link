@@ -1,8 +1,8 @@
 
 <template>
-    <div id="staggered-list">
+    <div>
         <transition-group name="list-f" tag="ul" v-on:enter="enter" v-on:after-enter="afterEnter">
-            <li v-for="(block, idx) in blockList" :key="block.id+'_'" :data-index="idx" class="bg list-group-item">
+            <li class="bg list-group-item" v-for="(block, idx) in blockList" :key="block.id+'_'" :data-index="idx">
                 <div class="row col-sm-4">
                         <b>Ethereum</b> - <blockLink :block="block.id"></blockLink>
                     </div>
