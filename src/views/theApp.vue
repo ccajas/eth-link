@@ -1,10 +1,10 @@
 
 <template>
     <div class="bg-main">
-        <navbar :apptitle = "apptitle" :conn = "connected"></navbar>
+        <navbar :apptitle="apptitle" :conn="connected" :containerClass="isResponsive ? fluid : nonFluid"></navbar>
         <div id="main-container">
-            <section class="container">
-                <div class="col-sm-3"  v-cloak>
+            <section v-bind:class="isResponsive ? fluid : nonFluid">
+                <div class="col-sm-3" v-cloak>
                     <div class="fixed-panel" v-cloak>
                         <h1 class="text-second" v-text="title +' '+ itemID"></h1>
                         <networkInfo></networkInfo>
@@ -16,7 +16,7 @@
                     <div class="row tabs border-main">
                         <div id="main-loader" class="bg-bright"></div>
                     </div>
-                    <section class="row col-sm-8">
+                    <section class="row col-sm-8" id="middle-panel">
                         <component v-bind:is="currentListComponent" :itemID="itemID"></component>
                     </section>
                     <section id="compare-detail" class="col-sm-4">

@@ -15,6 +15,10 @@ export default {
         conn: {
             type: Boolean,
             required: true 
+        },
+        containerClass: {
+            type: String,
+            required: true
         }
     },
     data: function() {
@@ -34,7 +38,7 @@ export default {
             window.history.pushState(null, '', path);
             eventBus.$emit('link-clicked', path);
         },
-        sendRequest: function (event) 
+        sendRequest: function() 
         {
             let request = this.ethRequest.split('0x').join('');
 
@@ -48,6 +52,10 @@ export default {
             else if(/[0-9]{1,8}/.test(request)) {
                 this.goToLocation('block', parseInt(request));
             }
+        },
+        toggleResponsive: function()
+        {
+            this.$parent.toggleResponsive();
         }
     }
 }

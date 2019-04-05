@@ -22,7 +22,11 @@ export default {
             connected: false,
             currentRoute: window.location.pathname,
             title: '',
-            itemID: ''
+            itemID: '',
+            // classes
+            isResponsive: false,
+            nonFluid: 'container',
+            fluid: 'container-fluid'
         }
     },  
     watch: {
@@ -71,6 +75,9 @@ export default {
         updateRoute()
         {
             this.currentRoute = window.location.pathname;
+        },
+        toggleResponsive: function() {
+            this.isResponsive = !this.isResponsive;
         }
     }
 }
