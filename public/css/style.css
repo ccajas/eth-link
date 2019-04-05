@@ -1,5 +1,5 @@
-/*@import url('https://fonts.googleapis.com/css?family=Titillium+Web:400,600');
-@import url('https://fonts.googleapis.com/css?family=Exo+2:400,600|Saira+Semi+Condensed:400,600');*/
+@import url('https://fonts.googleapis.com/css?family=Titillium+Web:400,600');
+/*@import url('https://fonts.googleapis.com/css?family=Exo+2:400,600|Saira+Semi+Condensed:400,600');*/
 @import url('https://fonts.googleapis.com/css?family=Cousine:400,400i,700');
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
 @import url('https://fonts.googleapis.com/css?family=Barlow:400,700');
@@ -9,9 +9,13 @@ html {
 }
 
 body {
-    font-family: "Barlow", Helvetica, Arial, sans-serif; /*"Cousine"*/
+    font-family: "Barlow", Arial, sans-serif; /*"Cousine"*/
     font-size: 13px;
     height: 100%;
+}
+
+[v-cloak] { 
+    display:none; 
 }
 
 table {
@@ -20,7 +24,7 @@ table {
 }
 
 h1, h2, h3 {
-    font-family: "Barlow", Helvetica, Arial, sans-serif;
+    font-family: "Titillium Web", Arial, sans-serif;
     font-weight: bold;
 }
 
@@ -160,6 +164,7 @@ ul .list-group-item {
     overflow: hidden;
     text-overflow: ellipsis;
     border: 1px solid;
+    z-index: 1;
     transition: transform 0.25s;
     -webkit-transition: transform 0.25s;
 }
@@ -241,12 +246,36 @@ nav .form-control {
     background: transparent;
 }
 
-nav input#master-input{
+nav input#master-input {
     padding: 0px 32px 2px 0px;
     font-size: 1.25em;
     box-shadow: none;
     border: 0px;
     border-radius: 0px;
+}
+
+/*** Tooltips ***/
+
+.ttip {
+    position: relative;
+    display: inline-block;
+}
+
+.ttip .ttip-text {
+    visibility: hidden;
+    bottom: 100%;
+    left: 0%;
+    margin-left: 0px;
+    text-align: center;
+    font-size: 0.85em;
+    padding: 4px 8px;
+    border-radius: 4px;
+    position: absolute;
+    z-index: 2;
+  }
+
+.ttip:hover .ttip-text {
+    visibility: visible;
 }
 
 /*** Glyphicon positioning ***/

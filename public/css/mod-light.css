@@ -36,7 +36,7 @@ ul a .list-group-item {
     color: #223336;
 }
 
-ul a:hover .bg {
+ul .list-group-item.bg:hover  {
     background: #f6f9fb;
 }
 
@@ -98,6 +98,11 @@ ul a:hover .bg {
 .table > tbody > tr.border-main > td {
     background: #f3f3f3;
     border-top: 2px solid #fff;
+}
+
+.ttip .ttip-text {
+    background: rgba(0, 0, 0, 0.75);
+    color: #fff;
 }
 
 .text-second {
