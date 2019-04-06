@@ -114,6 +114,17 @@ button {
     border-radius: 50%;
 }
 
+.capitalize {
+    text-transform: capitalize;
+}
+
+.spin-loader {
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+}
+
 #main-container {
     padding: 0px;
     padding-top: 48px;
@@ -162,7 +173,7 @@ button {
     top: 3px;
 }
 
-/*** Lists ***/
+/*** Transitions ***/
 
 .list-f-enter-active, .list-f-leave-active {
     transition: all 0.25s;
@@ -172,6 +183,14 @@ button {
     opacity: 0;
     perspective: inherit;
     transform: rotateX(80deg);
+}
+
+.fade-enter-active, .fade-leave-active {
+    transition: opacity 1s;
+}
+  
+.fade-enter, .fade-leave-to {
+    opacity: 0;
 }
 
 ul {
@@ -197,7 +216,7 @@ ul .list-group-item:first-child {
 }
 
 ul .list-group-item:hover {
-    transform: scale(1.1);
+    transform: scale(1.1176);
     z-index: 20;
 }
 

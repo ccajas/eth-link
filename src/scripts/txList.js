@@ -28,7 +28,8 @@ export default {
             maxEntries: 25,
             current: 0,
             gasPrice: 0,
-            next: 0
+            next: 0,
+            loading: true
         }
     },
     watch: {
@@ -92,9 +93,15 @@ export default {
 
                 this.current = this.next;
                 this.next += this.maxEntries;
+
                 if (this.next > txs.length)
                     this.next = txs.length;
 
+                if (this.current == this.next)
+                {
+                    console.log('done!');
+                    this.loading = false;
+                }
                 promises.length = 0;
 
                 // Start loading the next group

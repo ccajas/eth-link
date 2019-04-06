@@ -1,11 +1,14 @@
 
 <template>
     <div>
-        <h3>Addresses in this block</h3>
-
+        <h3>Addresses in this block
+            <transition appear name="fade"><div class="spin-loader pull-right" v-if="loading"></div></transition>
+        </h3>
         <transition-group name="list-f" tag="ul" v-on:enter="enter" v-on:after-enter="afterEnter">
             <li class="bg list-group-item" v-for="(tx, idx) in txList" :key="tx.transactionIndex +'_'" :data-index="idx">
-                <div class="row col-sm-1" v-text="tx.transactionIndex"></div>
+                <div class="row col-sm-1">
+                    <b>{{ tx.transactionIndex + 1 }}</b>
+                </div>
                 <div class="row col-sm-11">
                     <div class="row col-sm-1">
                         <div v-html="identicon(tx.from, 20)" class="identicon pull-left"></div>
@@ -40,6 +43,9 @@
                 </div>
             </li>              
         </transition-group>
+        <transition appear name="fade">
+            <h3><div class="spin-loader center-block" v-if="loading && txList.length"></div></h3>
+        </transition>
     </div>
 </template>
 

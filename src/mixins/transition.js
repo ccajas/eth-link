@@ -2,7 +2,7 @@
 export default {
     data() {
         return {
-            trTime: 0.15
+            trTime: 0.1
         }
     },
     methods: {

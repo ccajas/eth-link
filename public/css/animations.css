@@ -47,13 +47,33 @@
     height: 5px;
     width: 100px;
 }
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@-webkit-keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@-moz-keyframes  spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
   
+@keyframes changewidth {
+    from { width: 100%; }
+    to { width: 1px; }
+}
+
 @-webkit-keyframes changewidth {
     from { width: 100%; }
     to { width: 1px; }
 }
-  
-@keyframes changewidth {
+
+@-moz-keyframes changewidth {
     from { width: 100%; }
     to { width: 1px; }
 }
