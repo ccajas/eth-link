@@ -16,6 +16,12 @@ export default {
         timeInfo
     },
     mixins: [transition],
+    props: {
+        network: {
+            type: String,
+            required: true 
+        }
+    },
     data() {
         return {
             tempBlocks: [],
@@ -57,10 +63,7 @@ export default {
             window.onscroll = () => {
                 let bottom = el.scrollHeight - window.scrollY < window.innerHeight + 1;
                 if (bottom)
-                {
-                    console.log('getBlockNumber: '+ this.next +' '+ this.current);
                     this.loadBlockList(this.next, this.maxEntries);
-                }
             }
         },
         loadBlockList: function(n, maxEntries)

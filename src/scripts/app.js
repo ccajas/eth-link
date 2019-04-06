@@ -20,6 +20,7 @@ export default {
         return {
             apptitle: 'Eth-Link',
             connected: false,
+            network: '',
             currentRoute: window.location.pathname,
             title: '',
             itemID: '',
@@ -57,6 +58,11 @@ export default {
         this.itemID = path[2] || '';
     },
     mounted: function() {
+
+        this.$web3.eth.net.getNetworkType().then(function(network) {
+
+            this.network = network;
+        }.bind(this));
 
         this.$web3.eth.getBlockNumber().then(function(b) {
             

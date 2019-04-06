@@ -18,7 +18,7 @@
                         <br/><br/><br/>
                     </div>
                     <section id="middle-panel" class="row col-sm-8">
-                        <component v-bind:is="currentListComponent" :itemID="itemID"></component>
+                        <component v-bind:is="currentListComponent" :network="network" :itemID="itemID"></component>
                     </section>
                     <section id="compare-detail" class="col-sm-4">
 
