@@ -1,6 +1,8 @@
 
 <template>
     <div>
+        <h3>Addresses in this block</h3>
+
         <transition-group name="list-f" tag="ul" v-on:enter="enter" v-on:after-enter="afterEnter">
             <li class="bg list-group-item" v-for="(tx, idx) in txList" :key="tx.transactionIndex +'_'" :data-index="idx">
                 <div class="row col-sm-1" v-text="tx.transactionIndex"></div>

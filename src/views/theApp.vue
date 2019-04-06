@@ -12,11 +12,12 @@
                         -&#164;- work in progress -&#164;-
                     </div>
                 </div>
-                <div class="row col-sm-9">
+                <div class="row col-sm-10">
                     <div class="row tabs border-main">
                         <div id="main-loader" class="bg-bright"></div>
+                        <br/><br/><br/>
                     </div>
-                    <section class="row col-sm-8" id="middle-panel">
+                    <section id="middle-panel" class="row col-sm-8">
                         <component v-bind:is="currentListComponent" :itemID="itemID"></component>
                     </section>
                     <section id="compare-detail" class="col-sm-4">

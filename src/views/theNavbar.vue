@@ -1,9 +1,9 @@
 
 <template>
     <nav class="navbar navbar-default bg-second-grad shadow-normal">
-        <div class="text-light" v-bind:class="containerClass">
+        <div v-bind:class="containerClass" class="text-light" >
             <div class="row bg-add">
-                <div class="col-sm-3">
+                <div class="col-sm-2">
                     <vlink v-cloak class="navbar-brand" href="/">
                         <i class="glyphicon glyphicon-random text-light"></i>
                         &nbsp;<span class="text-light"> {{ apptitle }} </span></vlink>
@@ -13,7 +13,7 @@
                 </div>
 
                 <!-- Search box -->
-                <div class="col-sm-6 form-group inner-addon right-addon bg-remove">
+                <div class="col-sm-5 form-group inner-addon right-addon bg-remove">
                     <form @submit.prevent="sendRequest" name="ethRequest">
                         <i class="glyphicon glyphicon-search"></i>
                         <input type="text" class="form-control text-shadow-glow" v-model="ethRequest" id="master-input" name="master-input"
