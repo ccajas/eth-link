@@ -4,9 +4,10 @@
         <navbar :apptitle="apptitle" :conn="connected" :containerClass="isResponsive ? fluid : nonFluid"></navbar>
         <div id="main-container">
             <section v-bind:class="isResponsive ? fluid : nonFluid">
-                <div class="col-sm-2" v-cloak>
-                    <div class="fixed-panel" v-cloak>
+                <div class="row col-sm-2" style="height: 100%" v-cloak>
+                    <div class="col-sm-2 fixed-panel" v-cloak>
                         <h1 class="text-second" v-text="title +' '+ itemID"></h1>
+                        <img :src="'/public/images/ethereum-coin.svg'" style="margin: 0px 30% 0px 25%"/>
                         <networkInfo></networkInfo>
                         <br/>
                         -&#164;- work in progress -&#164;-

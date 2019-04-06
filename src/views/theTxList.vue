@@ -4,11 +4,10 @@
         <h3>{{ totalRecipients }} Recipients
             <transition appear name="fade"><div class="spin-loader pull-right" v-if="loading"></div></transition>
         </h3>
-        <transition-group appear name="fade" tag="div">
+        <transition-group appear name="fade" tag="div" class="clearfix">
             <!--<span v-for="(times, addr) in uniqueFromAddr" :key="addr" :data-index="addr">{{ addr }}, </span>-->
-            <div v-for="(times, addr) in uniqueFromAddr" :key="addr" :data-index="addr" class="bg pull-left">
-                <div v-html="identicon(addr, 20)" class="pull-left"></div> &nbsp;
-                <addrLink :addr="addr" :trunc="true"></addrLink> &nbsp;
+            <div v-for="(times, addr) in uniqueFromAddr" :key="addr" :data-index="addr" class="pull-left">
+                <div v-html="identicon(addr, 48)" class="pull-left bg-mid" style="height: 48px; margin: 0 10px 10px 0"></div>
             </div>
         </transition-group>
         <br/>

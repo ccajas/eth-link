@@ -111,7 +111,7 @@ export default {
             .catch(() => { console.log('failed!') });
         },
         identicon: function(addr, dimension) {
-            return jdenticon.toSvg(addr, dimension, 0);
+            return jdenticon.toSvg(addr, dimension, 0.08);
         }
     },
     created: function()

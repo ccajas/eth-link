@@ -3,7 +3,7 @@ body {
     /*background: -moz-radial-gradient(farthest-corner at 40px 40px, #ebf0f3 0%, #caced1 100%); /* FF3.6-15 */
     /*background: -webkit-radial-gradient(farthest-corner at 40px 40px, #e6eff5 0%,#caced1 100%); /* Chrome10-25,Safari5.1-6 */
     /*background: radial-gradient(farthest-corner at 40px 40px, #ebf0f3 52%,#caced1 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    background-image: radial-gradient(farthest-corner at 40px 40px, #f6f9fb 52%,rgba(202, 206, 209, 0.5) 100%);
+    background-image: radial-gradient(farthest-corner at 50% 0px, #f6f9fb 62%,rgba(64, 82, 87, 0.25) 100%);
     background-attachment: fixed;
     background-size: 100%;
     color: #405257;
@@ -57,13 +57,14 @@ ul .list-group-item.bg:hover  {
 
 .bg-main-grad {
     background: #f3f3f3;
-    background: -moz-linear-gradient(180deg, #00728e -30%,#fff 60%);
-    background: -webkit-linear-gradient(180deg, #00728e -30%,#fff 60%);
-    background: linear-gradient(180deg, #00728e -30%,#fff 60%);
+    background: -moz-linear-gradient(-65deg, #00728e -30%,#fff 60%);
+    background: -webkit-linear-gradient(-65deg, #00728e -30%,#fff 60%);
+    background: linear-gradient(-65deg, #00728e -30%,#fff 60%);
 }
 
 .bg-mid {
-    background: #404040;
+    background: #405257;
+    background: rgba(64, 82, 87, 0.5);
 }
 
 .bg-second {
@@ -76,8 +77,8 @@ ul .list-group-item.bg:hover  {
 
 .bg-second-grad {
     background: #112741;
-    background: -moz-linear-gradient(-45deg, #112741 60%, #00728e 100%);
-    background: -webkit-linear-gradient(-45deg, #112741 60%,#00728e 100%);
+    background: -moz-linear-gradient(135deg, #112741 60%, #00728e 100%);
+    background: -webkit-linear-gradient(135deg, #112741 60%,#00728e 100%);
     background: linear-gradient(135deg, #112741 60%,#00728e 100%);
     filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#112741', endColorstr='#008e7b',GradientType=1);
 }
