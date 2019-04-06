@@ -4,13 +4,19 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
 @import url('https://fonts.googleapis.com/css?family=Barlow:400,700');
 
+@font-face {
+    font-family: 'Muli';
+    src: url('../fonts/Muli.ttf') format('truetype'),
+        url('../fonts/Muli-Bold.ttf') format('truetype');
+}
+
 html {
     height: 100%;
 }
 
 body {
     font-family: "Barlow", Arial, sans-serif; /*"Cousine"*/
-    font-size: 13px;
+    font-size: 15px;
     height: 100%;
 }
 
@@ -143,7 +149,7 @@ button {
 .navbar-default .navbar-brand {
     padding: 14px 0px 14px 2px;
     height: 48px;
-    font-size: 1.3em;
+    font-size: 1.1em;
     font-weight: bold;
     text-shadow: none;
 }
@@ -175,7 +181,9 @@ ul {
 }
 
 ul .list-group-item {
-    font-size: 1.15em;
+    font-size: 1.133em;
+    line-height: 1.25em;
+    letter-spacing: 0.01em;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

@@ -1,13 +1,18 @@
 
 export default {
+    data() {
+        return {
+            trTime: 0.15
+        }
+    },
     methods: {
         enter: function (el) {
-            let time = (el.dataset.index % this.maxEntries) * 0.25;
+            let time = (el.dataset.index % this.maxEntries) * this.trTime;
             el.style['transition-delay'] = time +'s';
         },
         afterEnter: function (el) {
             el.style['transition-delay'] = null;
-            el.style.transition = 'all 0.25s';
+            el.style.transition = 'all '+ this.trTime +'s';
         },
     }
 }

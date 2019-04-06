@@ -1,12 +1,12 @@
 body {
-    background: #ebf0f3 url(../images/bg-mtn1.jpg);
+    background: #ebf0f3;
     /*background: -moz-radial-gradient(farthest-corner at 40px 40px, #ebf0f3 0%, #caced1 100%); /* FF3.6-15 */
     /*background: -webkit-radial-gradient(farthest-corner at 40px 40px, #e6eff5 0%,#caced1 100%); /* Chrome10-25,Safari5.1-6 */
     /*background: radial-gradient(farthest-corner at 40px 40px, #ebf0f3 52%,#caced1 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    background-image: radial-gradient(farthest-corner at 40px 40px, #f6f9fb 52%,rgba(202, 206, 209, 0.5) 100%), url('../images/bg-mtn1-blur.jpg');
+    background-image: radial-gradient(farthest-corner at 40px 40px, #f6f9fb 52%,rgba(202, 206, 209, 0.5) 100%);
     background-attachment: fixed;
     background-size: 100%;
-    color: #223336;
+    color: #324044;
 }
 
 a {
@@ -29,6 +29,10 @@ ul .list-group-item {
     /*border: 1px solid #9fa6aa;*/
     border: 1px solid rgba(148, 157, 162, 30%);
     border-top: 1px solid transparent;
+}
+
+ul .list-group-item:first-child {
+    border-top: 1px solid rgba(148, 157, 162, 30%);
 }
 
 ul .list-group-item:hover {
