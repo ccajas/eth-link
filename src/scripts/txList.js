@@ -25,7 +25,7 @@ export default {
         return {
             txList: [],
             txs: [],
-            maxEntries: 20,
+            maxEntries: 25,
             current: 0,
             gasPrice: 0,
             next: 0
@@ -96,6 +96,10 @@ export default {
                     this.next = txs.length;
 
                 promises.length = 0;
+
+                // Start loading the next group
+                if (this.current != this.next)
+                    setTimeout(_ => this.loadTxList(txs), 5000);
             })
             .catch(() => { console.log('failed!') });
         },
@@ -133,7 +137,6 @@ export default {
         // List next blocks
         this.$web3.eth.getBlock(this.itemID).then(function(block) 
         {
-            console.log(block);
             this.next = (block.transactions.length < this.maxEntries) ?
                 block.transactions.length : this.maxEntries;
 
@@ -143,10 +146,22 @@ export default {
                 this.gasPrice = gas;
                 this.loadTxList(block.transactions);
             });
+            // Filter unique addresses
             this.txs = block.transactions;
+            /*
+            let uniqueAddrFrom = {}
+            for (let i = 0; i < this.txs.length; i++) 
+            {
+                if (!(this.txs[i] in uniqueAddrFrom))
+                    uniqueAddrFrom[this.txs[i]] = 1;
+                else
+                    uniqueAddrFrom[this.txs[i]]++;
+            }
+
+            console.log(uniqueAddrFrom);*/
 
         }.bind(this));
 
-        this.scroll();
+        //this.scroll();
     }
 }
