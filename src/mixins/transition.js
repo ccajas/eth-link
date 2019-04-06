@@ -2,17 +2,18 @@
 export default {
     data() {
         return {
-            trTime: 0.1
+            tEntered: 0.1,
+            tAfterEnter: 0.2
         }
     },
     methods: {
         enter: function (el) {
-            let time = (el.dataset.index % this.maxEntries) * this.trTime;
-            el.style['transition-delay'] = time +'s';
+            let time = (el.dataset.index % this.maxEntries) * this.tEntered;
+            el.style['transition-delay'] = this.tEntered +'s';
         },
         afterEnter: function (el) {
             el.style['transition-delay'] = null;
-            el.style.transition = 'all '+ this.trTime +'s';
+            el.style.transition = 'all '+ this.tAfterEnter +'s';
         },
     }
 }

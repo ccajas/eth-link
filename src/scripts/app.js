@@ -60,7 +60,6 @@ export default {
     mounted: function() {
 
         this.$web3.eth.net.getNetworkType().then(function(network) {
-
             this.network = network;
         }.bind(this));
 
@@ -78,8 +77,7 @@ export default {
         },
     },
     methods: {
-        updateRoute()
-        {
+        updateRoute() {
             this.currentRoute = window.location.pathname;
         },
         toggleResponsive: function() {

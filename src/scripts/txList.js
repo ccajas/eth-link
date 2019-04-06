@@ -74,7 +74,7 @@ export default {
                     this.loadTxList(this.txs);
             }
         },
-        loadTxList: function(txs)
+        loadTxList: function(blockNumber, totalTxs)
         {
             console.log(this.current +" "+ this.next);
             if (this.current == this.next)
@@ -84,31 +84,30 @@ export default {
             let promises = [];
 
             for (var i = this.current; i < this.next; i++) {
-                promises.push(this.$web3.eth.getTransaction(txs[i]).then(this.processTx));
+                promises.push(this.$web3.eth.getTransactionFromBlock(blockNumber, i).then(this.processTx));
             }
             
             // Move next marker after txs are loaded
             Promise.all(promises).then(() => 
             {
-                let allTxs = this.tempTxs.sort((a, b) => a.transactionIndex - b.transactionIndex);
-                this.txList = this.txList.concat(allTxs);
+                // Txs will be loaded asynchronously so let's sort them
+                let sortedTxs = this.tempTxs.sort((a, b) => a.transactionIndex - b.transactionIndex);
+                this.txList = this.txList.concat(sortedTxs);
+
+                // Move the iterators and clean up
                 this.current = this.next;
                 this.next += this.maxEntries;
+                promises = [];
 
-                if (this.next > txs.length)
-                    this.next = txs.length;
-
-                if (this.current == this.next)
-                    this.loading = false;
-
-                promises.length = 0;
+                if (this.next > totalTxs)      this.next = totalTxs;
+                if (this.current == this.next) this.loading = false;
                 this.totalRecipients = Object.keys(this.uniqueFromAddr).length;
 
                 // Start loading the next group
                 if (this.current != this.next)
-                    setTimeout(_ => this.loadTxList(txs), 5000);
+                    setTimeout(_ => this.loadTxList(blockNumber, totalTxs), 5000);
             })
-            .catch(() => { console.log('failed!') });
+            .catch((err) => { console.error(err) });
         },
         identicon: function(addr, dimension) {
             return jdenticon.toSvg(addr, dimension, 0.08);
@@ -130,7 +129,7 @@ export default {
             this.$web3.eth.getGasPrice().then((gas) =>
             {
                 this.gasPrice = gas;
-                this.loadTxList(block.transactions);
+                this.loadTxList(block.number, block.transactions.length);
             });
             // Filter unique addresses
             this.txs = block.transactions;

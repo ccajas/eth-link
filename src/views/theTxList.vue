@@ -6,8 +6,9 @@
         </h3>
         <transition-group appear name="fade" tag="div" class="clearfix">
             <!--<span v-for="(times, addr) in uniqueFromAddr" :key="addr" :data-index="addr">{{ addr }}, </span>-->
-            <div v-for="(times, addr) in uniqueFromAddr" :key="addr" :data-index="addr" class="pull-left">
-                <div v-html="identicon(addr, 48)" class="pull-left bg-mid" style="height: 48px; margin: 0 10px 10px 0"></div>
+            <div v-for="(times, addr) in uniqueFromAddr" :key="addr" :data-index="addr" class="ttip pull-left">
+                <div v-html="identicon(addr, 40)" class="identicon pull-left bg-mid" style="height: 40px; margin: 0 10px 10px 0"></div>
+                <span class="ttip-text">{{ addr }}</span>
             </div>
         </transition-group>
         <br/>
@@ -17,11 +18,18 @@
                 <div class="row col-sm-1">
                     <b>{{ tx.transactionIndex + 1 }}</b>
                 </div>
+                <div class="row col-sm-11 text-second">
+                    {{ tx.hash }}
+                </div>
+
+                <div class="row col-sm-1">
+                    &nbsp;
+                </div>
                 <div class="row col-sm-11">
                     <div class="row col-sm-1">
-                        <div v-html="identicon(tx.from, 20)" class="identicon pull-left"></div>
+                        <div v-html="identicon(tx.from, 18)" class="identicon pull-left"></div>
                     </div>
-                    <div class="row col-sm-9">
+                    <div class="row col-sm-11">
                         <addrLink :addr="tx.from"></addrLink>
                     </div>
                 </div>
@@ -31,7 +39,7 @@
                 </div>
                 <div class="row col-sm-11">
                     <div class="row col-sm-1">
-                        <div v-html="identicon(tx.to, 20)" class="identicon pull-left"></div>
+                        <div v-html="identicon(tx.to, 18)" class="identicon pull-left"></div>
                     </div>
                     <div class="row col-sm-9">
                         <addrLink :addr="tx.to"></addrLink>
@@ -53,6 +61,7 @@
         </transition-group>
         <transition appear name="fade">
             <h3><div class="spin-loader center-block" v-if="loading && txList.length"></div></h3>
+            <div class="center-block" v-if="loading == false"><div>-&#164;-</div></div>
         </transition>
     </div>
 </template>
