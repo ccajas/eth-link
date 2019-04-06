@@ -25,6 +25,8 @@ export default {
         return {
             txList: [],
             txs: [],
+            uniqueFromAddr: {},
+            totalRecipients: 0,
             maxEntries: 25,
             current: 0,
             gasPrice: 0,
@@ -44,16 +46,18 @@ export default {
                 return;
 
             tx.value = this.$web3.utils.fromWei(tx.value);
-            //tx.gasPrice = this.$web3.utils.fromWei(tx.gasPrice, 'Gwei');
             tx.gasFee = this.$web3.utils.fromWei(tx.gasPrice) * tx.gas;
+            // tx.gasPrice = this.$web3.utils.fromWei(tx.gasPrice, 'Gwei');
 
-            // instantiate by address
-            //console.log(this.myContract.balanceOf);
-            /*this.MyContract.balanceOf(tx.to, function(error, success)
-            {
-                if(error) console.log ("Something went wrong: " + error);
-                else console.log ("Balance: " + success.toString(10));
-            });*/
+            if (tx.to === null)
+                tx.to = "Created contract";
+
+            // Add to list of unique addresses
+            if (!(tx.from in this.uniqueFromAddr))
+                this.uniqueFromAddr[tx.from] = 1;
+            else
+                this.uniqueFromAddr[tx.from]++;
+
             this.tempTxs.push(tx);
         },
         convertTimestamp: function (timestamp) 
@@ -67,9 +71,7 @@ export default {
             window.onscroll = () => {
                 let bottom = el.scrollHeight - window.scrollY < window.innerHeight + 1;
                 if (bottom)
-                {
                     this.loadTxList(this.txs);
-                }
             }
         },
         loadTxList: function(txs)
@@ -89,8 +91,7 @@ export default {
             Promise.all(promises).then(() => 
             {
                 let allTxs = this.tempTxs.sort((a, b) => a.transactionIndex - b.transactionIndex);
-                this.txList = this.txList.concat(allTxs); 
-
+                this.txList = this.txList.concat(allTxs);
                 this.current = this.next;
                 this.next += this.maxEntries;
 
@@ -98,11 +99,10 @@ export default {
                     this.next = txs.length;
 
                 if (this.current == this.next)
-                {
-                    console.log('done!');
                     this.loading = false;
-                }
+
                 promises.length = 0;
+                this.totalRecipients = Object.keys(this.uniqueFromAddr).length;
 
                 // Start loading the next group
                 if (this.current != this.next)
@@ -117,27 +117,6 @@ export default {
     created: function()
     {
         this.nf = new Intl.NumberFormat();
-
-        // Minimalist ABI for smart contract
-        let minABI = [
-            // balanceOf
-            {
-              "constant":true,
-              "inputs":[{"name":"_owner","type":"address"}],
-              "name":"balanceOf",
-              "outputs":[{"name":"balance","type":"uint256"}],
-              "type":"function"
-            },
-            // decimals
-            {
-              "constant":true,
-              "inputs":[],
-              "name":"decimals",
-              "outputs":[{"name":"","type":"uint8"}],
-              "type":"function"
-            }
-        ];
-        this.myContract = this.$web3.eth.Contract(minABI);
     },
     mounted: function() 
     {    
@@ -155,20 +134,7 @@ export default {
             });
             // Filter unique addresses
             this.txs = block.transactions;
-            /*
-            let uniqueAddrFrom = {}
-            for (let i = 0; i < this.txs.length; i++) 
-            {
-                if (!(this.txs[i] in uniqueAddrFrom))
-                    uniqueAddrFrom[this.txs[i]] = 1;
-                else
-                    uniqueAddrFrom[this.txs[i]]++;
-            }
-
-            console.log(uniqueAddrFrom);*/
 
         }.bind(this));
-
-        //this.scroll();
     }
 }
