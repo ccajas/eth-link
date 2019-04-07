@@ -90,7 +90,7 @@ export default {
                 this.next = this.current - maxEntries;
                 promises.length = 0;
             })
-            .catch(() => { console.log('failed!') });
+            .catch((err) => { console.error(err) });
         },
         checkUpdates: function()
         {
@@ -119,11 +119,21 @@ export default {
         identicon: function(block, dimension) {
             return jdenticon.toSvg(block.miner, dimension, 0);
         },
+        // Convert hex encoding for extra data
         hex2ascii: function(hex) {
             let str = '';
             // skip first two characters
-            for (var i = 2; (i < hex.length && hex.substr(i, 2) !== '00'); i += 2)
-                str += String.fromCharCode(parseInt(hex.substr(i, 2), 16));
+            for (var i = 2; (i < hex.length); i += 2)
+            {
+                let char = String.fromCharCode(parseInt(hex.substr(i, 2), 16));
+                //console.log(charCodeAt(char));
+                str += char;
+            }
+            console.log(str);
+
+            for (var i = 0; i < str.length; i++)
+                console.log(str[i] +" "+ str.charCodeAt(i));
+
             return str;
         },
         convertTimestamp: function (timestamp) 

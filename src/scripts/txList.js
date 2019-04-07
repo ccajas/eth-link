@@ -2,6 +2,7 @@
 import addrLink from  '../views/components/vAddrLink.vue';
 import blockLink from '../views/components/vBlockLink.vue';
 import timeInfo from  '../views/components/vTimeInfo.vue';
+import vlink from     '../views/components/vLink.vue';
 
 // Mixin
 import transition from '../mixins/transition.js';
@@ -12,7 +13,8 @@ export default {
     components: {
         addrLink,
         blockLink,
-        timeInfo
+        timeInfo,
+        vlink
     },
     mixins: [transition],
     props: {

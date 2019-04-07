@@ -5,9 +5,10 @@
             <transition appear name="fade"><div class="spin-loader pull-right" v-if="loading"></div></transition>
         </h3>
         <transition-group appear name="fade" tag="div" class="clearfix">
-            <!--<span v-for="(times, addr) in uniqueFromAddr" :key="addr" :data-index="addr">{{ addr }}, </span>-->
             <div v-for="(times, addr) in uniqueFromAddr" :key="addr" :data-index="addr" class="ttip pull-left">
-                <div v-html="identicon(addr, 40)" class="identicon pull-left bg-mid" style="height: 40px; margin: 0 10px 10px 0"></div>
+                <vlink v-bind:href="'/addr/'+ addr">
+                    <div v-html="identicon(addr, 40)" class="identicon pull-left bg-mid" style="height: 40px; margin: 0 10px 10px 0"></div>
+                </vlink>
                 <span class="ttip-text">{{ addr }}</span>
             </div>
         </transition-group>
@@ -61,7 +62,6 @@
         </transition-group>
         <transition appear name="fade">
             <h3><div class="spin-loader center-block" v-if="loading && txList.length"></div></h3>
-            <div class="center-block" v-if="loading == false"><div>-&#164;-</div></div>
         </transition>
     </div>
 </template>
