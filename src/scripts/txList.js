@@ -28,6 +28,7 @@ export default {
             txList: [],
             txs: [],
             uniqueFromAddr: {},
+            totalSenders: 0,
             totalRecipients: 0,
             maxEntries: 25,
             current: 0,
@@ -103,7 +104,7 @@ export default {
 
                 if (this.next > totalTxs)      this.next = totalTxs;
                 if (this.current == this.next) this.loading = false;
-                this.totalRecipients = Object.keys(this.uniqueFromAddr).length;
+                this.totalSenders = Object.keys(this.uniqueFromAddr).length;
 
                 // Start loading the next group
                 if (this.current != this.next)
@@ -112,7 +113,14 @@ export default {
             .catch((err) => { console.error(err) });
         },
         identicon: function(addr, dimension) {
-            return jdenticon.toSvg(addr, dimension, 0.08);
+            let svg = jdenticon.toSvg(addr, dimension, 0.08);
+            let span = document.createElement('span');
+            span.innerHTML = svg.trim();
+            span.firstChild.removeAttribute('width');
+            span.firstChild.removeAttribute('height');
+            span.firstChild.setAttribute('class', 'scaling-svg');
+            console.log(span.firstChild);
+            return span.firstChild.outerHTML;
         }
     },
     created: function()

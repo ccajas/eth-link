@@ -35,7 +35,7 @@ export default {
             return '/addr/'+ this.addr;
         },
         addrTrunc () {
-            return this.addr.substring(0, 6) + "..." + this.addr.substring(38, 42);
+            return this.addr.substring(0, 8) + "..." + this.addr.substring(38, 42);
         },
         addrColored () {
             let str = '';

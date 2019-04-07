@@ -1,8 +1,8 @@
 
 <template>
     <div>
-        <transition-group name="list-f" tag="ul" v-on:enter="enter" v-on:after-enter="afterEnter">
-            <li class="bg list-group-item" v-for="(block, idx) in blockList" :key="block.id+'_'" :data-index="idx">
+        <transition-group name="list-f" tag="ul" class="list-group shadow-soft" v-on:enter="enter" v-on:after-enter="afterEnter">
+            <li class="bg" v-for="(block, idx) in blockList" :key="block.id+'_'" :data-index="idx">
                 <div class="row col-sm-4">
                         <b class='capitalize'>{{ network }}</b> - <blockLink :block="block.id"></blockLink>
                     </div>

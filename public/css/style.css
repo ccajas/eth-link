@@ -32,6 +32,7 @@ table {
 h1, h2, h3 {
     font-family: "Titillium Web", Arial, sans-serif;
     font-weight: bold;
+    letter-spacing: -0.03em;
 }
 
 h4, h5, h6 {
@@ -106,16 +107,40 @@ button {
 }
 
 .identicon {
-    margin-right: 10px;
     transition: transform 0.15s;
 }
 
 .identicon svg {
-    border-radius: 50%;
+    width: 100%;
+}
+
+.identicon-group > div {
+    width: 5.99%; 
+    margin: 0 0.72% 0.72% 0;
+}
+
+.identicon-group > div:nth-child(15n) {
+    margin-right: 0%;
+}
+
+.scaling-svg-container {
+    position: relative; 
+    height: 0; 
+    width: 100%; 
+    padding: 0;
+    padding-bottom: 100%;
+}
+
+.scaling-svg {
+    position: absolute; 
+    height: 100%; 
+    width: 100%; 
+    left: 0; 
+    top: 0;
 }
 
 .identicon:hover {
-    transform: scale(1.25);
+    transform: scale(1.15);
 }
 
 .capitalize {
@@ -203,7 +228,8 @@ ul {
     list-style-type: none;
 }
 
-ul .list-group-item {
+ul.list-group li {
+    padding: 10px;
     font-size: 1.133em;
     line-height: 1.25em;
     letter-spacing: 0.01em;
@@ -215,27 +241,31 @@ ul .list-group-item {
     z-index: 1;
 }
 
-ul .list-group-item:first-child {
+ul.list-group li:first-child {
     border-radius: 0px;
 }
 
-ul .list-group-item:hover {
-    transform: scale(1.1176);
+ul.list-group li:hover {
+    transform: scale(1.07);
     z-index: 20;
 }
 
-ul .list-group-item p {
+ul.list-group p {
     margin-bottom: 0px;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-ul .list-group-item p.pull-right {
+ul.list-group p.pull-right {
     text-overflow: ellipsis;
 }
 
-ul .list-group-item .glyphicon {
-    font-size: 0.9em;
+ul.list-group .addr {
+    font-size: 1.2em;
+}
+
+ul.list-group .glyphicon {
+    font-size: 0.85em;
 }
 
 ul.tabs {
@@ -371,4 +401,8 @@ footer {
 
 .shadow-normal {
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.65);
+}
+
+.shadow-soft {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
 }
