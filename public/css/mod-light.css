@@ -3,7 +3,7 @@ body {
     /*background: -moz-radial-gradient(farthest-corner at 40px 40px, #ebf0f3 0%, #caced1 100%); /* FF3.6-15 */
     /*background: -webkit-radial-gradient(farthest-corner at 40px 40px, #e6eff5 0%,#caced1 100%); /* Chrome10-25,Safari5.1-6 */
     /*background: radial-gradient(farthest-corner at 40px 40px, #ebf0f3 52%,#caced1 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    background-image: radial-gradient(farthest-corner at 50% 0px, #f6f9fb 72%,rgba(64, 82, 87, 0.25) 100%);
+    background-image: radial-gradient(farthest-corner at 50% 0px, #f6f9fb 72%,rgba(64, 82, 87, 0.7) 120%);
     background-attachment: fixed;
     background-size: 100%;
     color: #364549;
@@ -31,20 +31,25 @@ ul.list-group li {
     border-top: 1px solid transparent;
 }
 
-ul.list-group li:first-child {
-    border-top: 1px solid rgba(148, 157, 162, 30%);
-}
-
 ul.list-group li:hover {
-    border: 1px solid #d9dde3;
+    border: 1px solid #c6ccd4;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 }
 /*
 ul.list-group a {
     color: #223336;
 }*/
 
-ul.list-group li.bg:hover  {
+li.bg:hover  {
     background: #f6f9fb;
+}
+
+li.bg.success > div > div:last-child {
+    border-right: 4px solid #50b379;
+}
+
+li.bg.contract-call > div > div:last-child {
+    border-right: 4px solid #828eb6
 }
 
 .tabs a {
@@ -115,7 +120,7 @@ ul.list-group li.bg:hover  {
 }
 
 .text-second {
-    color: #84909e;
+    color: #74808d;
 }
 
 .text-light {
@@ -130,4 +135,8 @@ ul.list-group li.bg:hover  {
 .text-shadow-glow {
     color: #def;
     text-shadow: #def 0 0 1px;
+}
+
+.text-shadow-haze {
+    text-shadow: rgba(119, 160, 163, 0.5) 0 0 10px;
 }

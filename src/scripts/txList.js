@@ -6,6 +6,7 @@ import vlink from     '../views/components/vLink.vue';
 
 // Mixin
 import transition from '../mixins/transition.js';
+import blockies from   '../mixins/blockies.js';
 
 // Table info component for block and tx data
 
@@ -16,7 +17,7 @@ export default {
         timeInfo,
         vlink
     },
-    mixins: [transition],
+    mixins: [transition, blockies],
     props: {
         itemID: {
             type: String,
@@ -28,13 +29,17 @@ export default {
             txList: [],
             txs: [],
             uniqueFromAddr: {},
+            uniqueToAddr: {},
             totalSenders: 0,
             totalRecipients: 0,
             maxEntries: 25,
             current: 0,
             gasPrice: 0,
             next: 0,
-            loading: true
+            loading: true,
+            // Class list for tx types
+            callClass: 'contract-call',
+            successClass: 'success'
         }
     },
     watch: {
@@ -50,16 +55,25 @@ export default {
 
             tx.value = this.$web3.utils.fromWei(tx.value);
             tx.gasFee = this.$web3.utils.fromWei(tx.gasPrice) * tx.gas;
-            // tx.gasPrice = this.$web3.utils.fromWei(tx.gasPrice, 'Gwei');
 
+            // Check if contract created or contract call
             if (tx.to === null)
                 tx.to = "Created contract";
+
+            this.$web3.eth.getCode(tx.to).then(function(code) {
+                tx.code = code;
+            }.bind(tx));
 
             // Add to list of unique addresses
             if (!(tx.from in this.uniqueFromAddr))
                 this.uniqueFromAddr[tx.from] = 1;
             else
                 this.uniqueFromAddr[tx.from]++;
+
+            if (!(tx.to in this.uniqueToAddr))
+                this.uniqueToAddr[tx.to] = 1;
+            else
+                this.uniqueToAddr[tx.to]++;
 
             this.tempTxs.push(tx);
         },
@@ -104,7 +118,8 @@ export default {
 
                 if (this.next > totalTxs)      this.next = totalTxs;
                 if (this.current == this.next) this.loading = false;
-                this.totalSenders = Object.keys(this.uniqueFromAddr).length;
+                this.totalSenders    = Object.keys(this.uniqueFromAddr).length;
+                this.totalRecipients = Object.keys(this.uniqueToAddr).length;
 
                 // Start loading the next group
                 if (this.current != this.next)
@@ -113,14 +128,29 @@ export default {
             .catch((err) => { console.error(err) });
         },
         identicon: function(addr, dimension) {
-            let svg = jdenticon.toSvg(addr, dimension, 0.08);
+            let svg = jdenticon.toSvg(addr, dimension, 0.05);
             let span = document.createElement('span');
             span.innerHTML = svg.trim();
             span.firstChild.removeAttribute('width');
             span.firstChild.removeAttribute('height');
             span.firstChild.setAttribute('class', 'scaling-svg');
-            console.log(span.firstChild);
             return span.firstChild.outerHTML;
+        },
+        blockie: function(addr, scaling)
+        {
+            let icon = this.createBlockiesIcon({ 
+                seed: addr, 
+                size: 8,
+                scale: scaling, 
+            });
+            let img = document.createElement('img');
+            img.setAttribute('src', icon.toDataURL());
+            console.log(img);
+            return img.outerHTML;
+        },
+        isCall: function(tx)
+        {        
+            return (tx.code != '0x');
         }
     },
     created: function()
@@ -139,7 +169,10 @@ export default {
             this.$web3.eth.getGasPrice().then((gas) =>
             {
                 this.gasPrice = gas;
-                this.loadTxList(block.number, block.transactions.length);
+                if (block.transactions.length > 0)
+                    this.loadTxList(block.number, block.transactions.length);
+                else
+                    this.loading = false;
             });
             // Filter unique addresses
             this.txs = block.transactions;

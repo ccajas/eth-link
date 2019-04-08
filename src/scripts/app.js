@@ -25,7 +25,7 @@ export default {
             title: '',
             itemID: '',
             // classes
-            isResponsive: true,
+            isResponsive: false,
             nonFluid: 'container',
             fluid: 'container-fluid'
         }

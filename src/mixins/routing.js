@@ -1,7 +1,7 @@
 
 export default {
     created: function () {
-    this.hello()
+
     },
     watch: {
         currentRoute: function (val, oldVal) {
@@ -13,10 +13,4 @@ export default {
             console.log('loading view: '+ this.view.tableinfo + ' | '+ this.view.rowinfo);
         }
     },
-    methods: 
-    {
-        hello: function () {
-            console.log('hello from mixin!')
-        }
-    }
 }
