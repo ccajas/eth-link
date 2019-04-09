@@ -21,22 +21,6 @@ body {
     height: 100%;
 }
 
-@media (min-width: 1280px) {
-    .container {
-        width: 1256px;
-    }
-}
-
-@media (min-width: 1600px) {
-    .container {
-        width: 1576px;
-    }
-}
-
-.container {
-    padding: 0px;
-}
-
 [v-cloak] { 
     display:none; 
 }
@@ -110,10 +94,6 @@ button {
     padding: 0px;
 }
 
-.container-fluid {
-    /*max-width: 1152px;*/
-}
-
 .y-overflow-panel {
     position: relative;
     max-height: calc(100vh - 96px);
@@ -138,10 +118,6 @@ button {
     margin: 0 6px 6px 0;
     padding: 2px;
     width: 40px;
-}
-
-.container .identicon-group > div:nth-child(15n) {
-    margin-right: 0%;
 }
 
 .scaling-svg-container {
@@ -176,7 +152,6 @@ button {
 }
 
 #main-container {
-    padding: 0px;
     padding-top: 48px;
 }
 
@@ -242,6 +217,12 @@ button {
 .fade-enter, .fade-leave-to {
     opacity: 0;
 }
+
+.accordion > div {
+    transition: 0.25s ease-out;
+}
+
+/*** Lists ***/
 
 ul {
     margin: 0px;

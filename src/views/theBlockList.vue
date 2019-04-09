@@ -1,10 +1,7 @@
 
 <template>
     <div class="row">
-        <div class="col-sm-3">
-
-        </div>
-        <div class="row col-sm-6">
+        <div class="row col-sm-9 pull-right">
             <transition-group name="list-f" tag="ul" class="list-group shadow-soft" v-on:enter="enter" v-on:after-enter="afterEnter">
                 <li class="bg" v-for="(block, idx) in blockList" :key="block.id+'_'" :data-index="idx">
                     <div class="row col-sm-4">

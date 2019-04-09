@@ -3,7 +3,7 @@ body {
     /*background: -moz-radial-gradient(farthest-corner at 40px 40px, #ebf0f3 0%, #caced1 100%); /* FF3.6-15 */
     /*background: -webkit-radial-gradient(farthest-corner at 40px 40px, #e6eff5 0%,#caced1 100%); /* Chrome10-25,Safari5.1-6 */
     /*background: radial-gradient(farthest-corner at 40px 40px, #ebf0f3 52%,#caced1 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    background-image: radial-gradient(farthest-corner at 50% 0px, #f6f9fb 72%,rgba(64, 82, 87, 0.7) 120%);
+    background-image: radial-gradient(farthest-corner at 50% 0px, #f6f9fb 72%,rgba(64, 82, 87, 0.4) 120%);
     background-attachment: fixed;
     background-size: 100%;
     color: #364549;
