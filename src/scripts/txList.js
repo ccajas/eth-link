@@ -1,23 +1,22 @@
 
-import addrLink from  '../views/components/vAddrLink.vue';
-import blockLink from '../views/components/vBlockLink.vue';
-import timeInfo from  '../views/components/vTimeInfo.vue';
-import vlink from     '../views/components/vLink.vue';
+import txListItem from '../views/components/vTxListItem.vue';
+import addrLink from   '../views/components/vAddrLink.vue';
+import timeInfo from   '../views/components/vTimeInfo.vue';
+import vlink from      '../views/components/vLink.vue';
 
 // Mixin
 import transition from '../mixins/transition.js';
-import blockies from   '../mixins/blockies.js';
 
 // Table info component for block and tx data
 
 export default {
     components: {
+        txListItem,
         addrLink,
-        blockLink,
         timeInfo,
         vlink
     },
-    mixins: [transition, blockies],
+    mixins: [transition],
     props: {
         itemID: {
             type: String,
@@ -37,14 +36,6 @@ export default {
             gasPrice: 0,
             next: 0,
             loading: true,
-            // Class list for tx types
-            callClass: 'contract-call',
-            successClass: 'success'
-        }
-    },
-    watch: {
-        view: function (val, oldVal) {
-            console.log('updated again');
         }
     },
     methods: {
@@ -81,15 +72,6 @@ export default {
         {
             let date = new Date(timestamp * 1000);      
             return date.toLocaleDateString() +' '+ date.toLocaleTimeString();
-        },
-        scroll: function()
-        {
-            let el = document.getElementById('main-container');
-            window.onscroll = () => {
-                let bottom = el.scrollHeight - window.scrollY < window.innerHeight + 1;
-                if (bottom)
-                    this.loadTxList(this.txs);
-            }
         },
         loadTxList: function(blockNumber, totalTxs)
         {
@@ -136,26 +118,6 @@ export default {
             span.firstChild.setAttribute('class', 'scaling-svg');
             return span.firstChild.outerHTML;
         },
-        blockie: function(addr, scaling)
-        {
-            let icon = this.createBlockiesIcon({ 
-                seed: addr, 
-                size: 8,
-                scale: scaling, 
-            });
-            let img = document.createElement('img');
-            img.setAttribute('src', icon.toDataURL());
-            console.log(img);
-            return img.outerHTML;
-        },
-        isCall: function(tx)
-        {        
-            return (tx.code != '0x');
-        }
-    },
-    created: function()
-    {
-        this.nf = new Intl.NumberFormat();
     },
     mounted: function() 
     {    

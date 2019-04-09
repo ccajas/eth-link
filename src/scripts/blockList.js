@@ -129,10 +129,6 @@ export default {
                 //console.log(charCodeAt(char));
                 str += char;
             }
-            console.log(str);
-
-            for (var i = 0; i < str.length; i++)
-                console.log(str[i] +" "+ str.charCodeAt(i));
 
             return str;
         },

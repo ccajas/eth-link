@@ -64,10 +64,7 @@ export default {
         }.bind(this));
 
         this.$web3.eth.getBlockNumber().then(function(b) {
-            
-            console.log('We\'re on block number '+ b);
             this.connected = this.$web3.currentProvider.connected;
-
         }.bind(this));
     },
     computed: {
