@@ -260,12 +260,20 @@ ul.list-group p.pull-right {
     text-overflow: ellipsis;
 }
 
-ul.list-group.tx-list li {
-    padding: 6px;
-}
-
 ul.list-group .addr {
     font-size: 1.1em;
+}
+
+ul.list-group.tx-list li {
+    padding: 0px;
+}
+
+ul.list-group.tx-list li > button {
+    padding: 15px;
+}
+
+li.bg > button > div:first-child {
+    height: 44px;
 }
 
 ul.list-group .glyphicon {

@@ -6,7 +6,7 @@ body {
     background-image: radial-gradient(farthest-corner at 50% 0px, #f6f9fb 72%,rgba(64, 82, 87, 0.4) 120%);
     background-attachment: fixed;
     background-size: 100%;
-    color: #364549;
+    color: #3e4d52;
 }
 
 a {
@@ -44,12 +44,18 @@ li.bg:hover  {
     background: #f6f9fb;
 }
 
-li.bg.success > div > div:last-child {
+li.bg.success > button > div:first-child {
+    background: url('../images/ethereum-coin.svg') no-repeat;
     border-right: 4px solid #50b379;
 }
 
-li.bg.contract-call > div > div:last-child {
+li.bg.contract-call > button > div:first-child {
+    background: url('../images/code-eth.svg') no-repeat;
     border-right: 4px solid #828eb6
+}
+
+li.bg > button .accordion > div {
+    background: rgba(246, 249, 251, 0.8);
 }
 
 .tabs a {
@@ -120,7 +126,7 @@ li.bg.contract-call > div > div:last-child {
 }
 
 .text-second {
-    color: #74808d;
+    color: #8491a0;
 }
 
 .text-light {
