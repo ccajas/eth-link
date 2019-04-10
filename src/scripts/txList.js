@@ -25,6 +25,7 @@ export default {
     },
     data() {
         return {
+            block: {},
             txList: [],
             txs: [],
             uniqueFromAddr: {},
@@ -44,15 +45,14 @@ export default {
             if (tx === null)
                 return;
 
+            tx.code = '';
             tx.value = this.$web3.utils.fromWei(tx.value);
             tx.gasFee = this.$web3.utils.fromWei(tx.gasPrice) * tx.gas;
-
-            // Check if contract created or contract call
             if (tx.to === null)
-                tx.to = "Created contract";
+                console.log('found contract created from '+ tx.from);
 
-            this.$web3.eth.getCode(tx.to).then(function(code) {
-                tx.code = code;
+            this.$web3.eth.getCode(tx.to).then(function(code){
+                tx.code = code.substring(2);
             }.bind(tx));
 
             // Add to list of unique addresses
@@ -124,6 +124,7 @@ export default {
         // List next blocks
         this.$web3.eth.getBlock(this.itemID).then(function(block) 
         {
+            this.block = block;
             this.next = (block.transactions.length < this.maxEntries) ?
                 block.transactions.length : this.maxEntries;
 

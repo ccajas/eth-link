@@ -10,7 +10,7 @@
                 </div>
             </div>
             <div class="col-sm-7">
-                <strong>{{ isCall ? 'Contract Call' : 'Transaction' }}</strong>
+                <strong>{{ isCall ? 'Contract Call' : 'Value Transaction' }}</strong>
                 <div class="col-sm-6">
                     <p><strong>&nbsp; <addrLink :addr="tx.from" :trunc="true"></addrLink></strong>
                     <i class="glyphicon glyphicon-arrow-right text-second"></i></p>
@@ -35,7 +35,7 @@
                         <div v-for="(val, key) in tx" :key="key">
                             <div class="row col-sm-1">&nbsp;</div>
                             <div class="row col-sm-2"><strong>{{ key }}</strong></div>
-                            <div class="col-sm-9">{{ val }}</div>
+                            <div class="col-sm-9">{{ val.length > 0 ? val : "&nbsp;" }}</div>
                         </div>
                     </div>
                 </transition>
@@ -58,6 +58,7 @@ export default {
     data() {
         return {
             detail: false,
+            contractCall: false,
             // Class list for tx types
             callClass: 'contract-call',
             successClass: 'success'
@@ -89,7 +90,11 @@ export default {
     computed: {
         isCall()
         {        
-            return (this.tx.code != '0x');
+            console.log(this.tx.from +' to '+ this.tx.to +': '+ this.tx.code);
+            if (this.tx.code.length > 0)
+                this.contractCall = true;
+            console.log(this.contractCall);
+            return this.contractCall;
         }
     },
     created: function()
