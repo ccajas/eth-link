@@ -5,12 +5,6 @@
 @import url('https://fonts.googleapis.com/css?family=Barlow:400,600');
 
 @font-face {
-    font-family: 'Muli';
-    src: url('../fonts/Muli.ttf') format('truetype'),
-        url('../fonts/Muli-Bold.ttf') format('truetype');
-}
-
-@font-face {
     font-family: 'NeueMontreal';
     src: url('../fonts/NeueMontreal-Light.otf') format('opentype');
 }
@@ -266,7 +260,7 @@ ul.list-group li {
     overflow: hidden;
     text-overflow: ellipsis;
     transform-style: preserve-3d;
-    z-index: 5;
+    z-index: 0;
 }
 
 ul.list-group li:first-child {
