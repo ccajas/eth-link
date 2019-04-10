@@ -21,13 +21,13 @@ a:hover {
 
 .bg {
     background: #fff;
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(246, 249, 251, 0.7);
 }
 
 ul.list-group li {
     margin: 0px;
     /*border: 1px solid #9fa6aa;*/
-    border: 1px solid rgba(148, 157, 162, 30%);
+    border-bottom: 1px solid rgba(148, 157, 162, 0.3);
     border-top: 1px solid transparent;
 }
 
@@ -45,13 +45,18 @@ li.bg:hover  {
 }
 
 li.bg.success > button > div:first-child {
-    /*background: url('../images/ethereum-coin.svg') no-repeat;*/
-    border-right: 4px solid #50b379;
+    background: url('../images/ethereum-coin.svg') no-repeat;
+    border-right: 4px solid #3ab86e;
 }
 
 li.bg.contract-call > button > div:first-child {
-    /*background: url('../images/code-eth.svg') no-repeat;*/
-    border-right: 4px solid #828eb6
+    background: url('../images/code-eth.svg') no-repeat;
+    border-right: 4px solid #e4852d
+}
+
+li.bg.contract-created > button > div:first-child {
+    background: url('../images/code-eth.svg') no-repeat;
+    border-right: 4px solid #54dbec
 }
 
 li.bg > button .accordion > div {
@@ -88,6 +93,10 @@ li.bg > button .accordion > div {
     background: -webkit-linear-gradient(135deg, #112741 60%,#00728e 100%);
     background: linear-gradient(135deg, #112741 60%,#00728e 100%);
     filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#112741', endColorstr='#008e7b',GradientType=1);
+}
+
+.bg-drop-grad {
+    background: linear-gradient(#8491a0 -160%, transparent 70%);
 }
 
 .bg-add {

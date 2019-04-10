@@ -46,14 +46,18 @@ export default {
                 return;
 
             tx.code = '';
+            tx.type = 'txValue'; // Default
             tx.value = this.$web3.utils.fromWei(tx.value);
             tx.gasFee = this.$web3.utils.fromWei(tx.gasPrice) * tx.gas;
-            if (tx.to === null)
-                console.log('found contract created from '+ tx.from);
 
-            this.$web3.eth.getCode(tx.to).then(function(code){
-                tx.code = code.substring(2);
-            }.bind(tx));
+            if (tx.to === null)
+                tx.type = 'txCreated';
+            else
+                this.$web3.eth.getCode(tx.to).then(function(code){
+                    tx.code = code.substring(2);
+                    if (tx.code.length > 0)
+                        tx.type = 'txCall';
+                }.bind(tx));
 
             // Add to list of unique addresses
             if (!(tx.from in this.uniqueFromAddr))
@@ -61,7 +65,7 @@ export default {
             else
                 this.uniqueFromAddr[tx.from]++;
 
-            if (!(tx.to in this.uniqueToAddr))
+            if (tx.to !== null && !(tx.to in this.uniqueToAddr))
                 this.uniqueToAddr[tx.to] = 1;
             else
                 this.uniqueToAddr[tx.to]++;

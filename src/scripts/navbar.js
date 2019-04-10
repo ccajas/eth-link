@@ -30,7 +30,7 @@ export default {
         textchange: function (event) 
         {
             let el = document.getElementById(event.target.id);
-            el.style['font-size'] = (el.value.length <= 42) ? '1.25em' : '0.95em';
+            el.style['font-size'] = (el.value.length <= 42) ? '1em' : '0.8em';
         },
         goToLocation: function (route, request)
         {

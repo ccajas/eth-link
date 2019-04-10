@@ -1,22 +1,27 @@
 
 <template>
-    <li class="bg" :class="[isCall ? callClass : successClass]">
-        <button class="row col-sm-12" @click='detail = !detail' style="text-align: left">
+    <li class="bg" :class="[
+        tx.type == 'txValue' ? successClass : 
+        tx.type == 'txCall' ? callClass : createdClass]">
+        <button class="col-sm-12" @click='detail = !detail' style="text-align: left">
             <div class="col-sm-1">&nbsp;</div>
+            <div class="col-sm-3"><p><strong>{{ txType }}</strong></p>
+                <p>{{ tx.hash }}</p>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="col-sm=-12" style="text-align: center"> </div>
+                <div class="row col-sm-12" style="text-align: center">
+                    <p><strong><addrLink :addr="tx.from" :trunc="true"></addrLink></strong>
+                    <i class="glyphicon glyphicon-arrow-right text-second"></i>
+
+                    &nbsp; <addrLink :addr="tx.to" :trunc="true" v-if="tx.to !== null"></addrLink></p>
+                </div>
+            </div>
 
             <div class="col-sm-1 identicon-group">
                 <div class="bg-mid identicon ttip pull-left" style=" margin-bottom: 0px">
                     <div v-html="identicon(tx.from, 36)" class="scaling-svg-container"></div>
-                </div>
-            </div>
-            <div class="col-sm-7">
-                <strong>{{ isCall ? 'Contract Call' : 'Value Transaction' }}</strong>
-                <div class="col-sm-6">
-                    <p><strong>&nbsp; <addrLink :addr="tx.from" :trunc="true"></addrLink></strong>
-                    <i class="glyphicon glyphicon-arrow-right text-second"></i></p>
-                </div>
-                <div class="col-sm-5">
-                    &nbsp; <addrLink :addr="tx.to" :trunc="true"></addrLink>
                 </div>
             </div>
             <div class="col-sm-2">
@@ -26,17 +31,20 @@
 
             <div class="col-sm-1 identicon-group">
                 <div class="bg-mid identicon ttip pull-left" style=" margin-bottom: 0px">
-                    <div v-html="identicon(tx.to, 36)" class="scaling-svg-container"></div>
+                    <div v-html="identicon(tx.to, 36)" class="scaling-svg-container" v-if="tx.to !== null"></div>
                 </div>
             </div>
             <div class="accordion">
                 <transition name="accordion fade" v-on:before-enter="beforeEnter" v-on:enter="enter" v-on:leave="leave">
                     <div class="row col-sm-12" v-if="detail">
                         <br/>
+                        <div class="col-sm-1">&nbsp;</div>
+                        <div class="row col-sm-11"><h1>{{ txType }}</h1></div>
                         <div v-for="(val, key) in tx" :key="key">
                             <div class="row col-sm-1">&nbsp;</div>
-                            <div class="row col-sm-2"><strong>{{ key }}</strong></div>
-                            <div class="col-sm-9">{{ val.length > 0 ? val : "&nbsp;" }}</div>
+                            <div class="row col-sm-11"><strong>{{ key }}</strong></div>
+                            <div class="row col-sm-1">&nbsp;</div>
+                            <div class="row col-sm-11">{{ val !== null && val.length > 0 ? val : "&nbsp;" }}<br/><br/></div>
                         </div>
                     </div>
                 </transition>
@@ -59,9 +67,9 @@ export default {
     data() {
         return {
             detail: false,
-            contractCall: false,
             // Class list for tx types
             callClass: 'contract-call',
+            createdClass: 'contract-created',
             successClass: 'success'
         }
     },
@@ -89,13 +97,13 @@ export default {
         }
     },
     computed: {
-        isCall()
+        txType()
         {        
-            console.log(this.tx.from +' to '+ this.tx.to +': '+ this.tx.code);
-            if (this.tx.code.length > 0)
-                this.contractCall = true;
-            console.log(this.contractCall);
-            return this.contractCall;
+            console.log(this.tx.from +' to '+ this.tx.to +': '+ this.tx.type);
+            let tType =  
+                (this.tx.type == 'txValue') ? 'Value Transaction' : 
+                (this.tx.type == 'txCall')  ? 'Contract Call' : 'Contract Created';
+            return tType;
         }
     },
     created: function()
