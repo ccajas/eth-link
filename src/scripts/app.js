@@ -1,4 +1,3 @@
-
 import app          from '../views/theApp.vue';
 import navbar       from '../views/theNavbar.vue';
 import blocks       from '../views/theBlockList.vue';
@@ -59,13 +58,11 @@ export default {
     },
     mounted: function() {
 
-        this.$web3.eth.net.getNetworkType().then(function(network) {
-            this.network = network;
-        }.bind(this));
-
-        this.$web3.eth.getBlockNumber().then(function(b) {
-            this.connected = this.$web3.currentProvider.connected;
-        }.bind(this));
+        this.network = "mainnet";
+        this.$provider.getBlockNumber().then((blockNumber) => {
+            console.log("Current block number: " + blockNumber);
+            this.connected = true;
+        });
     },
     computed: {
         currentListComponent: function () {

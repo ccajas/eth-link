@@ -47,13 +47,13 @@ export default {
 
             tx.code = '';
             tx.type = 'txValue'; // Default
-            tx.value = this.$web3.utils.fromWei(tx.value);
-            tx.gasFee = this.$web3.utils.fromWei(tx.gasPrice) * tx.gas;
+            tx.value = this.$ethers.utils.formatEther(tx.value, {pad: true});
+            tx.gasFee = this.$ethers.utils.formatEther(tx.gasPrice) * this.gasPrice;
 
             if (tx.to === null)
                 tx.type = 'txCreated';
             else
-                this.$web3.eth.getCode(tx.to).then(function(code){
+                this.$provider.getCode(tx.to).then(function(code){
                     tx.code = code.substring(2);
                     if (tx.code.length > 0)
                         tx.type = 'txCall';
@@ -77,7 +77,7 @@ export default {
             let date = new Date(timestamp * 1000);      
             return date.toLocaleDateString() +' '+ date.toLocaleTimeString();
         },
-        loadTxList: function(blockNumber, totalTxs)
+        loadTxList: function(txs)
         {
             console.log(this.current +" "+ this.next);
             if (this.current == this.next)
@@ -87,7 +87,8 @@ export default {
             let promises = [];
 
             for (var i = this.current; i < this.next; i++) {
-                promises.push(this.$web3.eth.getTransactionFromBlock(blockNumber, i).then(this.processTx));
+                console.log(txs[i]);
+                promises.push(this.$provider.getTransaction(txs[i]).then(this.processTx));
             }
             
             // Move next marker after txs are loaded
@@ -102,14 +103,14 @@ export default {
                 this.next += this.maxEntries;
                 promises = [];
 
-                if (this.next > totalTxs)      this.next = totalTxs;
+                if (this.next > txs.length)    this.next = txs.length;
                 if (this.current == this.next) this.loading = false;
                 this.totalSenders    = Object.keys(this.uniqueFromAddr).length;
                 this.totalRecipients = Object.keys(this.uniqueToAddr).length;
 
                 // Start loading the next group
                 if (this.current != this.next)
-                    setTimeout(_ => this.loadTxList(blockNumber, totalTxs), 5000);
+                    setTimeout(_ => this.loadTxList(txs), 5000);
             })
             .catch((err) => { console.error(err) });
         },
@@ -126,18 +127,21 @@ export default {
     mounted: function() 
     {    
         // List next blocks
-        this.$web3.eth.getBlock(this.itemID).then(function(block) 
+        console.log('get block here');
+        console.log(this.itemID);
+        this.$provider.getBlock(parseInt(this.itemID)).then(function(block) 
         {
             this.block = block;
             this.next = (block.transactions.length < this.maxEntries) ?
                 block.transactions.length : this.maxEntries;
 
             // Get gas price only once
-            this.$web3.eth.getGasPrice().then((gas) =>
+            this.$provider.getGasPrice().then((gas) =>
             {
                 this.gasPrice = gas;
+                console.log('gasprice '+ gas);
                 if (block.transactions.length > 0)
-                    this.loadTxList(block.number, block.transactions.length);
+                    this.loadTxList(block.transactions);
                 else
                     this.loading = false;
             });

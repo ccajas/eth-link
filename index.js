@@ -1,6 +1,6 @@
 
 import Vue  from 'vue'
-import Web3 from 'web3'
+import { ethers } from 'ethers';
 
 import Config from './config'
 import App    from './src/views/theApp.vue'
@@ -21,14 +21,17 @@ const provider_url = 'https://mainnet.infura.io/'+ Config.provider_key;
 // Create web3 object after page load
 //if (typeof(Web3) !== 'undefined')
 
-var web3 = new Web3(new Web3.providers.HttpProvider(provider_url));
+let provider = new ethers.providers.InfuraProvider('homestead');
+
 //console.log(`Connecting to Ethereum node on RPC @ ${provider_url}`);
 
-Vue.prototype.$web3 = web3;
+Vue.prototype.$ethers = ethers;
+Vue.prototype.$provider = provider;
 
 new Vue({
     beforeCreate: function () {
-        console.log(this.$web3)
+        console.log('Infura provider');
+        console.log(this.$provider);
     },
     mounted: function() {
         this.connected = true;

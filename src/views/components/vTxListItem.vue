@@ -25,7 +25,7 @@
                 </div>
             </div>
             <div class="col-sm-2">
-                <span :class="{ 'text-second' : nf.format(tx.value) == '0' }"> {{ nf.format(tx.value) }} &Xi;</span><br/>
+                <span :class="{ 'text-second' : nf.format(tx.value) == '0' }"> {{ tx.value.toString() }} &Xi;</span><br/>
                 <span class="text-second">{{ parseFloat(tx.gasFee.toFixed(8)) }} &Xi;</span>
             </div>
 

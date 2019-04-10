@@ -52,7 +52,7 @@ export default {
                 txLength: b.transactions.length,
                 miner: b.miner,
                 gasUsed: b.gasUsed,
-                extraData: this.$web3.utils.hexToAscii(b.extraData),// this.hex2ascii(b.extraData),
+                extraData: this.hex2ascii(b.extraData),
                 time: this.convertTimestamp(b.timestamp),
                 sorted: false
             });
@@ -78,7 +78,7 @@ export default {
             console.log('loading blocks...');
 
             for (var i = 0; i < maxEntries; i++) {
-                promises.push(this.$web3.eth.getBlock(n - i).then(this.processBlock));
+                promises.push(this.$provider.getBlock(n - i).then(this.processBlock));
             }
 
             // Order blocks and get current network stats
@@ -144,15 +144,12 @@ export default {
     mounted: function() 
     {    
         // List next blocks
-        this.$web3.eth.getBlockNumber().then(function(n) 
+        this.$provider.getBlockNumber().then(function(n) 
         {
+            console.log('begin loading blocks');
             this.next = n;
             this.loadBlockList(n, this.maxEntries);
         }.bind(this));
-
-        this.$root.$on('eventing', data => {
-            console.log(data);
-        });
 
         this.scroll();
     }
