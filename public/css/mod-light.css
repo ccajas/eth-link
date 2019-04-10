@@ -45,12 +45,12 @@ li.bg:hover  {
 }
 
 li.bg.success > button > div:first-child {
-    background: url('../images/ethereum-coin.svg') no-repeat;
+    /*background: url('../images/ethereum-coin.svg') no-repeat;*/
     border-right: 4px solid #50b379;
 }
 
 li.bg.contract-call > button > div:first-child {
-    background: url('../images/code-eth.svg') no-repeat;
+    /*background: url('../images/code-eth.svg') no-repeat;*/
     border-right: 4px solid #828eb6
 }
 

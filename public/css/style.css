@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Titillium+Web:400,600');
 /*@import url('https://fonts.googleapis.com/css?family=Exo+2:400,600|Saira+Semi+Condensed:400,600');
 @import url('https://fonts.googleapis.com/css?family=Cousine:400,400i,700');
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600');*/
-@import url('https://fonts.googleapis.com/css?family=Barlow:400,600');
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700');
+@import url('https://fonts.googleapis.com/css?family=Barlow:400,600');*/
 
 @font-face {
     font-family: 'Muli';
@@ -16,7 +16,7 @@ html {
 
 body {
     font-family: Helvetica, Arial, sans-serif; /*"Cousine"*/
-    font-size: 15px;
+    font-size: 14px;
     letter-spacing: -0.01em;
     height: 100%;
 }
@@ -198,6 +198,13 @@ button {
     top: 3px;
 }
 
+nav > ul li {
+    padding: 10px 20px;
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
 /*** Transitions ***/
 
 .list-f-enter-active, .list-f-leave-active {
@@ -232,7 +239,6 @@ ul {
 
 ul.list-group li {
     padding: 10px;
-    font-size: 1.04em;
     line-height: 1.25em;
     white-space: nowrap;
     overflow: hidden;
@@ -273,7 +279,7 @@ ul.list-group.tx-list li > button {
 }
 
 li.bg > button > div:first-child {
-    height: 44px;
+    height: 41px;
 }
 
 ul.list-group .glyphicon {

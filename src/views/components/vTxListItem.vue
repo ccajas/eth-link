@@ -6,7 +6,7 @@
 
             <div class="col-sm-1 identicon-group">
                 <div class="bg-mid identicon ttip pull-left" style=" margin-bottom: 0px">
-                    <div v-html="identicon(tx.from, 46)" class="scaling-svg-container"></div>
+                    <div v-html="identicon(tx.from, 36)" class="scaling-svg-container"></div>
                 </div>
             </div>
             <div class="col-sm-7">
@@ -20,12 +20,13 @@
                 </div>
             </div>
             <div class="col-sm-2">
-                {{ nf.format(tx.value) }} ETH
+                <span :class="{ 'text-second' : nf.format(tx.value) == '0' }"> {{ nf.format(tx.value) }} &Xi;</span><br/>
+                <span class="text-second">{{ parseFloat(tx.gasFee.toFixed(8)) }} &Xi;</span>
             </div>
 
             <div class="col-sm-1 identicon-group">
                 <div class="bg-mid identicon ttip pull-left" style=" margin-bottom: 0px">
-                    <div v-html="identicon(tx.to, 46)" class="scaling-svg-container"></div>
+                    <div v-html="identicon(tx.to, 36)" class="scaling-svg-container"></div>
                 </div>
             </div>
             <div class="accordion">

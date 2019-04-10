@@ -1,6 +1,21 @@
 
 <template>
     <div class="row col-sm-9 pull-right">
+        <nav>
+            <ul>
+                <li>Overview</li>
+                <li>Transactions</li>
+            </ul>
+        </nav>
+        <div class="row col-sm-12">
+            <br/>
+            <div v-for="(val, key) in block" :key="key">
+                <div class="row col-sm-3"><strong>{{ key }}</strong></div>
+                <div class="col-sm-9">{{ val.length > 0 ? val : "&nbsp;" }}</div>
+            </div>
+            <br/>
+        </div>
+
         <h3>
             <i class="glyphicon glyphicon-transfer" style="font-size: 0.7em; margin-right: 5px"></i> {{ txList.length }} Transactions &nbsp;
             <i class="glyphicon glyphicon-export" style="font-size: 0.7em; margin-right: 5px"></i> {{ totalSenders }} Senders &nbsp;
@@ -16,7 +31,7 @@
             </div>
         </transition-group>
 
-            <!-- <transition appear name="fade"><div class="spin-loader pull-right" v-if="loading"></div></transition> -->
+        <!-- <transition appear name="fade"><div class="spin-loader pull-right" v-if="loading"></div></transition> -->
         <transition-group appear name="fade" tag="div" class="identicon-group_">
             <div v-for="(times, addr) in uniqueToAddr" :key="addr" :data-index="addr" class="bg-mid identicon ttip pull-left">
                 <vlink v-bind:href="itemID +'/addr/'+ addr">

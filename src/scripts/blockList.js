@@ -52,7 +52,7 @@ export default {
                 txLength: b.transactions.length,
                 miner: b.miner,
                 gasUsed: b.gasUsed,
-                extraData: this.$web3.utils.hexToUtf8(b.extraData),// this.hex2ascii(b.extraData),
+                extraData: this.$web3.utils.hexToAscii(b.extraData),// this.hex2ascii(b.extraData),
                 time: this.convertTimestamp(b.timestamp),
                 sorted: false
             });
