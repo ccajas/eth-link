@@ -1,7 +1,7 @@
 
 # Ethereum Block Explorer
 
-[![Web3](https://img.shields.io/badge/web3-1.0.0%20beta%2036-brightgreen.svg)](https://www.npmjs.com/package/web3)
+[![EthersJS](https://img.shields.io/badge/ethers.js-4.0-brightgreen.svg)](https://www.npmjs.com/package/ethers)
 [![VueJS](https://img.shields.io/badge/Vue-2.x-brightgreen.svg)](https://vuejs.org)
 [![Poi](https://img.shields.io/badge/Poi-9.6.x-green.svg)](https://poi.js.org)
 
