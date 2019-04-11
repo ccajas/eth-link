@@ -48,12 +48,6 @@ export default {
                 return;
 
             tx.code = '';
-            /*tx.balance = '0';
-            // From Address balance
-            this.$provider.getBalance(tx.from).then((balance) => {
-                let etherString = ethers.utils.formatEther(balance);
-                tx.balance = etherString;
-            });*/
             tx.type = 'txValue'; // Default
             tx.value = this.$ethers.utils.formatEther(tx.value, {pad: true});
             tx.gasFee = this.$ethers.utils.formatEther(tx.gasPrice) * this.gasPrice;
@@ -68,16 +62,20 @@ export default {
                     if (tx.code.length > 0)
                     {
                         tx.type = 'txCall';
+                        // ERC-20 token transfer
                         if (tx.data.substring(0, 10) == "0xa9059cbb" && tx.data.length === 138) 
                         {
                             tx.data = tx.data.substring(2);
-                            tx.tokenTo = '0x' + tx.data.substring(32, 72);
-                            console.log('token from: '+ tx.from +' token to: '+ tx.tokenTo);
-                            //console.log(tx.code);
+                            tx.tokenTo     = '0x' + tx.data.substring(32, 72);
+
                             let contract = new self.$ethers.Contract(tx.to, self.erc_20_abi_min, self.$provider);
-                            contract.symbol().then(function(name) {
-                                console.log(name +' from '+ tx.to);
-                                //console.log(tx.code);
+                            contract.name().then(function(name) {
+                                console.log('token from: '+ tx.from +' token to: '+ tx.tokenTo);
+                                tx.tokenAmount = tx.data.substring(72, 136);
+                                tx.tokenAmount = self.$ethers.utils.formatUnits(self.$ethers.utils.bigNumberify('0x'+ tx.tokenAmount), 18);
+                                console.log(tx.tokenAmount + ' '+ name +' from contract '+ tx.to);
+                                //console.log(tx.code);                                                                        
+
                             }.bind(tx))
                             .catch((err) => { console.error(err) } );
                         }

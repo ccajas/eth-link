@@ -14,8 +14,8 @@
             <br/>
         </div>
         
-        <div class="row col-sm-12 pull-right">
-            <p class="text-second">&nbsp;&nbsp;&nbsp;&nbsp; {{ block.hash }}</p>     
+        <div class="col-sm-12 pull-right">
+            <p class="text-second">{{ block.hash }}</p>     
             <br/>
             <nav>
                 <ul>

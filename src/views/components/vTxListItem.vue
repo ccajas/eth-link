@@ -6,7 +6,7 @@
         <button class="col-sm-12" @click='detail = !detail' style="text-align: left">
             <div class="col-sm-1">&nbsp;</div>
             <div class="col-sm-3"><p><strong>{{ txType }}</strong></p>
-                <p>{{ tx.hash }}</p>
+                <p class="text-second">{{ tx.hash }}</p>
             </div>
 
             <div class="col-sm-4">
@@ -44,7 +44,9 @@
                             <div class="row col-sm-1">&nbsp;</div>
                             <div class="row col-sm-11"><strong>{{ key }}</strong></div>
                             <div class="row col-sm-1">&nbsp;</div>
-                            <div class="row col-sm-11" style="word-wrap: break-word; white-space: pre-line">{{ val !== null && val.length > 0 ? val : "&nbsp;" }}<br/><br/></div>
+                            <div class="row col-sm-11" style="word-wrap: break-word; white-space: pre-line">
+                                {{ val !== null && val.length > 0 ? val : "&nbsp;" }}<br/><br/>
+                            </div>
                         </div>
                     </div>
                 </transition>

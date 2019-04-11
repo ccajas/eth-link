@@ -169,7 +169,7 @@ button {
 /*** Nav ***/
 
 .navbar {
-    z-index: 100;
+    z-index: 10;
     margin: 0px;
     padding: 0px;
     border: 0px;
@@ -255,6 +255,7 @@ ul {
 
 ul.list-group li {
     padding: 10px;
+    font-size: 1.05em;
     line-height: 1.25em;
     white-space: nowrap;
     overflow: hidden;
@@ -267,7 +268,7 @@ ul.list-group li:first-child {
     border-radius: 0px;
 }
 
-ul.list-group li:hover {
+ul.list-group li.bg:hover {
     transform: scale(1.06);
     z-index: 5;
 }
@@ -291,7 +292,7 @@ ul.list-group.tx-list li {
 }
 
 ul.list-group.tx-list li > button {
-    padding: 15px;
+    padding: 17px 15px;
 }
 
 li.bg > button > div:first-child {
