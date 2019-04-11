@@ -4,8 +4,9 @@ import addrLink from   '../views/components/vAddrLink.vue';
 import timeInfo from   '../views/components/vTimeInfo.vue';
 import vlink from      '../views/components/vLink.vue';
 
-// Mixin
+// Mixins
 import transition from '../mixins/transition.js';
+import erc20abi   from '../mixins/erc20_abi.js';
 
 // Table info component for block and tx data
 
@@ -16,7 +17,7 @@ export default {
         timeInfo,
         vlink
     },
-    mixins: [transition],
+    mixins: [transition, erc20abi],
     props: {
         itemID: {
             type: String,
@@ -56,14 +57,46 @@ export default {
             tx.type = 'txValue'; // Default
             tx.value = this.$ethers.utils.formatEther(tx.value, {pad: true});
             tx.gasFee = this.$ethers.utils.formatEther(tx.gasPrice) * this.gasPrice;
+            let self = this;
 
             if (tx.to === null)
                 tx.type = 'txCreated';
             else
-                this.$provider.getCode(tx.to).then(function(code){
+                this.$provider.getCode(tx.to).then(function(code)
+                {
                     tx.code = code.substring(2);
                     if (tx.code.length > 0)
+                    {
                         tx.type = 'txCall';
+                        if (tx.data.substring(0, 10) == "0xa9059cbb" && tx.data.length === 138) 
+                        {
+                            tx.data = tx.data.substring(2);
+                            tx.tokenTo = '0x' + tx.data.substring(32, 72);
+                            console.log('token from: '+ tx.from +' token to: '+ tx.tokenTo);
+                            //console.log(tx.code);
+                            let contract = new self.$ethers.Contract(tx.to, self.erc_20_abi_min, self.$provider);
+                            contract.symbol().then(function(name) {
+                                console.log(name +' from '+ tx.to);
+                                //console.log(tx.code);
+                            }.bind(tx))
+                            .catch((err) => { console.error(err) } );
+                        }
+                        /*
+                        let topic = "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef";
+                        let filter = {
+                            address: tx.to,
+                            fromBlock: parseInt(self.itemID),
+                            toBlock: parseInt(self.itemID),
+                            topics: [ topic ]
+                        }
+                        self.$provider.getLogs(filter).then(function(result) {
+                            console.log('getting logs...');
+                            console.log(tx.to +" "+ tx.data.length);
+                            console.log(result);
+                            tx.tokenFrom = result.topics[1].substring(0, 2) + result.topics[1].substring(26);
+                            console.log(tx.tokenFrom);
+                        }.bind(tx));*/
+                    }
                 }.bind(tx));
 
             // Add to list of unique addresses
