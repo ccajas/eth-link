@@ -3,7 +3,7 @@
 @import url('https://fonts.googleapis.com/css?family=Cousine:400,400i,700');
 @import url('https://fonts.googleapis.com/css?family=Lato:400,700');*/
 @import url('https://fonts.googleapis.com/css?family=Barlow:400,600');
-
+/*
 @font-face {
     font-family: 'NeueMontreal';
     src: url('../fonts/NeueMontreal-Light.otf') format('opentype');
@@ -13,7 +13,7 @@
     font-family: 'NeueMontreal';
     font-weight: bold;
     src: url('../fonts/NeueMontreal-Bold.otf') format('opentype');
-}
+} */
 
 html {
     height: 100%;
