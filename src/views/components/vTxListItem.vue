@@ -44,7 +44,7 @@
                             <div class="row col-sm-1">&nbsp;</div>
                             <div class="row col-sm-11"><strong>{{ key }}</strong></div>
                             <div class="row col-sm-1">&nbsp;</div>
-                            <div class="row col-sm-11">{{ val !== null && val.length > 0 ? val : "&nbsp;" }}<br/><br/></div>
+                            <div class="row col-sm-11" style="word-wrap: break-word; white-space: pre-line">{{ val !== null && val.length > 0 ? val : "&nbsp;" }}<br/><br/></div>
                         </div>
                     </div>
                 </transition>

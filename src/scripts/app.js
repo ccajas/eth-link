@@ -19,7 +19,7 @@ export default {
         return {
             apptitle: 'Eth-Link',
             connected: false,
-            network: '',
+            network: { name: ''},
             currentRoute: window.location.pathname,
             title: '',
             itemID: '',
@@ -58,7 +58,10 @@ export default {
     },
     mounted: function() {
 
-        this.network = "mainnet";
+        this.$provider.getNetwork().then((network) => {
+            this.network = network;
+            console.log(this.network);
+        });
         this.$provider.getBlockNumber().then((blockNumber) => {
             console.log("Current block number: " + blockNumber);
             this.connected = true;
