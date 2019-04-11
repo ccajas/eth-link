@@ -36,6 +36,7 @@ export default {
             current: 0,
             gasPrice: 0,
             next: 0,
+            view: '',
             loading: true,
         }
     },
@@ -46,6 +47,12 @@ export default {
                 return;
 
             tx.code = '';
+            /*tx.balance = '0';
+            // From Address balance
+            this.$provider.getBalance(tx.from).then((balance) => {
+                let etherString = ethers.utils.formatEther(balance);
+                tx.balance = etherString;
+            });*/
             tx.type = 'txValue'; // Default
             tx.value = this.$ethers.utils.formatEther(tx.value, {pad: true});
             tx.gasFee = this.$ethers.utils.formatEther(tx.gasPrice) * this.gasPrice;
@@ -87,7 +94,6 @@ export default {
             let promises = [];
 
             for (var i = this.current; i < this.next; i++) {
-                console.log(txs[i]);
                 promises.push(this.$provider.getTransaction(txs[i]).then(this.processTx));
             }
             
@@ -127,8 +133,6 @@ export default {
     mounted: function() 
     {    
         // List next blocks
-        console.log('get block here');
-        console.log(this.itemID);
         this.$provider.getBlock(parseInt(this.itemID)).then(function(block) 
         {
             this.block = block;

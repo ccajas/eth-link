@@ -2,7 +2,7 @@
 <template>
     <div class="row">
         <div class="col-sm-3 bg-drop-grad" v-cloak>
-            <div class="row col-sm-3 identicon" style="padding-top: 20px">
+            <div class="row col-sm-3 identicon" style="padding-top: 15px">
                 <div style="background: #fff">
                     <div v-html="identicon(itemID, 84)" class="scaling-svg-container"></div>
                 </div>
@@ -13,9 +13,9 @@
             <!-- <img :src="'/public/images/ethereum-coin.svg'" style="margin: 0px 30% 0px 25%"/> -->
             <br/>
         </div>
+        
         <div class="row col-sm-12 pull-right">
-                <p class="text-second">&nbsp;&nbsp;&nbsp;&nbsp; {{ block.hash }}</p>
-            
+            <p class="text-second">&nbsp;&nbsp;&nbsp;&nbsp; {{ block.hash }}</p>     
             <br/>
             <nav>
                 <ul>
@@ -44,7 +44,7 @@
 
             <!-- Senders -->
             <transition-group appear name="fade" tag="div" class="identicon-group_">
-                <div v-for="(times, addr) in uniqueFromAddr" :key="addr" :data-index="addr" class="bg-mid identicon ttip pull-left">
+                <div v-show="view == 'senders'" v-for="(times, addr) in uniqueFromAddr" :key="addr" :data-index="addr" class="bg-mid identicon ttip pull-left">
                     <vlink v-bind:href="itemID +'/addr/'+ addr">
                         <div v-html="identicon(addr, 44)" class="scaling-svg-container"></div>
                     </vlink>
@@ -54,7 +54,7 @@
 
             <!-- Recipients -->
             <transition-group appear name="fade" tag="div" class="identicon-group_">
-                <div v-for="(times, addr) in uniqueToAddr" :key="addr" :data-index="addr" class="bg-mid identicon ttip pull-left">
+                <div v-show="view == 'recipients'" v-for="(times, addr) in uniqueToAddr" :key="addr" :data-index="addr" class="bg-mid identicon ttip pull-left">
                     <vlink v-bind:href="itemID +'/addr/'+ addr">
                         <div v-html="identicon(addr, 44)" class="scaling-svg-container"></div>
                     </vlink>
@@ -62,8 +62,8 @@
                 </div>
             </transition-group>
 
-            <!-- Recipients -->
-            <div class="col-sm-12">
+            <!-- Tx List -->
+            <div class="row col-sm-12">
                 <br/>
                 <transition-group name="list-f" tag="ul" class="list-group tx-list shadow-soft" v-on:enter="enter" v-on:after-enter="afterEnter">
                     <txListItem class="bg" :tx="tx" v-for="(tx, idx) in txList" :key="tx.transactionIndex +'_'" :data-index="idx">
@@ -78,4 +78,4 @@
     </div>
 </template>
 
-<script src="../scripts/txList.js"/>
+<script src="../scripts/blockInfo.js"/>

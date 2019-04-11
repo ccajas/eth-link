@@ -99,7 +99,6 @@ export default {
     computed: {
         txType()
         {        
-            console.log(this.tx.from +' to '+ this.tx.to +': '+ this.tx.type);
             let tType =  
                 (this.tx.type == 'txValue') ? 'Value Transaction' : 
                 (this.tx.type == 'txCall')  ? 'Contract Call' : 'Contract Created';
