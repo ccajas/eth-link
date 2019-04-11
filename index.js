@@ -21,11 +21,10 @@ Vue.prototype.$provider = provider;
 
 new Vue({
     beforeCreate: function () {
-        console.log('Infura provider');
         console.log(this.$provider);
     },
     mounted: function() {
-        this.connected = true;
+        // ...
     },
     el: '#app',
     render: h => h(App)

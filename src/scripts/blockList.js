@@ -68,7 +68,7 @@ export default {
         },
         loadBlockList: function(n, maxEntries)
         {
-            if (this.current == this.next)
+            if (this.next > 0 && this.current == this.next)
                 return;
 
             this.current = this.next;
@@ -146,9 +146,10 @@ export default {
         // List next blocks
         this.$provider.getBlockNumber().then(function(n) 
         {
-            console.log('begin loading blocks');
+            console.log('begin loading blocks at '+ n);
             this.next = n;
-            this.loadBlockList(n, this.maxEntries);
+            let entries = n < this.maxEntries ? n + 1 : this.maxEntries;
+            this.loadBlockList(n, entries);
         }.bind(this));
 
         this.scroll();
