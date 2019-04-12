@@ -17,7 +17,7 @@ export default {
         timeInfo,
         vlink
     },
-    mixins: [transition, erc20abi],
+    mixins: [transition],
     props: {
         itemID: {
             type: String,
@@ -62,23 +62,6 @@ export default {
                     if (tx.code.length > 0)
                     {
                         tx.type = 'txCall';
-                        // ERC-20 token transfer
-                        if (tx.data.substring(0, 10) == "0xa9059cbb" && tx.data.length === 138) 
-                        {
-                            tx.data = tx.data.substring(2);
-                            tx.tokenTo     = '0x' + tx.data.substring(32, 72);
-
-                            let contract = new self.$ethers.Contract(tx.to, self.erc_20_abi_min, self.$provider);
-                            contract.name().then(function(name) {
-                                console.log('token from: '+ tx.from +' token to: '+ tx.tokenTo);
-                                tx.tokenAmount = tx.data.substring(72, 136);
-                                tx.tokenAmount = self.$ethers.utils.formatUnits(self.$ethers.utils.bigNumberify('0x'+ tx.tokenAmount), 18);
-                                console.log(tx.tokenAmount + ' '+ name +' from contract '+ tx.to);
-                                //console.log(tx.code);                                                                        
-
-                            }.bind(tx))
-                            .catch((err) => { console.error(err) } );
-                        }
                         /*
                         let topic = "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef";
                         let filter = {

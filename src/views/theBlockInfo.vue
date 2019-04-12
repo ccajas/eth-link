@@ -26,8 +26,8 @@
                     </li>
                     <li><i class="glyphicon glyphicon-import" style="font-size: 0.7em; margin-right: 5px"></i> {{ totalRecipients }} Recipients
                     </li>
-                    <li class="pull-right">
-                        <transition appear name="fade"><div class="spin-loader" v-if="loading"></div></transition>
+                    <li class="col-sm-2 pull-right">
+                        <transition appear name="fade"><div class="spin-loader" v-if="loading" style="padding-bottom: 20%"></div></transition>
                     </li>
                 </ul>
             </nav>
@@ -71,7 +71,9 @@
                 </transition-group>
 
                 <transition appear name="fade">
-                    <h3><div class="spin-loader center-block" v-if="loading && txList.length"></div></h3>
+                    <div class="row col-sm-2 col-centered">
+                        <div class="spin-loader" v-if="loading && txList.length" style="padding-bottom: 20%"></div>
+                    </div>
                 </transition>
             </div>
         </div>

@@ -3,7 +3,7 @@
     <li class="bg" :class="[
         tx.type == 'txValue' ? successClass : 
         tx.type == 'txCall' ? callClass : createdClass]">
-        <button class="col-sm-12" @click='detail = !detail' style="text-align: left">
+        <button class="col-sm-12" v-on:click='loadDetail' style="text-align: left">
             <div class="col-sm-1">&nbsp;</div>
             <div class="col-sm-3"><p><strong>{{ txType }}</strong></p>
                 <p class="text-second">{{ tx.hash }}</p>
@@ -36,17 +36,28 @@
             </div>
             <div class="accordion">
                 <transition name="accordion fade" v-on:before-enter="beforeEnter" v-on:enter="enter" v-on:leave="leave">
+                    <!-- tx detail -->
                     <div class="row col-sm-12" v-if="detail">
-                        <br/>
-                        <div class="col-sm-1">&nbsp;</div>
-                        <div class="row col-sm-11"><h1>{{ txType }}</h1></div>
-                        <div v-for="(val, key) in tx" :key="key">
-                            <div class="row col-sm-1">&nbsp;</div>
-                            <div class="row col-sm-11"><strong>{{ key }}</strong></div>
-                            <div class="row col-sm-1">&nbsp;</div>
-                            <div class="row col-sm-11" style="word-wrap: break-word; white-space: pre-line">
-                                {{ val !== null && val.length > 0 ? val : "&nbsp;" }}<br/><br/>
+                        <transition appear name="fade" v-if="loading">
+                            <div class="row col-sm-3 col-centered" style="padding: 50px 0">
+                                <div class="spin-loader" style="padding-top: 5px; padding-bottom: 20%" v-if="loading"></div>
                             </div>
+                        </transition>
+                        <div class="row col-sm-12" style="word-wrap: break-word; white-space: pre-line" v-if="!loading">
+                            <br/>
+                            <h4>Loaded some details</h4>
+                                <span v-if="tx.tokenAmount && !loading">{{ tx.tokenAmount.toString() }}</span>
+                            <!--
+                            <div class="col-sm-1">&nbsp;</div>
+                            <div class="row col-sm-11"><h1>{{ txType }}</h1></div>
+                            <div v-for="(val, key) in tx" :key="key">
+                                <div class="row col-sm-1">&nbsp;</div>
+                                <div class="row col-sm-11"><strong>{{ key }}</strong></div>
+                                <div class="row col-sm-1">&nbsp;</div>
+                                <div class="row col-sm-11" style="word-wrap: break-word; white-space: pre-line">
+                                    {{ val !== null && val.length > 0 ? val : "&nbsp;" }}<br/><br/>
+                                </div>
+                            </div>-->
                         </div>
                     </div>
                 </transition>
@@ -59,6 +70,9 @@
 
 import addrLink from "./vAddrLink.vue";
 
+// Mixin
+import erc20abi   from '../../mixins/erc20_abi.js';
+
 export default {
     props: {
         tx: {
@@ -66,9 +80,11 @@ export default {
             required: true 
         }
     },
+    mixins: [erc20abi],
     data() {
         return {
             detail: false,
+            loading: true,
             // Class list for tx types
             callClass: 'contract-call',
             createdClass: 'contract-created',
@@ -88,7 +104,44 @@ export default {
         leave: function(el) {
             this.beforeEnter(el);
         },
-        identicon: function(addr, dimension) {
+        loadDetail: function()
+        {
+            this.detail = !this.detail;
+            let tx = this.tx;
+            // Load token detail
+            console.log(tx.type);
+            
+            // Load only if not loaded yet
+            if (this.loading && tx.type == 'txCall') 
+            {
+                // ERC-20 token transfer
+                if (tx.data.substring(0, 10) == "0xa9059cbb" && tx.data.length === 138) 
+                {
+                    this.tx.data = this.tx.data.substring(2);
+                    this.tx.tokenTo = '0x' + this.tx.data.substring(32, 72);
+
+                    let contract = new this.$ethers.Contract(tx.to, this.erc_20_abi_min, this.$provider);
+                    let self = this;
+
+                    contract.name().then(function(name) 
+                    {
+                        console.log('token from: '+ tx.from +' token to: '+ tx.tokenTo);
+                        tx.tokenAmount = tx.data.substring(72, 136);
+                        tx.tokenAmount = self.$ethers.utils.formatUnits(self.$ethers.utils.bigNumberify('0x'+ tx.tokenAmount), 18);
+                        console.log(tx.tokenAmount + ' '+ name +' from contract '+ tx.to);
+                        self.loading = false;                                                        
+                    }
+                    .bind(this.tx))
+                    .catch((err) => { console.error(err) } );
+                }
+                else
+                    console.log('not a token transfer');
+                
+                this.loading = false;
+            }
+        },
+        identicon: function(addr, dimension)
+        {
             let svg = jdenticon.toSvg(addr, dimension, 0.05);
             let span = document.createElement('span');
             span.innerHTML = svg.trim();

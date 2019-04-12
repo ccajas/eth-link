@@ -3,7 +3,7 @@
 @import url('https://fonts.googleapis.com/css?family=Cousine:400,400i,700');
 @import url('https://fonts.googleapis.com/css?family=Lato:400,700');*/
 @import url('https://fonts.googleapis.com/css?family=Barlow:400,600');
-/*
+
 @font-face {
     font-family: 'NeueMontreal';
     src: url('../fonts/NeueMontreal-Light.otf') format('opentype');
@@ -13,7 +13,7 @@
     font-family: 'NeueMontreal';
     font-weight: bold;
     src: url('../fonts/NeueMontreal-Bold.otf') format('opentype');
-} */
+}
 
 html {
     height: 100%;
@@ -99,6 +99,11 @@ button {
     padding: 0px;
 }
 
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}
+
 .y-overflow-panel {
     position: relative;
     max-height: calc(100vh - 96px);
@@ -152,10 +157,9 @@ button {
 }
 
 .spin-loader {
+    margin: -1% 37.5%;
     border-radius: 50%;
-    width: 25px;
-    height: 25px;
-    animation: spin 1s linear infinite;
+    animation: spin 1.2s linear infinite;
 }
 
 #main-container {
@@ -218,7 +222,7 @@ nav > ul li {
 }
 
 nav > ul li:last-child {
-    padding: 5px 20px;
+    padding: 2px;
 }
 
 /*** Transitions ***/

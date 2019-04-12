@@ -128,8 +128,8 @@ li.bg > button .accordion > div {
 }
 
 .spin-loader {
-    border: 3px solid #d9dde3;
-    border-top: 3px solid #00728e;
+    border: 5px solid transparent;
+    border-top: 5px solid #00728e;
 }
 
 .ttip .ttip-text {
