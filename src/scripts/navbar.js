@@ -1,4 +1,6 @@
 
+import vlink  from '../views/components/vLink.vue';
+
 export default {
     props: {
         apptitle: {
@@ -14,6 +16,9 @@ export default {
             required: true
         }
     },
+    components: {
+        vlink
+    },
     data: function() {
         return {
             ethRequest: ''
@@ -28,9 +33,8 @@ export default {
         goToLocation: function (route, request)
         {
             let href = '/'+ route +'/'+ request;
-            this.$root.currentRoute = href;
             window.history.pushState(null, '', href);
-            console.log(href);
+            this.$root.updateRoute();
         },
         sendRequest: function() 
         {

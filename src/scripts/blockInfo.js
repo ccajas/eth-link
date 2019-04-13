@@ -1,4 +1,5 @@
 
+import appLayout from  '../views/theApp.vue';
 import txListItem from '../views/components/vTxListItem.vue';
 import addrLink from   '../views/components/vAddrLink.vue';
 import timeInfo from   '../views/components/vTimeInfo.vue';
@@ -12,6 +13,7 @@ import erc20abi   from '../mixins/erc20_abi.js';
 
 export default {
     components: {
+        'appLayout': appLayout,
         txListItem,
         addrLink,
         timeInfo,

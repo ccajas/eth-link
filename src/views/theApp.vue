@@ -4,7 +4,7 @@
         <navbar :apptitle="apptitle" :conn="connected" :containerClass="isResponsive ? fluid : nonFluid"></navbar>
         <div id="main-container" v-bind:class="isResponsive ? fluid : nonFluid">
             <section>
-                <component v-bind:is="currentListComponent" :network="network.name" :title="title" :itemID="itemID"></component>
+                <slot></slot>
             </section>
         </div>
     </div>      

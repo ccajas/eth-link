@@ -1,4 +1,5 @@
 
+import appLayout from '../views/theApp.vue';
 import addrLink from  '../views/components/vAddrLink.vue';
 import blockLink from '../views/components/vBlockLink.vue';
 import vlink from     '../views/components/vLink.vue';
@@ -10,6 +11,7 @@ import transition from '../mixins/transition.js';
 
 export default {
     components: {
+        appLayout,
         addrLink,
         blockLink,
         vlink,
@@ -18,7 +20,7 @@ export default {
     mixins: [transition],
     props: {
         network: {
-            type: String,
+            type: Object,
             required: true 
         }
     },
@@ -26,7 +28,7 @@ export default {
         return {
             tempBlocks: [],
             blockList: [],
-            maxEntries: 20,
+            maxEntries: 10,
             current: 0,
             next: 0,
             show: true
@@ -63,7 +65,10 @@ export default {
             window.onscroll = () => {
                 let bottom = el.scrollHeight - window.scrollY < window.innerHeight + 1;
                 if (bottom)
+                {
                     this.loadBlockList(this.next, this.maxEntries);
+                    console.log('hit bottom');
+                }
             }
         },
         loadBlockList: function(n, maxEntries)
@@ -71,11 +76,11 @@ export default {
             if (this.next > 0 && this.current == this.next)
                 return;
 
+            console.log('load block list');
+
             this.current = this.next;
             this.tempBlocks = [];
             let promises = [];
-
-            console.log('loading blocks...');
 
             for (var i = 0; i < maxEntries; i++) {
                 promises.push(this.$provider.getBlock(n - i).then(this.processBlock));

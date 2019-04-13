@@ -24,7 +24,6 @@
 		methods: {
 			go (event) {
 				event.preventDefault();
-				this.$root.currentRoute = this.href;
 				window.history.pushState(null, '', this.href);
 			}
 		}

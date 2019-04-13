@@ -75,6 +75,8 @@
                         <div class="spin-loader" v-if="loading && txList.length" style="padding-bottom: 20%"></div>
                     </div>
                 </transition>
+
+                <h3 v-if="txList.length == 0">No transactions found!</h3>
             </div>
         </div>
     </div>

@@ -1,8 +1,8 @@
 
 const routes = {
-    '/'         : 'Blocks', 
-    '/block'    : 'Block',
-    '/tx'       : 'Transaction',
+    '/'         : 'BlockList', 
+    '/block'    : 'BlockInfo',
+    '/tx'       : 'TxInfo',
     '/addr'     : 'Address',       
     '/block-txs': 'Transactions for Block'
 }
