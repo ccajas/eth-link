@@ -9,14 +9,11 @@
 
 <script>
 
-	import routes 		from '../../routes/index.js';
-	import { eventBus } from '../../routes/eventbus.js';
-
 	export default {
 		props: {
 			href: {
 				type:String,
-				required: true 
+				required: true
 			}
 		},
 		computed: {
@@ -27,8 +24,8 @@
 		methods: {
 			go (event) {
 				event.preventDefault();
+				this.$root.currentRoute = this.href;
 				window.history.pushState(null, '', this.href);
-				eventBus.$emit('link-clicked', this.href);
 			}
 		}
 	}

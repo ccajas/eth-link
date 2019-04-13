@@ -129,7 +129,7 @@ export default {
                         tx.tokenAmount = tx.data.substring(72, 136);
                         tx.tokenAmount = self.$ethers.utils.formatUnits(self.$ethers.utils.bigNumberify('0x'+ tx.tokenAmount), 18);
                         console.log(tx.tokenAmount + ' '+ name +' from contract '+ tx.to);
-                        self.loading = false;                                                        
+                        self.loading = false;                                                   
                     }
                     .bind(this.tx))
                     .catch((err) => { console.error(err) } );

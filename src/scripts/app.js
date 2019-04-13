@@ -1,11 +1,12 @@
+
 import app          from '../views/theApp.vue';
 import navbar       from '../views/theNavbar.vue';
 import blocks       from '../views/theBlockList.vue';
 import block        from '../views/theBlockInfo.vue';
+import tx           from '../views/theTxInfo.vue';
 import networkInfo  from '../views/components/vNetworkInfo.vue';
 
 import routes       from '../routes/index.js';
-import { eventBus } from '../routes/eventbus.js';
 
 export default {
     components: {
@@ -13,6 +14,7 @@ export default {
         navbar,
         blocks,
         block,
+        tx,
         networkInfo,
     },
     data: function() {
@@ -30,26 +32,24 @@ export default {
         }
     },  
     watch: {
-        currentRoute: function (val, oldVal) {
+        currentRoute: {
+            handler: function (val, oldVal) {
 
-            let path = this.currentRoute.split('/');
-            this.title = routes['/'+ path[1]] || 'notfound';
-            this.itemID = path[2] || '';
+                this.updateRoute();
 
-            console.log('loading view: '+ this.view.tableinfo + ' | '+ this.view.rowinfo);
+                let path = this.currentRoute.split('/');
+                this.title = routes['/'+ path[1]] || 'notfound';
+                this.itemID = path[2] || '';
+            },
+            deep: true,
+            immediate: true
         }
     },
     created: function () {
-
         // Listen to popstate event
         window.onpopstate = function (event) {
             this.updateRoute();
         }.bind(this);
-
-        // Listen for the clicked event on links
-        eventBus.$on('link-clicked', route => {
-            this.updateRoute();
-        });
 
         // Set route
         let path = this.currentRoute.split('/');
@@ -70,6 +70,10 @@ export default {
         currentListComponent: function () {
             let path = this.currentRoute.split('/');
             return path[1] || 'blocks';
+        },
+        MainViewComponent: function() {
+            let path = this.currentRoute.split('/');
+            return routes[this.currentRoute[path[1]]] || NotFound
         },
     },
     methods: {

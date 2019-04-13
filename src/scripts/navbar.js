@@ -1,12 +1,5 @@
 
-import vlink        from "../views/components/vLink.vue";
-import routes       from '../routes/index.js';
-import { eventBus } from '../routes/eventbus.js';
-
 export default {
-    components: {
-        vlink
-    },
     props: {
         apptitle: {
             type: String,
@@ -34,9 +27,10 @@ export default {
         },
         goToLocation: function (route, request)
         {
-            let path = '/'+ route +'/'+ request;
-            window.history.pushState(null, '', path);
-            eventBus.$emit('link-clicked', path);
+            let href = '/'+ route +'/'+ request;
+            this.$root.currentRoute = href;
+            window.history.pushState(null, '', href);
+            console.log(href);
         },
         sendRequest: function() 
         {
