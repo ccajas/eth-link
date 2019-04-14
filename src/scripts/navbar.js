@@ -3,14 +3,14 @@ import vlink  from '../views/components/vLink.vue';
 
 export default {
     props: {
-        apptitle: {
+        /*apptitle: {
             type: String,
             required: true
         },
         conn: {
             type: Boolean,
             required: true 
-        },
+        },*/
         containerClass: {
             type: String,
             required: true

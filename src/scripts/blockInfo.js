@@ -13,7 +13,7 @@ import erc20abi   from '../mixins/erc20_abi.js';
 
 export default {
     components: {
-        'appLayout': appLayout,
+        appLayout,
         txListItem,
         addrLink,
         timeInfo,

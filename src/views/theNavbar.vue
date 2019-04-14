@@ -6,7 +6,7 @@
                 <div class="col-sm-3">
                     <vlink v-cloak class="navbar-brand" href="/">
                         <i class="glyphicon glyphicon-random text-light"></i>
-                        &nbsp;<span class="text-light"> {{ apptitle }} </span></vlink>
+                        &nbsp;<span class="text-light"> apptitle </span></vlink>
                     <button v-on:click="toggleResponsive" class="navbar-brand pull-right">
                         &nbsp; <i class="glyphicon glyphicon-resize-horizontal text-light"></i> &nbsp;
                     </button>
@@ -22,9 +22,9 @@
                 </div>
 
                 <div v-cloak class="col-sm-2 pull-right" style="padding-top: 7px">
-                    <span class="pull-right">&nbsp;{{ conn ? "connected" : "disconnected" }} &nbsp;</span>
-                    <i v-if="conn" class="glyphicon glyphicon-flash pull-right" style="padding-top: 2px"></i>
-                    <i v-if="conn === false" class="glyphicon glyphicon-remove-circle pull-right" style="padding-top: 4px"></i>
+                    <span class="pull-right">&nbsp;<!--{{ conn ? "connected" : "disconnected" }}--> &nbsp;</span>
+                    <i class="glyphicon glyphicon-flash pull-right" style="padding-top: 2px"></i>
+                    <i class="glyphicon glyphicon-remove-circle pull-right" style="padding-top: 4px"></i>
                 </div>
             </div>
         </div>

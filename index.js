@@ -2,11 +2,6 @@
 import Vue    from 'vue'
 import routes from './src/routes/index.js'
 
-import navbar       from './src/views/theNavbar.vue';
-import BlockList    from './src/views/theBlockList.vue';
-import BlockInfo    from './src/views/theBlockInfo.vue';
-import tx           from './src/views/theTxInfo.vue';
-
 var theme = 'light';
 
 // Static files
@@ -29,16 +24,7 @@ const vm = new Vue({
         title: '',
         itemID: '',
         network: {},
-        connected: false,
-        isResponsive: false
-    },
-    beforeCreate: function () {
-
-    },
-    components: {
-        navbar,
-        BlockList,
-        BlockInfo
+        connected: false
     },
     async created() 
     {
@@ -52,10 +38,7 @@ const vm = new Vue({
             this.title = routes['/'+ path[1]] || 'notfound';
             this.itemID = path[2] || '';
 
-            let matchingView = this.title;
-            return matchingView
-                ? matchingView
-                : BlockList
+            return require('./src/views/the'+ this.title +'.vue').default;
         }
     },
     methods: {
@@ -66,27 +49,17 @@ const vm = new Vue({
             let path = this.currentRoute.split('/');
             this.title = routes['/'+ path[1]] || 'notfound';
             this.itemID = path[2] || '';
-        },
-        toggleResponsive: function() {
-            this.isResponsive = !this.isResponsive;
         }
     },
-    render () {
-        // Set props to be passed here
-        const ViewComponent  = this.ViewComponent;
-        const nonFluid = 'container';
-        const fluid    = 'container-fluid';
-
-        return (
-            <div class="bg-main">
-                <navbar apptitle={ this.appTitle } conn={ this.connected } containerClass={ this.isResponsive ? fluid : nonFluid }></navbar>
-                <div id="main-container" class={ this.isResponsive ? fluid : nonFluid }>
-                    <section>
-                        <ViewComponent network={ this.network } itemID={ this.itemID } />
-                    </section>
-                </div>
-            </div>
-        )
+    render (h) {
+        return h(this.ViewComponent, {
+            props: { 
+                appTitle: this.appTitle,
+                network: this.network,
+                conn: this.connected,
+                itemID: this.itemID
+            }
+        });
     }
 })
 
