@@ -53,7 +53,7 @@ export default {
                 timestamp: b.timestamp,
                 txLength: b.transactions.length,
                 miner: b.miner,
-                gasUsed: b.gasUsed,
+                gasUsed: this.$ethers.utils.bigNumberify(b.gasUsed),
                 extraData: this.hex2ascii(b.extraData),
                 time: this.convertTimestamp(b.timestamp),
                 sorted: false
@@ -97,30 +97,6 @@ export default {
             })
             .catch((err) => { console.error(err) });
         },
-        checkUpdates: function()
-        {
-            const refreshTime = 20000;
-            let start = Date.now();
-            let self = this;
-    
-            // Check for updates
-            let step = function()
-            {
-                let elapsed = Date.now() - start;
-                let percent = 100 - (elapsed/refreshTime * 100);
-                let loaderEl = document.getElementById('main-loader');
-                loaderEl.style.width = percent +'%';
-    
-                if (elapsed > refreshTime)
-                {
-                    start = Date.now();
-                    //self.reloadTable();
-                }
-                window.requestAnimationFrame(step);
-            }.bind(this);
-    
-            //window.requestAnimationFrame(step);
-        },
         identicon: function(block, dimension) {
             return jdenticon.toSvg(block.miner, dimension, 0);
         },
@@ -134,8 +110,28 @@ export default {
                 //console.log(charCodeAt(char));
                 str += char;
             }
-
             return str;
+        },
+        transactionSend: function(event)
+        {
+            console.log('begin transaction');
+            let privateKey = 'xx';
+            let wallet = new this.$ethers.Wallet(privateKey, this.$provider);
+
+            for (let i = 1; i <= 3; i++)
+            {
+                let transaction = {
+                    to: "0x",
+                    value: ethers.utils.parseEther((0.01 * i).toString())
+                };
+    
+                // Send the transaction
+                let sendTransactionPromise = wallet.sendTransaction(transaction);
+                sendTransactionPromise.then((tx) => {
+                    console.log(tx);
+                })
+                .catch((err) => { console.error(err) });
+            }
         },
         convertTimestamp: function (timestamp) 
         {

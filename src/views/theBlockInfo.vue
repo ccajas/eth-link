@@ -1,11 +1,11 @@
 
 <template>
-    <app-layout>
+    <app-layout :network="network">
         <div class="row">
-            <div class="row col-sm-7 bg-drop-grad" v-cloak>
+            <div class="row col-sm-6 bg-drop-grad" v-cloak>
                 <div class="col-sm-2 identicon" style="padding-top: 15px">
-                    <div style="background: #12171c">
-                        <div v-html="identicon(block.hash, 84)" class="scaling-svg-container" style="background: #12171c"></div>
+                    <div class="shadow-soft">
+                        <div v-html="identicon(block.hash, 84)" class="scaling-svg-container"></div>
                     </div>
                 </div>
                 <div class="row col-sm-10">

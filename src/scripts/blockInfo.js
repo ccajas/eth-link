@@ -20,6 +20,10 @@ export default {
     },
     mixins: [transition],
     props: {
+        network: {
+            type: Object,
+            required: true 
+        },
         itemID: {
             type: String,
             required: true
@@ -52,7 +56,8 @@ export default {
             tx.type = 'txValue'; // Default
             tx.value = this.$ethers.utils.formatEther(tx.value, {pad: true});
             tx.gasFee = this.$ethers.utils.formatEther(tx.gasPrice) * this.gasPrice;
-            let self = this;
+            tx.gasLimit = this.$ethers.utils.bigNumberify(tx.gasLimit);
+            //tx.gasPrice = this.$ethers.utils.bigNumberify(tx.gasPrice._hex);
 
             if (tx.to === null)
                 tx.type = 'txCreated';
@@ -135,8 +140,13 @@ export default {
             })
             .catch((err) => { console.error(err) });
         },
+        convertTimestamp: function (timestamp) 
+        {
+            let date = new Date(timestamp * 1000);      
+            return date.toLocaleDateString() +' '+ date.toLocaleTimeString();
+        },
         identicon: function(addr, dimension) {
-            let svg = jdenticon.toSvg(addr, dimension, 0.05);
+            let svg = jdenticon.toSvg(addr, dimension, 0.0);
             let span = document.createElement('span');
             span.innerHTML = svg.trim();
             span.firstChild.removeAttribute('width');
@@ -150,6 +160,10 @@ export default {
         // List next blocks
         this.$provider.getBlock(parseInt(this.itemID)).then(function(block) 
         {
+            block.mined = this.convertTimestamp(block.timestamp);
+            block.gasLimit = this.$ethers.utils.bigNumberify(block.gasLimit).toString();
+            block.gasUsed  = this.$ethers.utils.bigNumberify(block.gasUsed).toString();
+
             this.block = block;
             this.next = (block.transactions.length < this.maxEntries) ?
                 block.transactions.length : this.maxEntries;
@@ -159,6 +173,8 @@ export default {
             {
                 this.gasPrice = gas;
                 console.log('gasprice '+ gas);
+                console.log(block);
+
                 if (block.transactions.length > 0)
                     this.loadTxList(block.transactions);
                 else

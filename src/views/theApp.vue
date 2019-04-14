@@ -1,7 +1,7 @@
 
 <template>
     <div class="bg-main">
-        <navbar :containerClass="responsive ? fluid : nonFluid"></navbar>
+        <navbar :networkName="network.name" :containerClass="responsive ? fluid : nonFluid"></navbar>
         <div id="main-container" v-bind:class="responsive ? fluid : nonFluid">
             <section>
                 <slot></slot>
@@ -21,11 +21,18 @@
                 nonFluid: 'container'
             }
         },
+        props: {
+            network: {
+                type: Object,
+                required: true 
+            }
+        },
         components: {
             navbar
         },
         methods: {
             toggleResponsive: function() {
+                console.log(this.network);
                 this.responsive = !this.responsive;
             }
         }

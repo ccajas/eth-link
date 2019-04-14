@@ -3,11 +3,11 @@ import vlink  from '../views/components/vLink.vue';
 
 export default {
     props: {
-        /*apptitle: {
+        networkName: {
             type: String,
-            required: true
+            required: false
         },
-        conn: {
+        /*conn: {
             type: Boolean,
             required: true 
         },*/

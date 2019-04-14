@@ -1,6 +1,6 @@
 
 <template>
-    <app-layout>
+    <app-layout :network="network">
         <div class="col-sm-3 pull-left">
             <div v-on:click="transactionSend">Send transaction</div>
         </div>
@@ -8,7 +8,7 @@
             <transition-group name="list-f" tag="ul" class="list-group" v-on:enter="enter" v-on:after-enter="afterEnter">
                 <li class="bg shadow-soft" v-for="(block, idx) in blockList" :key="block.id+'_'" :data-index="idx">
                     <div class="row col-sm-4">
-                        <b class='capitalize'>{{ network.name }}</b> - <blockLink :block="block.id"></blockLink>
+                        <b class="capitalize">{{ network.name }}</b> - <blockLink :block="block.id"></blockLink>
                         </div>
                         <div class="row col-sm-5">
                             <timeInfo :time="block.timestamp"></timeInfo>
