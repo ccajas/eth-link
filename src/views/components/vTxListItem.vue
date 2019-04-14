@@ -46,7 +46,9 @@
                         <div class="row col-sm-12" style="word-wrap: break-word; white-space: pre-line" v-if="!loading">
                             <br/>
                             <h4>Loaded some details</h4>
-                                <span v-if="tx.tokenAmount && !loading">{{ tx.tokenAmount.toString() }}</span>
+                                <span v-if="tx.tokenAmount && !loading">
+                                    {{ tx.tokenAmount.toString() }} {{ tx.tokenName }} ({{tx.tokenSymbol}}) sent from {{ tx.to }}
+                                </span>
                             <!--
                             <div class="col-sm-1">&nbsp;</div>
                             <div class="row col-sm-11"><h1>{{ txType }}</h1></div>
@@ -104,41 +106,52 @@ export default {
         leave: function(el) {
             this.beforeEnter(el);
         },
+        async parseERC20(tx)
+        {
+            this.tx.data = this.tx.data.substring(2);
+            this.tx.tokenTo = '0x' + this.tx.data.substring(32, 72);
+            console.log('token transfer');
+
+            let contract = new this.$ethers.Contract(tx.to, this.erc_20_abi_min, this.$provider);
+            let self = this;
+
+            tx.tokenName = await contract.name();//.then(function(name) 
+            tx.tokenSymbol = await contract.symbol();
+            let decimals = await contract.decimals();
+            
+            console.log('token from: '+ tx.from +' token to: '+ tx.tokenTo);
+            tx.tokenAmount = tx.data.substring(72, 136);
+            tx.tokenAmount = self.$ethers.utils.bigNumberify('0x'+ tx.tokenAmount);
+            tx.tokenAmount /= (10 ** decimals);
+            console.log(10 ** decimals);
+            console.log(tx.tokenAmount +' '+ tx.tokenName +'('+ tx.tokenSymbol +') from contract '+ tx.to);
+            self.loading = false;                                                   
+            
+            //.bind(this.tx))
+            //.catch((err) => { console.error(err) } );     
+        },
         loadDetail: function()
         {
             this.detail = !this.detail;
             let tx = this.tx;
-            // Load token detail
-            console.log(tx.type);
             
             // Load only if not loaded yet
             if (this.loading && tx.type == 'txCall') 
             {
+                // Load token detail
                 // ERC-20 token transfer
                 if (tx.data.substring(0, 10) == "0xa9059cbb" && tx.data.length === 138) 
                 {
-                    this.tx.data = this.tx.data.substring(2);
-                    this.tx.tokenTo = '0x' + this.tx.data.substring(32, 72);
-
-                    let contract = new this.$ethers.Contract(tx.to, this.erc_20_abi_min, this.$provider);
-                    let self = this;
-
-                    contract.name().then(function(name) 
-                    {
-                        console.log('token from: '+ tx.from +' token to: '+ tx.tokenTo);
-                        tx.tokenAmount = tx.data.substring(72, 136);
-                        tx.tokenAmount = self.$ethers.utils.formatUnits(self.$ethers.utils.bigNumberify('0x'+ tx.tokenAmount), 18);
-                        console.log(tx.tokenAmount + ' '+ name +' from contract '+ tx.to);
-                        self.loading = false;                                                   
-                    }
-                    .bind(this.tx))
-                    .catch((err) => { console.error(err) } );
+                    this.parseERC20(tx);
                 }
                 else
+                {
                     console.log('not a token transfer');
-                
-                this.loading = false;
+                    this.loading = false;
+                }
             }
+            else
+                this.loading = false;
         },
         identicon: function(addr, dimension)
         {

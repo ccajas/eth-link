@@ -47,19 +47,19 @@ li.bg:hover  {
 li.bg.success > button > div:first-child {
     /*background: url('../images/ethereum-coin.svg') no-repeat;
     background-position: 20px 0;*/
-    border-right: 4px solid #3ab86e;
+    border-left: 14px solid #3ab86e;
 }
 
 li.bg.contract-call > button > div:first-child {
     /*background: url('../images/code-eth.svg') no-repeat;
     background-position: 20px 0;*/
-    border-right: 4px solid #e4852d
+    border-left: 14px solid #e4852d
 }
 
 li.bg.contract-created > button > div:first-child {
     /*background: url('../images/code-eth.svg') no-repeat;
     background-position: 20px 0;*/
-    border-right: 4px solid #54dbec
+    border-left: 14px solid #54dbec
 }
 
 li.bg > button .accordion > div {

@@ -3,7 +3,7 @@
 @import url('https://fonts.googleapis.com/css?family=Cousine:400,400i,700');
 @import url('https://fonts.googleapis.com/css?family=Lato:400,700');*/
 @import url('https://fonts.googleapis.com/css?family=Barlow:400,600');
-
+/*
 @font-face {
     font-family: 'NeueMontreal';
     src: url('../fonts/NeueMontreal-Light.otf') format('opentype');
@@ -14,7 +14,7 @@
     font-weight: bold;
     src: url('../fonts/NeueMontreal-Bold.otf') format('opentype');
 }
-
+*/
 html {
     height: 100%;
 }
@@ -37,7 +37,7 @@ table {
 
 h1, h2, h3 {
     margin-top: 15px;
-    font-family: "NeueMontreal", Helvetica, Arial, sans-serif;
+    font-family: Helvetica, Arial, sans-serif;
     font-weight: bold;
     letter-spacing: 0.0em;
 }
@@ -297,6 +297,14 @@ ul.list-group.tx-list li {
 
 ul.list-group.tx-list li > button {
     padding: 17px 15px;
+}
+
+ul.list-group.tx-list > li > button > div:first-child {
+    margin-top: 7px;
+    width: 0px;
+    height: 0px;
+    border-top: 14px solid transparent;
+    border-bottom: 14px solid transparent;
 }
 
 li.bg > button > div:first-child {
