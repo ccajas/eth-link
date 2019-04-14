@@ -7,7 +7,6 @@ import vlink from      '../views/components/vLink.vue';
 
 // Mixins
 import transition from '../mixins/transition.js';
-import erc20abi   from '../mixins/erc20_abi.js';
 
 // Table info component for block and tx data
 
@@ -44,7 +43,7 @@ export default {
         }
     },
     methods: {
-        processTx: function(tx)
+        async processTx(tx)
         {        
             if (tx === null)
                 return;
@@ -58,7 +57,7 @@ export default {
             if (tx.to === null)
                 tx.type = 'txCreated';
             else
-                this.$provider.getCode(tx.to).then(function(code)
+                await this.$provider.getCode(tx.to).then(function(code)
                 {
                     tx.code = code.substring(2);
                     if (tx.code.length > 0)
