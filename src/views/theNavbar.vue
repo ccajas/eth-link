@@ -1,6 +1,6 @@
 
 <template>
-    <nav class="navbar navbar-default bg-second-grad shadow-normal">
+    <nav class="navbar navbar-default bg-second-grad">
         <div v-bind:class="containerClass" class="text-light" >
             <div class="row bg-add">
                 <div class="col-sm-3">

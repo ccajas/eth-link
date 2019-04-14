@@ -1,10 +1,13 @@
 body {
-    background: #363d44;
+    background: #171d24;
+    background-image: radial-gradient(farthest-corner at 50% 0px, #8390a1 12%,rgba(9, 11, 12, 0.9) 110%);
+    background-attachment: fixed;
+    background-size: 100%;
     color: #eee;
 }
 
 a {
-    color: #15cffd;
+    color: #4294d6;
 }
 
 a:hover {
@@ -14,15 +17,17 @@ a:hover {
 /*** Style Modifiers ***/
 
 .bg {
-    background: #0d1015;
+    background: #151920;
+    background: rgba(13, 16, 21, 0.7);
+    background: rgba(33, 40, 51, 0.4);
 }
 
-.bg.list-group-item {
-    border: 1px solid #363d44;
+ul.list-group li.bg {
+    border: 2px solid #606a7a;
 }
 
-.bg.list-group-item:hover {
-    background: #363d44;
+ul.list-group li.bg:hover {
+    background: rgb(26, 31, 39, 0.7);
 }
 
 .tabs a {
@@ -30,11 +35,7 @@ a:hover {
 }
 
 .tabs a:hover {
-    background: #363d44;
-}
-
-.bg-main {
-    background: #181b20;
+    background: #383e44;
 }
 
 .bg-main-grad {
@@ -45,7 +46,7 @@ a:hover {
 }
 
 .bg-mid {
-    background: #aaa;
+    background: #495663;
 }
 
 .bg-second {
@@ -53,19 +54,27 @@ a:hover {
 }
 
 .bg-second-grad {
-    background: #112741;
     background: -moz-linear-gradient(-45deg, #112741 60%, #00728e 100%);
     background: -webkit-linear-gradient(-45deg, #112741 60%,#00728e 100%);
-    background: linear-gradient(135deg, #112741 60%,#00728e 100%);
-    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#112741', endColorstr='#008e7b',GradientType=1);
+    background: linear-gradient(#2c3641 10%,rgba(15, 16, 19, 0) 100%);
 }
 
 .bg-add {
-    background: rgba(0, 0, 0, 0.25)
+    background: rgba(0, 0, 0, 0.0)
 }
 
 .bg-remove {
-    background: rgba(255, 255, 255, 0.15)
+    background: rgba(255, 255, 255, 0.0)
+}
+
+nav > ul a, nav > ul a:hover {
+    color: #eee;
+    text-decoration: none;
+}
+
+nav > ul a.active {
+    background: #ffd036;
+    color: #112741;
 }
 
 .border-main {
@@ -78,6 +87,10 @@ a:hover {
 
 .table > tbody > tr.border-main > td {
     border-top: 2px solid #0d1015;
+}
+
+.text-second {
+    color: #8491a0;
 }
 
 .text-light {
