@@ -157,16 +157,21 @@ export default {
     },
     mounted: function() 
     {    
+        let nf = new Intl.NumberFormat();
+
         // List next blocks
         this.$provider.getBlock(parseInt(this.itemID)).then(function(block) 
         {
             block.mined = this.convertTimestamp(block.timestamp);
-            block.gasLimit = this.$ethers.utils.bigNumberify(block.gasLimit).toString();
-            block.gasUsed  = this.$ethers.utils.bigNumberify(block.gasUsed).toString();
+            block.difficulty = nf.format(block.difficulty);
+            block.gasLimit = nf.format(this.$ethers.utils.bigNumberify(block.gasLimit).toString());
+            block.gasUsed  = nf.format(this.$ethers.utils.bigNumberify(block.gasUsed).toString());
 
             this.block = block;
             this.next = (block.transactions.length < this.maxEntries) ?
                 block.transactions.length : this.maxEntries;
+
+            this.view = 'summary';
 
             // Get gas price only once
             this.$provider.getGasPrice().then((gas) =>

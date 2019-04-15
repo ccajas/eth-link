@@ -24,6 +24,7 @@ export default {
             tx.tokenSymbol = await contract.symbol();
             let decimals = await contract.decimals();
             
+            // Convert token amount
             console.log('token from: '+ tx.from +' token to: '+ tx.tokenTo);
             tx.tokenAmount = tx.data.substring(72, 136);
             tx.tokenAmount = this.$ethers.utils.bigNumberify('0x'+ tx.tokenAmount) / (10 ** decimals);

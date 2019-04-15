@@ -1,24 +1,28 @@
 
 <template>
-    <li class="bg shadow-soft" :class="[
+    <li class="bg" :class="[
         tx.type == 'txValue' ? successClass : 
         tx.type == 'txCall' ? callClass : createdClass]">
-        <button class="col-sm-12" v-on:click='loadDetail' style="text-align: left">
-            <div class="col-sm-1"><i class="glyphicon glyphicon-transfer" style="font-size: 2.25em"></i></div>
+        <button class="col-sm-12 shadow-soft" v-on:click='loadDetail' style="text-align: left">
+            <div class="col-sm-1">
+                <i v-if="tx.type == 'txValue'" class="glyphicon glyphicon-transfer" style="font-size: 1.65em"></i>
+                <i v-if="tx.type == 'txCreate'" class="glyphicon glyphicon-asterisk" style="font-size: 1.5em"></i>
+                <i v-if="tx.type == 'txCall'" class="glyphicon glyphicon-list" style="font-size: 1.5em"></i>
+            </div>
 
             <div class="row col-sm-11">
-                <div class="row col-sm-3"><p><strong>{{ txType }}</strong></p>
-                    <p class="text-second">{{ tx.hash }}</p>
+                <div class="row col-sm-3"><p>{{ txType }}</p>
+                    <p class="text-second" style="font-size: 0.9em">{{ tx.hash }}</p>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-5">
                     <div class="row col-sm-6">
                         <p>From</p>
-                        <p><strong><addrLink :addr="tx.from" :trunc="true"></addrLink></strong>
+                        <p class="addr"><strong><addrLink :addr="tx.from" :trunc="true"></addrLink></strong>
                         <i class="glyphicon glyphicon-arrow-right text-second"></i></p>
                     </div>
                     <div class="row col-sm-6">
                         <p>To</p>
-                        <p><addrLink :addr="tx.to" :trunc="true" v-if="tx.to !== null"></addrLink></p>
+                        <p class="addr"><addrLink :addr="tx.to" :trunc="true" v-if="tx.to !== null"></addrLink></p>
                     </div>
                 </div>
 
@@ -36,44 +40,42 @@
                         <div v-html="identicon(tx.to, 36)" class="scaling-svg-container" v-if="tx.to !== null"></div>
                     </div>
                 </div>
-
-                <div class="row col-sm-4">
-                    Gas Limit: {{ tx.gasLimit.toString() }}
-                </div>
-            </div>
-
-
-            <div class="accordion">
-                <transition name="accordion fade" v-on:before-enter="beforeEnter" v-on:enter="enter" v-on:leave="leave">
-                    <!-- tx detail -->
-                    <div class="row col-sm-12" v-if="detail">
-                        <transition appear name="fade" v-if="loading">
-                            <div class="row col-sm-3 col-centered" style="padding: 50px 0">
-                                <div class="spin-loader" style="padding-top: 5px; padding-bottom: 20%" v-if="loading"></div>
-                            </div>
-                        </transition>
-                        <div class="row col-sm-12" style="word-wrap: break-word; white-space: pre-line" v-if="!loading">
-                            <br/>
-                            <h4>Loaded some details</h4>
-                                <span v-if="tx.tokenAmount && !loading">
-                                    {{ tx.tokenAmount.toString() }} {{ tx.tokenName }} ({{tx.tokenSymbol}}) sent from {{ tx.to }}
-                                </span>
-                            <!--
-                            <div class="col-sm-1">&nbsp;</div>
-                            <div class="row col-sm-11"><h1>{{ txType }}</h1></div>
-                            <div v-for="(val, key) in tx" :key="key">
-                                <div class="row col-sm-1">&nbsp;</div>
-                                <div class="row col-sm-11"><strong>{{ key }}</strong></div>
-                                <div class="row col-sm-1">&nbsp;</div>
-                                <div class="row col-sm-11" style="word-wrap: break-word; white-space: pre-line">
-                                    {{ val !== null && val.length > 0 ? val : "&nbsp;" }}<br/><br/>
-                                </div>
-                            </div>-->
-                        </div>
-                    </div>
-                </transition>
             </div>
         </button>
+
+        <div class="accordion">
+            <transition name="accordion fade" v-on:before-enter="beforeEnter" v-on:enter="enter" v-on:leave="leave">
+                <!-- tx detail -->
+                <div class="col-sm-12" v-if="detail">
+                    <transition appear name="fade" v-if="loading">
+                        <div class="row col-sm-3 col-centered" style="padding: 50px 0">
+                            <div class="spin-loader" style="padding-top: 5px; padding-bottom: 20%" v-if="loading"></div>
+                        </div>
+                    </transition>
+                    <div class="row col-sm-6" style="word-wrap: break-word; white-space: pre-line" v-if="!loading">
+                        <h3>{{ txType }}</h3>
+                    </div>
+                    <div class="row col-sm-6" style="word-wrap: break-word; white-space: pre-line" v-if="!loading">
+                        <br/>
+                        <h4>Loaded some details</h4>
+                        <span v-if="tx.tokenAmount && !loading"><!--
+                            -->{{ tx.tokenAmount.toString() }} {{ tx.tokenName }} ({{tx.tokenSymbol}}) sent from {{ tx.to }}
+                        </span>
+                        <!--
+                        <div class="col-sm-1">&nbsp;</div>
+                        <div class="row col-sm-11"><h1>{{ txType }}</h1></div>
+                        <div v-for="(val, key) in tx" :key="key">
+                            <div class="row col-sm-1">&nbsp;</div>
+                            <div class="row col-sm-11"><strong>{{ key }}</strong></div>
+                            <div class="row col-sm-1">&nbsp;</div>
+                            <div class="row col-sm-11" style="word-wrap: break-word; white-space: pre-line">
+                                {{ val !== null && val.length > 0 ? val : "&nbsp;" }}<br/><br/>
+                            </div>
+                        </div>-->
+                    </div>
+                </div>
+            </transition>
+        </div>
     </li>              
 </template>
 
