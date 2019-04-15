@@ -5,9 +5,9 @@ export default {
         return {
 			erc20_abi_min: [
                 "function name() view returns (string)",
-                "function decimals() view returns (uint8)",
-                "function balanceOf (address _owner) view returns (uint256 balance)",
+                "function decimals() view returns (uint)",
                 "function symbol() view returns (string)"
+                //"function balanceOf (address _owner) view returns (uint256 balance)",
             ]
 		}
     },

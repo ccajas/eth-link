@@ -47,32 +47,24 @@
             <transition name="accordion fade" v-on:before-enter="beforeEnter" v-on:enter="enter" v-on:leave="leave">
                 <!-- tx detail -->
                 <div class="col-sm-12" v-if="detail">
-                    <transition appear name="fade" v-if="loading">
-                        <div class="row col-sm-3 col-centered" style="padding: 50px 0">
-                            <div class="spin-loader" style="padding-top: 5px; padding-bottom: 20%" v-if="loading"></div>
+                    <transition appear name="fade">
+                        <div class="row col-sm-3 col-centered" style="padding: 50px 0" v-if="loading">
+                            <div class="spin-loader" style="padding-top: 5px; padding-bottom: 20%"></div>
+                        </div>
+                        <div class="row col-sm-12" v-else>
+                            <div class="row col-sm-6" style="word-wrap: break-word; white-space: pre-line">
+                                <h3>{{ txType }}</h3>
+                            </div>
+                            <div class="row col-sm-6" style="word-wrap: break-word; white-space: pre-line">
+                                <br/>
+                                <h4>Loaded some details</h4>
+                                <span v-if="tx.tokenAmount && !error"><!--
+                                    -->{{ tx.tokenAmount.toString() }} {{ tx.tokenName }} ({{tx.tokenSymbol}}) sent from {{ tx.to }}
+                                </span>
+                                <div class="alert alert-danger" v-if="error">{{ this.errorMsg }}</div>
+                            </div>
                         </div>
                     </transition>
-                    <div class="row col-sm-6" style="word-wrap: break-word; white-space: pre-line" v-if="!loading">
-                        <h3>{{ txType }}</h3>
-                    </div>
-                    <div class="row col-sm-6" style="word-wrap: break-word; white-space: pre-line" v-if="!loading">
-                        <br/>
-                        <h4>Loaded some details</h4>
-                        <span v-if="tx.tokenAmount && !loading"><!--
-                            -->{{ tx.tokenAmount.toString() }} {{ tx.tokenName }} ({{tx.tokenSymbol}}) sent from {{ tx.to }}
-                        </span>
-                        <!--
-                        <div class="col-sm-1">&nbsp;</div>
-                        <div class="row col-sm-11"><h1>{{ txType }}</h1></div>
-                        <div v-for="(val, key) in tx" :key="key">
-                            <div class="row col-sm-1">&nbsp;</div>
-                            <div class="row col-sm-11"><strong>{{ key }}</strong></div>
-                            <div class="row col-sm-1">&nbsp;</div>
-                            <div class="row col-sm-11" style="word-wrap: break-word; white-space: pre-line">
-                                {{ val !== null && val.length > 0 ? val : "&nbsp;" }}<br/><br/>
-                            </div>
-                        </div>-->
-                    </div>
                 </div>
             </transition>
         </div>
@@ -98,6 +90,7 @@ export default {
         return {
             detail: false,
             loading: true,
+            error: false,
             // Class list for tx types
             callClass: 'contract-call',
             createdClass: 'contract-created',
@@ -129,7 +122,16 @@ export default {
                 // ERC-20 token transfer
                 if (tx.data.substring(0, 10) == "0xa9059cbb" && tx.data.length === 138) 
                 {
-                    this.parseERC20(tx).then(() => this.loading = false);
+                    this.parseERC20(tx).then(() => this.loading = false)
+                        .catch((err) => {
+                            console.log(err);
+                            this.$provider.getCode(tx.to).then((code) => {
+                                console.log(code);
+                            });
+                            this.errorMsg = "Top-level call failure: Contract execution failed.";
+                            this.error = true;
+                            this.loading = false;
+                        });
                 }
                 else
                 {
