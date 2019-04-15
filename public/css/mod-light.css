@@ -1,11 +1,9 @@
 #bg-main {
-    /*background: -moz-radial-gradient(farthest-corner at 40px 40px, #ebf0f3 0%, #caced1 100%); /* FF3.6-15 */
-    /*background: -webkit-radial-gradient(farthest-corner at 40px 40px, #e6eff5 0%,#caced1 100%); /* Chrome10-25,Safari5.1-6 */
-    /*background: radial-gradient(farthest-corner at 40px 40px, #ebf0f3 52%,#caced1 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    background-image: radial-gradient(farthest-corner at 50% 0px, #f6f9fb 50%,rgba(38, 44, 46, 0.6) 120%);
+    background: #f6f9fb;
+    /*background-image: radial-gradient(farthest-corner at 50% 0px, #f6f9fb 70%,rgba(38, 44, 46, 0.6) 120%);
     background-attachment: fixed;
     background-size: 100%;
-    color: #3e4d52;
+    color: #3e4d52;*/
 }
 
 a {
