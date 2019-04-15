@@ -1,36 +1,65 @@
-#bg-main {
+body {
+    background: #939ea4;
     /*background: -moz-radial-gradient(farthest-corner at 40px 40px, #ebf0f3 0%, #caced1 100%); /* FF3.6-15 */
     /*background: -webkit-radial-gradient(farthest-corner at 40px 40px, #e6eff5 0%,#caced1 100%); /* Chrome10-25,Safari5.1-6 */
     /*background: radial-gradient(farthest-corner at 40px 40px, #ebf0f3 52%,#caced1 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    background-image: radial-gradient(farthest-corner at 50% 0px, #f6f9fb 50%,rgba(38, 44, 46, 0.6) 120%);
+    background-image: radial-gradient(farthest-corner at 50% 0px, #939ea4 72%,rgba(26, 28, 29, 0.7) 120%);
     background-attachment: fixed;
     background-size: 100%;
-    color: #3e4d52;
+    color: #f6f9fb;
 }
 
 a {
-    color: #00aad4;
+    color: #0091b6;
 }
 
 a:hover {
-    color: #00a1c9;
+    color: #00728e;
 }
 
 /*** Style Modifiers ***/
 
 .bg {
-    background: #fff;
-    background: rgba(246, 249, 251, 0.25);
+    background: #414a4e;
+    background: rgba(41, 55, 61, 0.55);
 }
 
-ul.list-group li.bg {
-    border: 1px solid rgba(148, 157, 162, 0.3);
+ul.list-group li {
+    margin: 0px;
+    /*border: 1px solid #9fa6aa;*/
+    border-bottom: 1px solid #364147;
+    border-top: 1px solid transparent;
 }
 
-ul.list-group li.bg:hover button {
-    background: #f6f9fb;
-    border: 1px solid #c6ccd4;
+ul.list-group li:hover {
+    border: 1px solid #546875;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+/*
+ul.list-group a {
+    color: #223336;
+}*/
+
+li.bg:hover  {
+    background: #364147;
+}
+
+li.bg.success > button > div:first-child {
+    /*background: url('../images/ethereum-coin.svg') no-repeat;
+    background-position: 20px 0;*/
+    border-left: 14px solid #3ab86e;
+}
+
+li.bg.contract-call > button > div:first-child {
+    /*background: url('../images/code-eth.svg') no-repeat;
+    background-position: 20px 0;*/
+    border-left: 14px solid #e4852d
+}
+
+li.bg.contract-created > button > div:first-child {
+    /*background: url('../images/code-eth.svg') no-repeat;
+    background-position: 20px 0;*/
+    border-left: 14px solid #54dbec
 }
 
 .tabs a {
@@ -53,6 +82,10 @@ ul.list-group li.bg:hover button {
     background: rgba(12, 37, 70, 0.4);
 }
 
+.bg-bright {
+    background: #00728e;
+}
+
 .bg-second-grad {
     background: #112741;
     background: -moz-linear-gradient(135deg, #112741 60%, #00728e 100%);
@@ -62,7 +95,7 @@ ul.list-group li.bg:hover button {
 }
 
 .bg-drop-grad {
-    background: linear-gradient(#8491a0 -60%, transparent 70%);
+    background: linear-gradient(#8491a0 -160%, transparent 70%);
 }
 
 .bg-add {
@@ -73,21 +106,21 @@ ul.list-group li.bg:hover button {
     background: rgba(0, 0, 0, 0.25)
 }
 
-nav > ul a, nav > ul a:hover {
-    text-decoration: none;
-}
-
-nav > ul a.active, nav > ul button.active {
-    background: #00aad4;
-    color: #f6f9fb;
-}
-
 .border-main {
     border-color: #d9dde3;
 }
 
 .tabs.border-main {
     border-bottom: 1px solid #d9dde3;
+}
+
+.table > thead > tr.border-main > th {
+    border-bottom: 2px solid #fff;  
+}
+
+.table > tbody > tr.border-main > td {
+    background: #f3f3f3;
+    border-top: 2px solid #fff;
 }
 
 .spin-loader {
@@ -101,7 +134,7 @@ nav > ul a.active, nav > ul button.active {
 }
 
 .text-second {
-    color: #8491a0;
+    color: #9fa9b6;
 }
 
 .text-light {
@@ -120,20 +153,4 @@ nav > ul a.active, nav > ul button.active {
 
 .text-shadow-haze {
     text-shadow: rgba(119, 160, 163, 0.5) 0 0 10px;
-}
-
-/*** Scrollbars ***/
-
-::-webkit-scrollbar {
-    width: 12px;
-}
-
-::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 12px 12px #eee;
-    border: solid 4px transparent;
-}
-
-::-webkit-scrollbar-thumb {
-    box-shadow: inset 0 0 12px 12px #aaa;
-    border: solid 4px transparent;
 }

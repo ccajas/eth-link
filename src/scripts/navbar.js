@@ -54,6 +54,10 @@ export default {
         toggleResponsive: function()
         {
             this.$parent.toggleResponsive();
+        },
+        toggleStyle: function()
+        {
+            this.$parent.toggleStyle();
         }
     }
 }

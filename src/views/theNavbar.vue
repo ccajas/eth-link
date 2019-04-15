@@ -7,7 +7,7 @@
                     <vlink v-cloak class="navbar-brand" href="/">
                         <i class="glyphicon glyphicon-random text-light"></i>
                         &nbsp;<span class="text-light capitalize"> {{ networkName }} </span></vlink>
-                    <button v-on:click="toggleResponsive" class="navbar-brand pull-right">
+                    <button v-on:click="toggleStyle" class="navbar-brand pull-right">
                         &nbsp; <i class="glyphicon glyphicon-resize-horizontal text-light"></i> &nbsp;
                     </button>
                 </div>

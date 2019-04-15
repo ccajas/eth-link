@@ -2,14 +2,14 @@
 import Vue    from 'vue'
 import routes from './src/routes/index.js'
 
-var theme = 'light';
-
 // Static files
 
 require('./public/css/bootstrap.min.css');
 require('./public/css/animations.css');
+
 require('./public/css/style.css');
-require('./public/css/mod-'+ theme +'.css');
+require('./public/css/mod-light.css');
+require('./public/css/mod-dark.css');
 
 let provider = new ethers.providers.InfuraProvider('homestead');
 
@@ -32,7 +32,7 @@ const vm = new Vue({
         this.connected = true;
     },
     computed: {
-        ViewComponent () 
+        ViewComponent() 
         {
             let path = this.currentRoute.split('/');
             this.title = routes['/'+ path[1]] || 'notfound';

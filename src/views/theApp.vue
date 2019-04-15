@@ -1,7 +1,7 @@
 
 <template>
-    <div class="bg-main">
-        <navbar :networkName="network.name" :containerClass="responsive ? fluid : nonFluid"></navbar>
+    <div>
+        <navbar class="shadow-soft" :networkName="network.name" :containerClass="responsive ? fluid : nonFluid"></navbar>
         <div id="main-container" v-bind:class="responsive ? fluid : nonFluid">
             <section>
                 <slot></slot>
@@ -34,6 +34,11 @@
             toggleResponsive: function() {
                 console.log(this.network);
                 this.responsive = !this.responsive;
+            },
+            toggleStyle: function() {
+                let el = document.getElementById("bg-main");
+                console.log(el);
+                el.classList.toggle("dark");
             }
         }
     }

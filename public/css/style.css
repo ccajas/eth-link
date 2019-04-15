@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Titillium+Web:400,600');
 /*@import url('https://fonts.googleapis.com/css?family=Exo+2:400,600|Saira+Semi+Condensed:400,600');
-@import url('https://fonts.googleapis.com/css?family=Cousine:400,400i,700');
 @import url('https://fonts.googleapis.com/css?family=Lato:400,700');*/
-@import url('https://fonts.googleapis.com/css?family=Barlow:400,600');
-/*
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
+@import url('https://fonts.googleapis.com/css?family=Work+Sans:400,500');
+
 @font-face {
     font-family: 'NeueMontreal';
     src: url('../fonts/NeueMontreal-Light.otf') format('opentype');
@@ -14,20 +14,16 @@
     font-weight: bold;
     src: url('../fonts/NeueMontreal-Bold.otf') format('opentype');
 }
-*/
+
 html {
     height: 100%;
 }
 
 body {
-    font-family: Helvetica, Arial, sans-serif; /*"Cousine"*/
+    font-family: "Work Sans", Helvetica, Arial, sans-serif; /*"Cousine"*/
     font-size: 15px;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.03em;
     height: 100%;
-}
-
-[v-cloak] { 
-    display:none; 
 }
 
 table {
@@ -37,13 +33,15 @@ table {
 
 h1, h2, h3 {
     margin-top: 15px;
-    font-family: "NeueMontreal", Helvetica, Arial, sans-serif;
+    font-family: "Work Sans", Helvetica, Arial, sans-serif;
     font-weight: bold;
-    letter-spacing: 0.0em;
+    letter-spacing: 0.02em;
 }
 
 h4, h5, h6 {
+    margin: 2px 0px;
     font-weight: bold;
+    letter-spacing: 0.02em;
 }
 
 h5, h6 {
@@ -54,6 +52,10 @@ h4 span, h5 span {
     font-size: 0.75em;
 }
 
+p {
+    text-overflow: ellipsis;
+}
+
 code {
     background: none;
 }
@@ -61,7 +63,12 @@ code {
 button {
     border: 0px;
     padding: 0px;
+    letter-spacing: -0.03em;
     background: none;
+}
+
+button:focus {
+    outline:0;
 }
 
 [v-cloak] {
@@ -89,6 +96,10 @@ button {
     font-size: 15px;
 }
 
+.monospace {
+    font-family: "Cousine";
+}
+
 .no-border, 
 .table > tbody > tr.no-border > td {
     border: 0px;
@@ -110,7 +121,7 @@ button {
     overflow-y: scroll;
 }
 
-.sticky-panel {
+.sticky-fixed {
     position: sticky;
     position: -webkit-sticky;
     top: 48px;
@@ -124,7 +135,6 @@ button {
     width: 100%;
     background-color: #f6f9fb;
 }
-
 
 .identicon-group > div {
     margin: 0 6px 6px 0;
@@ -181,7 +191,6 @@ button {
     position: fixed;
     width: 100%;
     min-height: 48px;
-    font-family: Helvetica, Arial, sans-serif;
 }
 @media (min-width: 768px) {
     .navbar >.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
@@ -213,10 +222,13 @@ nav > ul {
     overflow: hidden;
 }
 
-nav > ul li {
-    float: left;
+nav > ul li, nav > li {
     font-weight: bold;
     text-align: center;
+    text-transform: uppercase;
+}
+
+nav > ul li > button {
     text-transform: uppercase;
 }
 
@@ -224,11 +236,10 @@ nav > ul li:last-child {
     padding: 2px;
 }
 
-nav > ul li > a {
-    padding: 8px 30px;
+nav li > a, nav li > button {
+    padding: 8px 15px;
     display: block;
     font-size: 0.9em;
-    letter-spacing: 0.02em;
 }
 
 /*** Transitions ***/
@@ -255,6 +266,10 @@ nav > ul li > a {
     transition: 0.25s ease-out;
 }
 
+section.pull-right {
+    padding-top: 4px;
+}
+
 /*** Lists ***/
 
 ul {
@@ -264,7 +279,7 @@ ul {
 }
 
 ul.list-group li {
-    margin-bottom: 15px;
+    margin-bottom: 4px;
     padding: 10px;
     font-size: 1.05em;
     white-space: nowrap;
@@ -278,23 +293,17 @@ ul.list-group li:first-child {
     border-radius: 0px;
 }
 
-ul.list-group li.bg:hover {
-    transform: scale(1.06);
-    z-index: 5;
+ul.list-group li.bg {
+    transition: all .2s ease-in;
 }
 
 ul.list-group p {
     margin-bottom: 0px;
     overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-ul.list-group p.pull-right {
-    text-overflow: ellipsis;
 }
 
 ul.list-group .addr {
-    font-size: 1.1em;
+    font-size: 0.9em;
 }
 
 ul.list-group.tx-list li {
@@ -302,7 +311,7 @@ ul.list-group.tx-list li {
 }
 
 ul.list-group.tx-list li > button {
-    padding: 17px 15px;
+    padding: 10px;
 }
 
 ul.list-group.tx-list li > button:active {
@@ -310,11 +319,17 @@ ul.list-group.tx-list li > button:active {
 }
 
 ul.list-group.tx-list > li > button > div:first-child {
-    margin-top: 2px;
+    margin-top: 5px;
     /*width: 0px;
     height: 0px;*/
-    border-top: 14px solid transparent;
+    border-top: 2px solid transparent;
     border-bottom: 14px solid transparent;
+}
+
+ul.list-group.tx-list li.bg:hover {
+    transform: scale(1.035);
+    transition: all 1.5s;
+    z-index: 5;
 }
 
 li.bg > button > div:first-child {
@@ -340,7 +355,6 @@ ul.tabs li a {
     height: 20px;
     font-size: 1.25em;
     font-weight: bold;
-    letter-spacing: -0.03em;
     text-decoration: none;
 }
 
@@ -389,10 +403,10 @@ nav input#master-input {
 
 .ttip {
     position: relative;
-    display: inline-block;
 }
 
 .ttip .ttip-text {
+    position: absolute;
     visibility: hidden;
     bottom: 100%;
     left: 0%;
@@ -401,7 +415,6 @@ nav input#master-input {
     font-size: 0.85em;
     padding: 4px 8px;
     border-radius: 4px;
-    position: absolute;
     z-index: 2;
   }
 
@@ -429,28 +442,6 @@ nav input#master-input {
 .left-addon input  { padding-left:  30px; }
 .right-addon input { padding-right: 30px; }
 
-/*** Scrollbars ***/
-
-::-webkit-scrollbar {
-    width: 12px;
-}
-
-::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 12px 12px #eee;
-    border: solid 4px transparent;
-}
-
-::-webkit-scrollbar-thumb {
-    box-shadow: inset 0 0 12px 12px #aaa;
-    border: solid 4px transparent;
-}
-
-/*** Footer ***/
-
-footer {
-    /*min-height: calc(10vh);*/
-}
-
 .shadow-light {
     box-shadow: 0px 0px 5px #ccc;
 }
@@ -460,5 +451,5 @@ footer {
 }
 
 .shadow-soft {
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
