@@ -6,7 +6,7 @@
         </div>
         <div class="col-sm-9 pull-right">
             <transition-group name="list-f" tag="ul" class="list-group" v-on:enter="enter" v-on:after-enter="afterEnter">
-                <li class="bg shadow-soft" v-for="(block, idx) in blockList" :key="block.id+'_'" :data-index="idx">
+                <li class="bg" v-for="(block, idx) in blockList" :key="block.id+'_'" :data-index="idx">
                     <div class="row col-sm-4">
                         <b class="capitalize">{{ network.name }}</b> - <blockLink :block="block.id"></blockLink>
                         </div>
@@ -22,8 +22,8 @@
                             </div>
                         </div>
 
-                        <div class="row col-sm-12" style="margin-bottom: 10px" v-text="block.extraData"></div>
-                        <div class="row col-sm-8 text-second">
+                        <div class="row col-sm-7" style="margin-bottom: 10px" v-text="block.extraData"></div>
+                        <div class="row col-sm-1 text-second">
                             <div class="ttip">
                                 <i class="glyphicon glyphicon-transfer"></i> {{ block.txLength }}
                                 <span class="ttip-text">Transactions</span>

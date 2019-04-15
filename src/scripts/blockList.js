@@ -42,6 +42,7 @@ export default {
     methods: {
         processBlock: function(b)
         {
+            console.log(b.number +' '+ b.hash);
             if (b === null)
                 return;
                 
@@ -53,7 +54,7 @@ export default {
                 timestamp: b.timestamp,
                 txLength: b.transactions.length,
                 miner: b.miner,
-                gasUsed: this.$ethers.utils.bigNumberify(b.gasUsed),
+                gasUsed: this.$ethers.utils.bigNumberify(b.gasUsed).toString(),
                 extraData: this.hex2ascii(b.extraData),
                 time: this.convertTimestamp(b.timestamp),
                 sorted: false
@@ -151,6 +152,21 @@ export default {
             this.next = n;
             let entries = n < this.maxEntries ? n + 1 : this.maxEntries;
             this.loadBlockList(n, entries);
+
+            // Watch for new blocks
+            this.$provider.on('block', (blockNumber) => 
+            {
+                console.log('New Block: ' + blockNumber);
+                this.$provider.getBlock(blockNumber).then(function(b) 
+                {
+                    this.processBlock(b)
+                    this.blockList.unshift(this.tempBlocks.pop());
+
+                    console.log(this.tempBlocks);
+
+                }.bind(this));
+            });
+
         }.bind(this));
 
         this.scroll();

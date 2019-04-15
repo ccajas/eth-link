@@ -60,7 +60,7 @@ export default {
             //tx.gasPrice = this.$ethers.utils.bigNumberify(tx.gasPrice._hex);
 
             if (tx.to === null)
-                tx.type = 'txCreated';
+                tx.type = 'txCreate';
             else
                 await this.$provider.getCode(tx.to).then(function(code)
                 {
