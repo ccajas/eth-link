@@ -5,14 +5,7 @@
 @import url('https://fonts.googleapis.com/css?family=Work+Sans:400,500');
 
 @font-face {
-    font-family: 'NeueMontreal';
-    src: url('../fonts/NeueMontreal-Light.otf') format('opentype');
-}
-
-@font-face {
-    font-family: 'NeueMontreal';
-    font-weight: bold;
-    src: url('../fonts/NeueMontreal-Bold.otf') format('opentype');
+    font-family: 'Work Sans';
 }
 
 html {
