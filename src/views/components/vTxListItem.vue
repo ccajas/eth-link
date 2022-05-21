@@ -7,7 +7,7 @@
             <div class="col-sm-1">
                 <i v-if="tx.type == 'txValue'" class="glyphicon glyphicon-transfer" style="font-size: 1.65em"></i>
                 <i v-if="tx.type == 'txCreate'" class="glyphicon glyphicon-asterisk" style="font-size: 1.5em"></i>
-                <i v-if="tx.type == 'txCall'" class="glyphicon glyphicon-list" style="font-size: 1.5em"></i>
+                <i v-if="tx.type == 'txCall'" class="glyphicon glyphicon-tasks" style="font-size: 1.5em"></i>
             </div>
 
             <div class="row col-sm-11">
@@ -57,7 +57,7 @@
                             </div>
                             <div class="row col-sm-6" style="word-wrap: break-word; white-space: pre-line">
                                 <br/>
-                                <h4>Loaded some details</h4>
+                                <h4>Transaction info</h4>
                                 <span v-if="tx.tokenAmount && !error"><!--
                                     -->{{ tx.tokenAmount.toString() }} {{ tx.tokenName }} ({{tx.tokenSymbol}}) sent from {{ tx.to }}
                                 </span>

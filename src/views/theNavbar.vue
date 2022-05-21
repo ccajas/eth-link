@@ -8,7 +8,7 @@
                         <i class="glyphicon glyphicon-random text-light"></i>
                         &nbsp;<span class="text-light capitalize"> {{ networkName }} </span></vlink>
                     <button v-on:click="toggleStyle" class="navbar-brand pull-right">
-                        &nbsp; <i class="glyphicon glyphicon-resize-horizontal text-light"></i> &nbsp;
+                        &nbsp; <i class="glyphicon glyphicon-sunglasses text-light"></i> &nbsp;
                     </button>
                 </div>
 
