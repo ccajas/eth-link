@@ -5,7 +5,7 @@
 [![VueJS](https://img.shields.io/badge/Vue-2.x-brightgreen.svg)](https://vuejs.org)
 [![Poi](https://img.shields.io/badge/Poi-9.6.x-green.svg)](https://poi.js.org)
 
-Front end built with Vue.js and Poi. The block explorer can be run either with a local node (via Geth) or Infura.io
+Front end built with Vue.js and bundled with Poi. The block explorer can be run either with a local node (via Geth) or Infura.io
 
 **Setup**
 
